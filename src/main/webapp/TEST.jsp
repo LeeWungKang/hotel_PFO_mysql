@@ -23,7 +23,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-		깃허브 커밋 테스트트트틑트
 
 
 	<div align="center" style="margin: auto auto;" class="FormBG">
