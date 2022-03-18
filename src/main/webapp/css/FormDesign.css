@@ -1,5 +1,114 @@
 @charset "UTF-8";
 
+* {
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+	margin: auto;
+	height: auto;
+}
+
+a {
+	text-decoration: none;
+}
+table, tr, td, th, div, p, em, ol, ul, li, dl, dt, dd,a, address, img{
+	font-size: 11pt;
+	color: #666;
+	text-decoration: none;
+}
+
+.FormBG {
+	height: 600px;
+	padding: 15px;
+	line-height: 25px;
+	align-content: center;
+}
+
+.FormBG .table {
+	padding: 20px;
+}
+
+.FormBG .table th {
+	text-align: right;
+}
+
+.FormBG .table input {
+	width: 50%;
+}
+
+.table input[class='telLength'] {
+	width: 70px;
+}
+
+.id_btn {
+	background-color: rgba(5, 5, 150, 0.6);
+	border: none;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 20px;
+}
+
+.id_btn:hover {
+	background-color: blue;
+	font-weight: 700;
+}
+
+.id_btn:active {
+	background-color: yellow;
+}
+
+.H1_font{
+font-size: 2.2em;
+font-weight: 800;	
+margin-bottom: 50px;
+}
+.table .logBtn{
+	width:100px;
+	height: 40px;
+	margin-top: 15px;
+	color:#fff;
+	background: #004fff;
+	font-size: 16px;
+	border:none;
+	border-radius: 20px;
+	box-shadow: 0 4px 16px rgba(0,79,255,0.3);
+	transition:0.3s;
+	display:inline-block;
+/* 	left:50%;
+	top:50%;
+	transform: translate(-50%,-50%); */
+}
+.table .logBtn:focus{
+	outline: 0;
+}
+.table .logBtn:hover{
+	background: rgba(0,150,255,0.8);
+	cursor: pointer;
+	box-shadow: 0 2px 4px rgba(0,79,255,0.6);
+}
+.table{
+	line-height: 25px;
+}
+.table th{
+	text-align: center;
+}
+.table td{
+	height: 40px;
+}
+.table input{
+	padding: 8px;
+	font-size: 1.0em;
+}
+.table #inputId:focus{
+	outline: none ;
+	border:none;
+	box-shadow: 0px -1px 10px -2px rgba(0,100,300,0.7);
+}
+.table #inputPw:focus{
+	outline: none ;
+	border:none;
+	box-shadow: 0px -1px 10px -2px rgba(0,100,300,0.7);
+}
 
 
-
+/*  ------------------------------------------------------- */

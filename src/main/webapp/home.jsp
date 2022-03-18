@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body id="img" style="background-image: url('./css/mainPhoto1.png');margin: 0px;">
+<body id="img" style="background-image: url('./img/mainPhoto1.png');margin: 0px;">
 
 
 <!-- 홈페이지에 첫 화면은 풀 배경 샷  -->

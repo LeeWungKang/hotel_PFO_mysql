@@ -1,0 +1,297 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap'); 
+
+/*roomInfo.jsp*/
+.roomList{
+	width:230px;
+	height:330px;
+	position: relative;
+	top:10%;
+	left:10%; 
+	float:left;
+	background: rgba(84, 77, 0, 0.32);
+	display: block;
+	box-shadow: -2px 1px 7px  black;
+}
+
+.table{
+	width:90%;
+	height:100%;
+	text-align: left;
+	border-collapse: separate;
+    border-spacing: 0 20px;
+}
+.table a{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.table th{
+	height:10%;
+	font-size:xx-large;
+	border-bottom: 4px solid #432c10;
+	font-weight:bolder;
+}
+
+.table td a{
+	font-weight: 800;
+	font-size: 1.0rem;
+	padding-left: 8px;
+}
+
+.table a:link {					/* a 태그 클릭 안한 상태 */
+	color:rgb(0, 0, 0);
+	text-decoration : none;	/*밑줄 제거*/
+}
+
+.table a:visited { 				/* a 태그 1회 이상 클릭 했을 때 상태 */
+ 	color:#876234;
+ 	text-decoration: none;
+}
+
+.table a:hover { 					/* a 태그에 마우스 올렸을 때 상태 */
+ 	color:#fff; 
+ 	text-decoration: none;	
+}
+					/* 예약하기 버튼 디자인 */
+.wrap {
+  height: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrap .button {
+  width: 200px;
+  height: 50px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  font-size: 1.2em;
+  color: #000;
+  background-color: #eee;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(10, 40, 40, 0.2);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+/* 예약하러가기 버튼 */
+/* .wrap{
+	position: absolute;
+	left: 0%;	top: 100%;
+	width: 300px; height: 150px;
+	display: block; 
+	margin-top: 10px;
+	padding: 20px 5px 20px 5px;
+} */
+
+
+
+#select{
+	background-color: rgba(35, 35, 35, 0.2);
+	padding: 5px;
+	padding-left: 30px;
+}
+
+#next{         /*사이드바에 작은화살표 */
+	right:25px; position:absolute;
+	border:none;
+	background-color: rgba(0, 0, 0, 0.0);
+	color:#876234;
+	font-weight:900;
+	font-size:20px;
+	left: 50%;
+}
+
+
+
+
+.join_input_room button{
+	padding: 5px; 
+	width: 100%;
+}
+#container_room{
+	width: 100%;
+}
+.infoWrap{
+	width:  1100px;
+	height:100%;
+	margin: auto;
+}
+
+.roomInfo{         /*룸정보 전체  */
+	width:60%;
+	height:600px;
+	position: relative;
+	left: 26%;
+	display: inline-block;
+	margin:auto;
+	margin-bottom:5%;
+	font-size:large;
+	margin-top: 20px;
+}
+
+#roomContent{       /* 룸정보  */
+	position:absolute;
+    width:100%;
+    height:30%;
+}
+
+#infoContent{       /* 객실정보 */
+	position:absolute;
+    width:100%;
+    height:35%;
+    top:30%;
+    font-size:small;
+    border-top: 2px solid #dadada;
+    border-bottom: 2px solid #dadada;
+    line-height:25px;
+}
+
+#amenityContent{   /* 부대시설 */
+	position:absolute;
+	top:67%;
+    width:100%;
+    height:30%;
+   font-size:small;
+    border-bottom: 2px solid #dadada;
+    line-height:23px;
+}
+
+
+/*----------------------- 이미지 슬라이드-----------------  */
+
+.imgSlide_R{
+	width: 100%;
+}
+
+
+.section{
+	position: absolute;
+	position: relative;
+	left: 26%;
+}   
+	
+.section input[id*='slide']{    /* 슬라이드 라디오체크박스 아이콘  */
+	display: inline-block;
+	text-align: center;
+ 	overflow: hidden;
+ 	display: none; 
+	z-index: 0;
+	position:absolute; 
+	top: 90%; left: 50%; 
+}
+
+.section .slideWrap{
+	max-width: 900px;
+	max-height: 600px;
+	overflow: hidden;
+	box-shadow: 2px 4px 8px black;
+}
+.section .slideList{    /* ul-list 태그 */
+	white-space: nowrap;
+	font-size: 0;	
+}
+.section .slideList > li{
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	transition:all 0.5s;
+}
+.section .slideList > li > a{
+	display: block;
+	position: relative;
+}
+.section .slideList > li > a img{         /* 이미지 크기  */
+	width: 100%;
+}
+.section .slideList label{
+	position: absolute;
+	z-index: 10;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: 50px;
+	cursor: pointer;
+}
+.section .slideList .left{
+	left: 10px;
+	z-index:1;
+	background: url("../img/left.png") center center / 100% no-repeat;
+}
+.section .slideList .right{
+	right: 10px;
+	z-index:1;
+	background: url("../img/right.png") center center / 100% no-repeat;
+}
+
+.section [id='slide01']:checked ~ .slideWrap .slideList > li {
+	transform:translateX(0%); 
+}
+.section [id='slide02']:checked ~ .slideWrap .slideList > li {
+	transform:translateX(-100%); 
+}
+.section [id='slide03']:checked ~ .slideWrap .slideList > li {
+	transform:translateX(-200%); 
+}
+
+#infoContent b{
+	color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+.hotelInfo{       오른쪽 메뉴 사이드바 
+	width:270px;
+	height:450px;
+	position: relative;
+    top:60%;
+    left:40%;
+    background-color: #faf7ed;
+}
+
+#hotelTable{
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    margin-left:3%;
+}
+
+#hotelTable li{
+	font-size:small;
+}
+
+#reserveBtn{
+	float:none;
+	height: 100%;
+	width:10%;
+} */

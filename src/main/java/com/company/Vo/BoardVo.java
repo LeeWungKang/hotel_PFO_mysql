@@ -5,11 +5,15 @@ import java.sql.Date;
 public class BoardVo {
 
 	private int seq;
+	private String nickname;
 	private String title;
 	private String content;
 	private Date regdate;
 	private int cnt;
 	private String userid;
+	
+	
+	
 	public int getSeq() {
 		return seq;
 	}
@@ -45,6 +49,12 @@ public class BoardVo {
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 	

@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+table, tr, td, th, div, p, em, ol, ul, li, dl, dt, dd, a, address, img {
+	font-size: 11pt;
+	color: #666;
+	text-decoration: none;
+}
+.container{
+	margin-top: 50px;
+}
+.type10 .btn{
+	border-radius: 15px; 
+}
+
+.type10 .btn:hover{
+	background-color: rgba(5,5,5,0.7);
+	color: white;
+}
+.type10 .btn:active{
+	background-color: orange;
+}
+.add_form {
+	height: auto;
+	width: 800px;
+	margin: 50px 50px;
+}
+.type10 textarea{
+	width: 100%;
+}
+
+.type10 textarea:focus{
+	outline: none;
+}
+.type10 textarea, td input{
+	border: 0;
+	margin: 0px;
+}
+td input{
+	width: 90%;
+	padding: 12px;
+}
+
+table.type10 {
+border-collapse: collapse;
+text-align: left;
+line-height: 1.5;
+border-top: 1px solid #ccc;
+border-bottom: 1px solid #ccc; 
+border:none;
+margin: 20px 10px;
+}
+table.type10 thead th {
+text-align:center;
+width: 100px;
+padding: 5px;
+font-weight: bold;
+vertical-align: middle;
+color: #fff;
+background: #f0b36f;
+margin: 20px 2px;
+}
+table.type10 tbody th {
+	text-align:center;
+width: 150px;
+padding: 10px;
+background: #f0b36f;
+}
+table.type10 td {
+width: 350px;
+padding: 10px;
+vertical-align: top;
+}
+table.type10 .even {
+background: #e0e0e0;
+}
