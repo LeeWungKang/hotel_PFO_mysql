@@ -77,7 +77,7 @@ public class SearchPro extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		System.out.println(search_keyword+""+select_type);
-		RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./JSP/getSearchList");
+		RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./boardJSP/getSearchList");
 		dis.forward(request, response);
 		
 		

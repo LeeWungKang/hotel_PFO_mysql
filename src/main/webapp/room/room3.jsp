@@ -38,9 +38,9 @@
 					<td><a href="RoomInfo?roomseq=4">로열</a></td>
 				</tr>
 			</table>
-		<div class="join_input_room">
-			<button type="submit" onclick="location.href='RsRoomInput?roomseq=<%=roomvo.getRoomseq()%>'">현재 방 예약하러 가기 </button>
-		</div> 
+		<div class="wrap">
+  <button class="button" onclick="location.href='RsRoomInput?roomseq=<%=roomvo.getRoomseq()%>'">예약하러 가기</button>
+</div>
 		</div>
 
 		

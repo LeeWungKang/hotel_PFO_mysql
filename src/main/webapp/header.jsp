@@ -76,8 +76,8 @@
 					<% }else{	%>
 					<li class="adminMenu"><a href="" style="font-size: 0.8em; color: yellow;"> 마이페이지 </a>
 						<ul class="subMenu">
-						<li><a href="#"> 내정보  </a> <li>
-						<li><a href="#"> 예약내역 </a> <li>
+						<li><a href="MyPage_Info_List"> 내정보 & 예약내역  </a> <li>
+						<li><a href="MyRs_List"> 예약내역 </a> <li>
 						<li><a href="#"> Q & A </a> <li>
 						</ul>
 					</li>

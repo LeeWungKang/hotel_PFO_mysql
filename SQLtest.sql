@@ -40,7 +40,13 @@ role varchar2(10) default 'user'   --관리자계정은 ="admin" 따로 디비 �
 );
 
 select substr(email,1,instr(email,'@')-1) as email_str from HomeUsers;
+--  instr(칼럼A ,'찾는문자열B', 시작자릿수m, n번째 문자열B의 자릿수)
+--  substr(문자열,자르고싶은 시작수,자르고 싶은 끝 수)
+
+select email from HomeUsers;
 select substr(email,1,instr(email,'@')-1) as email_str from HomeUsers where email='kjdndrkd@naver.com';
+select substr(email,instr(email,'@')+1) as email_str_last from HomeUsers where email='kjdndrkd@naver.com';
+
 
 
 insert into HomeUsers values('lee','lee123','이웅강','010-3312-8325','2021/11/23','kjdndrkd@naver.com','admin');
@@ -133,8 +139,6 @@ rs_price number(12) not null
 constraint FK_reservation foreign key(rsroomseq) REFERENCES room(roomseq),
 foreign key(rsuserid) REFERENCES HomeUsers(id)
 
-
-select * from reservation where rs_date='202256';
 
 select * from reservation;
 drop table  reservation;

@@ -17,10 +17,10 @@ select * from HomeUsers;
 -- 예약 데이터 조회 sql  "pstmt.setString(1, id);"
 select rs_roomname,R.* from reservation R 
 left outer join HomeUsers U 
-on R.rs_userid = U.id          --유저테이블 id = 예약테이블 예약id가 같은지.
+on R.rs_userid = U.id         		 --유저테이블 id = 예약테이블 예약id가 같은지.
 left outer join room RM 
-on R.rs_roomseq = RM.roomseq 
-where rs_userid = 'lee' 
+on R.rs_roomseq = RM.roomseq 	  	 --룸번호가 예약된 룸번호와 같은지.
+where rs_userid = 'lee' 			 --이름이 ? 인 데이터만 뽑을떄.  (로그인한 회원 본인의 데이터만 뽑을떄)
 order by rs_no desc;
 
 

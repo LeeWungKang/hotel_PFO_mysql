@@ -89,7 +89,7 @@ public class Get_Board_Pro extends HttpServlet {
 			request.setAttribute("reply", reply);
 			
 			
-			RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./JSP/getBoard");
+			RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./boardJSP/getBoard");
 			dis.forward(request, response);
 			
 			

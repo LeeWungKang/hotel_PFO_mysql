@@ -1,4 +1,4 @@
-package com.company.userC;
+package com.company.userCheck;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

@@ -90,7 +90,7 @@ public class Get_Board_List_Pro extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("totalRows", totalCount);
 		
-		RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./JSP/GetboardList");
+		RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./boardJSP/GetboardList");
 		dis.forward(request, response);
 
 		

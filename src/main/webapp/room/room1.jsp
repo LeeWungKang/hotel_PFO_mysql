@@ -2,12 +2,10 @@
 <%@page import="com.company.Vo.roomVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	<%
-	
-	roomVo roomvo =(roomVo) request.getAttribute("roomvo");	
-	
-	%>
+
+<%
+roomVo roomvo = (roomVo) request.getAttribute("roomvo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,9 +24,8 @@
 					<th>객실</th>
 				</tr>
 				<tr>
-					<td id="select"><a href="RoomInfo?roomseq=1"><%=roomvo.getRoomname() %>
-							<button id="next">&#10095;</button>
-					</a></td>
+					<td id="select"><a href="RoomInfo?roomseq=1"><%=roomvo.getRoomname()%>
+							<button id="next">&#10095;</button> </a></td>
 				</tr>
 				<tr>
 					<td><a href="RoomInfo?roomseq=2">스위트</a></td>
@@ -40,14 +37,16 @@
 					<td><a href="RoomInfo?roomseq=4">로열</a></td>
 				</tr>
 			</table>
-		<!-- 예약하러 가기 버튼  -->
-	
-	<div class="wrap">
-  <button class="button" onclick="location.href='RsRoomInput?roomseq=<%=roomvo.getRoomseq()%>'">예약하러 가기</button>
-</div>
-</div>
-		
-		
+			<!-- 예약하러 가기 버튼  -->
+
+			<div class="wrap">
+				<button class="button"
+					onclick="location.href='RsRoomInput?roomseq=<%=roomvo.getRoomseq()%>'">예약하러
+					가기</button>
+			</div>
+		</div>
+
+
 
 		<!--메인 메뉴 2개  div로 묶어서 자리배치  -->
 
@@ -92,9 +91,12 @@
 					<h2>객실정보</h2>
 					<br />
 					<ul>
-						<li>룸 이름 : &nbsp;&nbsp;<b> <%=roomvo.getRoomname() %></b> 룸</li>
-						<li>가격 : &nbsp;&nbsp;<b> <%=roomvo.getPrice() %></b> 원</li>
-						<li>수용인원 :&nbsp; <b><%=roomvo.getRoomsize() %></b> 명</li>
+						<li>룸 이름 : &nbsp;&nbsp;<b> <%=roomvo.getRoomname()%></b> 룸
+						</li>
+						<li>가격 : &nbsp;&nbsp;<b> <%=roomvo.getPrice()%></b> 원
+						</li>
+						<li>수용인원 :&nbsp; <b><%=roomvo.getRoomsize()%></b> 명
+						</li>
 						<li>구성&nbsp;&nbsp;침실1, 욕실1</li>
 						<li>전망 &nbsp;시티뷰 또는 빌리지뷰</li>
 						<li>침대&nbsp;&nbsp;더블,트윈, 패밀리트윈</li>
