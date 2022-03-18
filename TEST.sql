@@ -1,6 +1,6 @@
 select * from HomeBoard;
 
-깃허브 테스트중
+
 
 select max(seq) from HomeBoard;
 select * from (select rownum rnum,A.* from (select * from HomeBoard order by seq desc) A) where rnum between 1 and 10";
