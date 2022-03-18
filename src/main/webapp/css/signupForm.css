@@ -1,26 +1,18 @@
 @charset "UTF-8";
-
-
 * {
 	padding: 0;
 }
-
 html {
 	height: 100%;
 }
-
 body {
 	height: 100%;
 	font-family: 'Noto Sans KR';
 }
-
 table, tr, td, th, div, p, em, ol, ul, li, dl, dt, dd, a, address, img{
 	font-size: 11pt;
 	color: #666;
 	text-decoration: none;
-}
-img {
-	border: 0;
 }
 h1 {
 	text-align: center;
@@ -37,11 +29,9 @@ ul, li {
 ul {
 	list-style: none;
 }
-
 .red_txt {
 	color: #ee7272;
 }
-
 .blind {
 	display: block;
 	overflow: hidden;
@@ -49,12 +39,10 @@ ul {
 	left: 0;
 	top: -5000px
 }
-
 .wrap {
 	max-width: 960px;
 	margin: 0 auto;
 }
-
 .wrap.wd668 {
 	max-width: 628px;
 }
@@ -164,9 +152,6 @@ ul {
 .form_txtInput #EmailBtn:hover{
 	background: orange;
 }
-
-
-
 .find_txt ul li {
 	color: #9a9a9a;
 	font-size: 13px;
@@ -374,23 +359,6 @@ ul {
 	width: 55px;
 }
 
-/* .join_form.idpwFind table td select {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	background:
-		url(https://secsales.interparkb2b.co.kr/data/G94/main/sele_arr.gif)
-		no-repeat 95% 50%;
-	text-indent: 20px;
-	width: 124px;
-	height: 50px;
-	border: 1px solid #ececec;
-	font-size: 14px;
-	color: #ccc;
-	float: left;
-} */
-
-
 .join_form.idpwFind table tr.email input:after, .mar10:after, .join_form.idpwFind table td select:after,
 	.join_form table td a.btn_confirm:after {
 	content: '';
@@ -424,10 +392,10 @@ ul {
 }
 
 .mar10 {
-	margin: 14px 5px 0 10px;
 	display: inline-block;
 	padding: 0;
 	float: left;
+		margin: 6px 2% 0 2%;
 }
 
 .exform_txt {
@@ -463,52 +431,6 @@ ul {
 	font-size: 13px;
 	line-height: 17px;
 }
-
-.popWrap {
-	border: 1px solid #ececec;
-	padding: 30px;
-	max-width: 400px;
-	width: 100%;
-	margin: 30px auto 0;
-	display: none;
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	background: #fff;
-	z-index: 5;
-}
-
-.popWrap.is-open {
-	display: block;
-}
-
-.popWrap .pop_txt_con .pop_exTxt {
-	font-size: 14px;
-	color: #9a9a9a;
-	line-height: 20px;
-}
-
-.popWrap .pop_txt_con .pop_exTxt span {
-	color: #254ee9
-}
-
-.popWrap .pop_btnWrap {
-	margin: 30px 0 0;
-}
-
-.popWrap .pop_btnWrap a {
-	color: #fff;
-	background-color: #4380ce;
-	font-weight: bold;
-	padding: 10px;
-	height: 22px;
-	line-height: 22px;
-	width: 103px;
-	display: block;
-	text-align: center;
-}
-
 /*   이메일 인증번호 입력 css 
 .join_form table input.send_number::placeholder {
 	text-align: right;
@@ -564,10 +486,7 @@ ul {
 	.join_form.idpwFind table tr.email input {
 		float: left;
 	}
-	.mar10 {
-		margin: 6px 2% 0 2%;
-		float: left;
-	}
+
 	.join_form.idpwFind table input.email {
 		width: 36%;
 	}
@@ -596,24 +515,6 @@ ul {
 	}
 	.btn_wrap {
 		overflow: hidden;
-	}
-	.join_form.idpwFind table td select {
-		width: 30%;
-		height: 37px;
-		float: left;
-	}
-	.join_form.idpwFind table tr.email input:after, .mar10:after, .join_form.idpwFind table td select:after
-		{
-		content: '';
-		display: block;
-		clear: both;
-	}
-	.popWrap {
-		right: auto;
-		max-width: 80vw;
-		margin: 30px auto 0;
-		left: 50%;
-		transform: translateX(-50%);
 	}
 	.join_form table td a.btn_confirm {
 		width: 100px;
