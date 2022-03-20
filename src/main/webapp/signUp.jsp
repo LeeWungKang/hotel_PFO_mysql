@@ -3,6 +3,7 @@
 
 <%
 String msg = request.getParameter("msg");
+String emailCheck = request.getParameter("emailCheck");
 %>
 <!DOCTYPE html>
 <html>
@@ -158,6 +159,7 @@ $(document).ready(function() {
             data : { id : id },
             url : "Ajax_ID_check",
             dataType: "json",
+            async : false,       //순차적 처리 
             success : function(result) {
             	if(result == 0){
                 $("#msg").html("(!) 중복된 아이디. (사용불가)");
@@ -166,7 +168,7 @@ $(document).ready(function() {
             	$("#id").focus(); 
                 return;
             	
-            	}else {
+            	}else {																
             	$("#msg").html("사용 할 수 있는 아이디 입니다.  <button type='button' id='textBtn' class='id_btn' onclick='idbtn()'> 사용 </button>");
 	            $("#msg").attr("color","blue");
 	            return;
@@ -213,38 +215,35 @@ $(function(){ //비밀번호 일치여부
 	
 //이메일 데이타에 중복여부 유효성.
 $(document).ready(function() { 
-	 $("#email_value").on("change",function(){
-		 console.log("셀렉트 이벤트");
-		 var email =  $.trim($("#email").val());
+	 $("#email_value").on("change",function(){     //자동입력칸으로 이용할시 유효성
+			var email =  $.trim($("#email").val());
 	        var email02 = $.trim($("#email02").val());
 	        var exp = /[a-z0-9]$/;
 	        var emailCheck = $("#emailCheck").val();
-	       
 	        var sumMail = email+"@"+email02
 	        
 	        emailCheck = "";
 	        if (email.length <= 2 || email.length > 16){
 	        	$('#emailCheck').html('<span style="color:red;">이메일은 3~16글자 내외 </span>');
 	        	$('#email').val('');
+	        	$('#email02').val('');
 	        	$('#email').focus();
 	        	return false;
-	        }else if (email == "" || email.length == 0) {
+	        } if (email == "" || email.length == 0) {
 	        	$('#emailCheck').html('<span style="color:red;"> 이메일을 입력 해주세요. </span>');
-	            $('#email').val('');
+	            $('#email02').val('');
 	            $('#email').focus();
 	            return false;
-	        }else if(!exp.test(email)){ 
+	        } if(!exp.test(email)){ 
 	        	$('#emailCheck').html('<span style="color:red;">영문자와 숫자만 입력 가능합니다. </span>');
 	        	$('#email').val('');
+	        	$('#email02').val('');
 	        	$('#email').focus(); 
 	        	return false; 
-	        }else{
-	         	$('#emailCheck').html('<span style="color:red;"> 이메일 유효성 검사 </span>');
 	        }
-	     
 	        
-	    $.ajax({   //이메일 아작스실패 ( '@' 포함되서 디비에 입력되는데, 아작스검사할때 스플릿해서 나누기 까지함.)
-	            type : "post",
+	    $.ajax({  
+	            type : "get",
 	            data : { "sumMail" : sumMail },
 	            url : "Ajax_email_check",
 	            dataType: "json",
@@ -254,23 +253,23 @@ $(document).ready(function() {
 	                $("#emailCheck").html("(!) 중복된 이메일 (사용불가)");
 	                $("#emailCheck").attr("color","red");
 	                $('#email').val('');
+	                $('#email02').val('');
 	            	$("#email").focus(); 
 	                return;
 	            	
-	            	}else {
-	            	$("#emailCheck").html("사용 할 수 있는 이메일 입니다.  <button type='button' id='EmailBtn' class='email_btn' onclick='EmailBtn()'> 사용 </button>");
-		            $("#emailCheck").attr("color","blue");
-		            return;
-	             	}
-	            },
-	          	  error: function () {	alert("서버 요청 실패");}
+	            	}else {																
+	                	$("#emailCheck").html("사용 할 수 있는 이메일 입니다.   <button type='button' id='emailBtn1' onclick='btn_emailBtn1()' >사용 </button> "); 
+	    	            $("#emailCheck").attr("color","blue");
+	    	            return;
+	                 	}
+	                },
+	              	  error: function () {	alert("서버 요청 실패");}
 	        });
-	 });
-	 
-	
+	 }); 
+});   
+$(document).ready(function() { 
     //이메일 주소까지 입력이 끝났으면 이벤트.
     $("#email02").change(function() {
-    	console.log("evnet 자공");
         var email =  $.trim($("#email").val());
         var email02 = $.trim($("#email02").val());
         var exp = /[a-z0-9]$/;
@@ -282,25 +281,25 @@ $(document).ready(function() {
         if (email.length <= 2 || email.length > 16){
         	$('#emailCheck').html('<span style="color:red;">이메일은 3~16글자 내외 </span>');
         	$('#email').val('');
+        	$('#email02').val('');
         	$('#email').focus();
         	return false;
-        }else if (email == "" || email.length == 0) {
+        } if (email == "" || email.length == 0) {
         	$('#emailCheck').html('<span style="color:red;"> 이메일을 입력 해주세요. </span>');
             $('#email').val('');
+            $('#email02').val('');
             $('#email').focus();
             return false;
-        }else if(!exp.test(email)){ 
+        } if(!exp.test(email)){ 
         	$('#emailCheck').html('<span style="color:red;">영문자와 숫자만 입력 가능합니다. </span>');
         	$('#email').val('');
+        	$('#email02').val('');
         	$('#email').focus(); 
         	return false; 
-        }else{
-         	$('#emailCheck').html('<span style="color:red;"> 이메일 유효성 검사 </span>');
         }
-     
-        
-    $.ajax({   //이메일 아작스실패 ( '@' 포함되서 디비에 입력되는데, 아작스검사할때 스플릿해서 나누기 까지함.)
-            type : "post",
+   
+   $.ajax({   
+            type : "get",
             data : { "sumMail" : sumMail },
             url : "Ajax_email_check",
             dataType: "json",
@@ -310,11 +309,12 @@ $(document).ready(function() {
                 $("#emailCheck").html("(!) 중복된 이메일 (사용불가)");
                 $("#emailCheck").attr("color","red");
                 $('#email').val('');
+                $('#email02').val('');
             	$("#email").focus(); 
                 return;
             	
             	}else {
-            	$("#emailCheck").html("사용 할 수 있는 이메일 입니다.  <button type='button' id='EmailBtn' class='email_btn' onclick='EmailBtn()'> 사용 </button>");
+            	$("#emailCheck").html("사용 할 수 있는 이메일 입니다. 		<button type='button' id='emailBtn2'  onclick='btn_emailBtn2()'>사용 </button> "); 
 	            $("#emailCheck").attr("color","blue");
 	            return;
              	}
@@ -322,7 +322,7 @@ $(document).ready(function() {
           	  error: function () {	alert("서버 요청 실패");}
         });
     }); 
- });   
+}); 
  
  
  
@@ -345,13 +345,19 @@ $('#email_value').change(function(){ $("#email_value option:selected").each(func
 
 	<script type="text/javascript">
 	
-function idbtn(){    //아이디사용가능 버튼 클릭시 이벤트   //"사용" 버튼누르면 버튼을 숨기고, 히든값 변경
-	 document.Join_form.ID_Duplication.value ="ID_check";
-	 document.getElementById("textBtn").style.display="none";   
-}
-function EmailBtn(){    //아이디사용가능 버튼 클릭시 이벤트   //"사용" 버튼누르면 버튼을 숨기고, 히든값 변경
+//이메일 아작스가 인풋박스랑,셀렉트박스 2개를 id명이랑 버튼명 동일하게 하면 오류걸림.
+function btn_emailBtn1(){    //이메일 "사용" 버튼 클릭시 이벤트   //"사용" 버튼누르면 버튼을 숨기고, 히든값 변경 (중복체크완료)
 	 document.Join_form.Email_Duplication.value ="Email_check";
-	 document.getElementById("EmailBtn").style.display="none";   
+	 document.getElementById("emailBtn1").style.display="none";  
+}
+function btn_emailBtn2(){    
+	 document.Join_form.Email_Duplication.value ="Email_check";
+	 document.getElementById("emailBtn2").style.display="none";  
+}
+	
+function idbtn(){    //아이디 "사용" 버튼 클릭시 이벤트   //"사용" 버튼누르면 버튼을 숨기고, 히든값 변경 (중복체크완료 안누르고가입하는걸 방지)
+document.Join_form.ID_Duplication.value ="ID_check";
+	 document.getElementById("textBtn").style.display="none";   
 }
 
 

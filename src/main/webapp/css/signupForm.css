@@ -138,7 +138,7 @@ ul {
 	background: orange;
 }
 /* -- 아작스 생성 email버튼 -- */
-.form_txtInput #EmailBtn{
+.form_txtInput #emailBtn1,#emailBtn2{
 	background-color: #8080ff;
 	color:white;
 	padding: 2.5px 12px 3px 10px;
@@ -149,7 +149,7 @@ ul {
 	border-radius: 10px;
 	cursor: pointer;
 }
-.form_txtInput #EmailBtn:hover{
+.form_txtInput #emailBtn1:hover,#emailBtn2:hover{
 	background: orange;
 }
 .find_txt ul li {

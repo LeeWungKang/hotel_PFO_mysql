@@ -21,13 +21,8 @@ public class Ajax_email_check extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf-8");
-
+		int emailCheck = 0;
 		
 		String sumMail = request.getParameter("sumMail");
 		System.out.println(sumMail + "//======= sumMail 확인 ");
@@ -38,16 +33,12 @@ public class Ajax_email_check extends HttpServlet {
 
 		try {
 			conn = JDBCconn.getConnection();
-			//instr(칼럼A ,'찾는문자열B', 시작자릿수m, n번째 문자열B의 자릿수)
-			//substr(문자열,자르고싶은 시작수,자르고 싶은 끝 수)
-				// 이메일 앞자리만 추출. 
-			String sql = "select email from HomeUsers where email=?";
+			String sql = "select * from HomeUsers where email=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, sumMail);
 			rs = pstmt.executeQuery();
 
-			int emailCheck = 0;
 			if (rs.next()) {
 				emailCheck = 0; // 중복된 이메일 (x)
 			} else {
@@ -65,5 +56,9 @@ public class Ajax_email_check extends HttpServlet {
 		} finally {
 			JDBCconn.close(rs, pstmt, conn);
 		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 }

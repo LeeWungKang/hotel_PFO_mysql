@@ -127,7 +127,7 @@ System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 
 							
 							<option value="0" /> 기본 2명
 							
-							<option value="<%= %>" /> <%  %> 명
+							<option value="" />
 						</select>						
 						</td>
 				</tr>
