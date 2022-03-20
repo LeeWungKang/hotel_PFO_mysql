@@ -93,7 +93,7 @@ System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 
 			<table class="reserve1">
 
 				<tr align="center">
-					<td><input type="hidden" name="rs_date" value="<%=date%>"></td>
+					<td><input type="hidden" name="rs_date" value="<%=ndate%>"></td> <!-- 예약한 현재시간  -->
 					<td><input type="hidden" name="name" value="<%=name%>"></td>
 					<td><input type="hidden" name="rs_userid" value="<%=id%>"></td>
 					<td><input type="hidden" name="rs_roomname"
@@ -112,22 +112,23 @@ System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 
 
 				<tr align="center">
 					<td colspan="1">
-						<input type="date" name="rs_checkin"min='<%=ndate%>' /></td>
+						<input type="date" name="rs_checkin"  id="add_setDate"  min="<%=ndate%>" ></td>
 					<td colspan="1">
-						<input type="date" name="rs_checkout"oninput="dateCheck()"></td>
+						<input type="date" name="rs_checkout" oninput="dateCheck()"></td>  <!--체크아웃 이벤트 -->
 					<td>
 						<input type="text" id="rs_Getprice" name="rs_Getprice"value=""> 
-						<input type="hidden" id="X"	value="<%=roomvo.getPrice()%>">
+						<input type="hidden" id="rs_setPrice_X"	value="<%=roomvo.getPrice()%>">
 						<input type="hidden" id="rs_price" name="rs_price" value=""></td>
 					<td>
 						<input type="text" maxlength="1" name="rs_people"
 						placeholder="기본 2명">
 						
-						<select name="rs_people" onChange="calculateMoney()" >
-							
-							<option value="0" /> 기본 2명
-							
-							<option value="" />
+						<!-- 인원수에 따른 가격변동 기능 추가 <대기>  -->
+						<select name="rs_people_selector" onChange="calculateMoney()" >
+							<option value="0" /> 기본2명
+							<option value=""/> 4명
+							<option value="" /> 6명
+							<option value="" /> 8명
 						</select>						
 						</td>
 				</tr>
@@ -148,10 +149,10 @@ System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 
 	function dateCheck() {    //날짜 차이 계산 
 		var start_date = new Date(document.regForm.rs_checkin.value).getTime();   //체크인 
 		var end_date = new Date(document.regForm.rs_checkout.value).getTime();      //체크아웃
-		var X = document.regForm.X.value;							 //룸 가격 '히든'(표현식으로 방의 값이 바뀜)
+		var rs_setPrice_X = document.regForm.rs_setPrice_X.value;							 //룸 가격 '히든'(표현식으로 방의 값이 바뀜)
 		var diffdate = ((end_date - start_date) / (24*60*60*1000));               //기간에 차이 결과 값 (ex:1일 2일 3일 4일 ...)
 		var rs_price = document.getElementById("rs_price").value;    //화면에 보여질 총 가격.
-		var totalPrice = diffdate * X;
+		var totalPrice = diffdate * rs_setPrice_X;
 		var diffdate1 = diffdate + 1;                                // 날짜차이에 더하기 1 값은=  [?박"?일"] 데이터로 사용.
 		var totalPriceF = totalPrice.toLocaleString();      	 	 //천자리수 마다 콤마찍는 스크립트 함수호출
 		if(rs_price.value == null){
@@ -159,6 +160,7 @@ System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 
 			 document.getElementById("rs_Getprice").value =("(총"+diffdate+"박"+diffdate1+"일)")+"         "+ totalPriceF+"원";
 		 }
 	}
+	
 	 
 	function reservationCheck() {
 		if (document.regForm.name.value == "" ||document.regForm.name.length == 0 ){

@@ -61,21 +61,24 @@ body{
 	z-index: 5;
 	position:absolute;
 	border-radius: 15px;
-	width: 110px;
-	height:110px;
+	width: 150px;
+	height:120px;
 	top:130px;
 	right: 7%;
 	font-size: 0.8em;
-	line-height: 25px;
-	padding-left : 12px;
-	padding-top: 22px;
+	line-height: 35px;
+	padding: 22px 2% 22px 2%;
 }
 .NAV .adminMenu .subMenu li{
 	float: none;
 	border-bottom: solid 1px;  
 	text-align: center;
 }
- 
+.NAV .adminMenu .subMenu li:hover{   /*  a태그 배경색 통일해야됨  */
+	display:block;
+	background-color: orange;
+}
+
 #UL_left{
 	float: left;
 	margin-left: 7%;
@@ -96,6 +99,33 @@ body{
 	border-radius: 30px;
 	color: rgb(0, 0, 0);
 }
+
+.NAV #UL_right .adminMenu .subMenu li a:hover{     /* 관리자,마이페이지 드롭다운 a태그 배경색 통일 */
+ 	background-color: orange;
+ }
+.I_info_Text{
+	text-align: right;
+	margin-bottom: 10px;
+}
+.I_info_Text p{
+	color: #333; font-weight:600; margin-right: 200px;
+}
+.fa-child{
+	color: blue;
+	font-size: 1.5em;
+	text-shadow: 0px 1px 2px silver;
+}
+.fa-user-gear{
+	color: red;
+	font-size: 1.5em;
+	text-shadow: 0px 2px 3px silver;
+}
+.fa-list-ul{  /* 관리자 메뉴 폰트어썸*/
+	color: black;
+	font-size: 1.3em;
+}
+
+
  /* #img{
 	opacity:0.6;
 	filter: alpha(opacity=40);

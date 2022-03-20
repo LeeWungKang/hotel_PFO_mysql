@@ -105,13 +105,13 @@ a:active {	color: red;}
   } else {
   calStr+="<td align=center><font size='3'>" 	 // 오늘 날짜가 아닐때 배경색 지정
   }
-     calStr+="<a href=CalendarPro?year="         //날자 클릭시 이동하는 부분. <a>
+    calStr+="<a href=CalendarPro?year="        //날자 클릭시 이동하는 부분. <a>
 calStr +=year
 calStr+="&month="
 calStr+=(month+1)
 calStr+="&day="
 calStr+=dayCount
-calStr+="&roomname=<%=roomname%> >" 					// 링크설정
+calStr+="&roomname=<%=roomname%> >" 					// 링크 '지정한 방'매개변수 넣기.
   calStr+=dayCount++
   calStr+="</a>"
   if(dayCount==nowd) {
@@ -141,7 +141,7 @@ calStr += "</table></form>";
 	
 	<div class="cWrap">
 	
-	 	<div class="contentBox1">
+	 	<div class="contentBox1" >
 			<left> <br>
 			<h3>예약을 원하는 날짜를 선택해 주세요.!! </h3><br> <h3>예약 목록과 중복되는 방은 선택하실 수 없습니다.</h3><br>
 			(클릭시 해당 날짜의 예약 현황 페이지로 이동합니다.)<br>
@@ -156,4 +156,15 @@ calStr += "</table></form>";
 </div>
 
 </body>
+
+
+<script type="text/javascript">
+
+function TEST1() {
+	alert(" 달력 클릭 이벤트 ");
+}
+
+</script>
+
+
 </html>

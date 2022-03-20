@@ -28,8 +28,10 @@
 			<div class="Rogoimg"><img src="./img/hotelRogo.png" width="80px;"></div>
 			
 			 
-		<%if(name != null) { %>
-		<div align="right" style="margin-bottom: 10px;"> <p style="color: #333; font-weight:600; margin-right: 240px;"><small> <i class="fa-solid fa-child"></i> ${name}( ${id} , ${role})님 어서오세요.</small> </p> </div>
+		<%if(name != null && role.equals("user")) { %>
+		<div class="I_info_Text"> <p ><small> <i class="fa-solid fa-child"></i> &nbsp;  ${name} ( ${id} , ${role})님 어서오세요.</small> </p> </div>
+		<%}else if( role != null && role.equals("admin")) {%>
+		<div class="I_info_Text"><p ><small> <i class="fa-solid fa-user-gear"></i> &nbsp; ${name} ( ${id} , ${role})님 어서오세요.</small> </p>   </div>
 		<% }else { %>
 		<div align="right"> <p style="color:gray; text-shadow: 1px -2px 2px 5px black;"> 로그인이 필요 합니다.  </p> </div>
 		<%} %>
@@ -66,17 +68,17 @@
 					<li><a href="Get_Board_List_Pro"> Community </a></li>
 					
 					 <%if(role!=null && role.equals("admin")){ %>   	<!--관리자만 보이는 메뉴얼 (회원목록, 예약한사람 목) -->
-					<li class="adminMenu"><a href="" style="font-size: 0.8em; color: yellow;"> 관리자 전용 </a>
-						<ul class="subMenu">
-						<li><a href="#"> 회원 관리 </a> <li>
-						<li><a href="#"> 예약 관리 </a> <li>
-						<li><a href="#"> Q & A </a> <li>
+					<li class="adminMenu"><a href="" style="font-size: 0.8em; color: yellow;"> 관리자 전용 &nbsp; <i class="fa-solid fa-list-ul"></i></a>
+						<ul class="subMenu" style="width: 100px;">
+						<li style="width: 100%"><a href="#"> 회원 관리 </a> <li>
+						<li style="width: 100%"><a href="#"> 예약 관리 </a> <li>
+						<li style="width: 100%"><a href="#"> Q & A </a> <li>
 						</ul>
 					</li>
 					<% }else{	%>
-					<li class="adminMenu"><a href="" style="font-size: 0.8em; color: yellow;"> 마이페이지 </a>
-						<ul class="subMenu">
-						<li><a href="MyPage_Info_List"> 내정보 & 예약내역  </a> <li>
+					<li class="adminMenu"><a href="" style="font-size: 0.8em; color: yellow;"> 마이페이지 &nbsp; <i class="fa-solid fa-list-ul"></i></a>
+						<ul class="subMenu"  style="width: 100px;">
+						<li><a href="MyPage_Info_List"> 내정보   </a> <li>
 						<li><a href="MyRs_List"> 예약내역 </a> <li>
 						<li><a href="#"> Q & A </a> <li>
 						</ul>

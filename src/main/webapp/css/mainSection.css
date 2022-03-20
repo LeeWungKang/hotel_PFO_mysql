@@ -14,7 +14,7 @@
 
 .section .slideWrap{
 	max-width:  1200px;
-	max-height: 650px;
+	max-height: 700px;
 	margin:0 auto;
 	overflow: hidden;
 }
@@ -26,7 +26,7 @@
 	display: inline-block;
 	vertical-align: middle;
 	width: 100%;
-	transition:all 0.5s;
+	transition:all 0.4s;
 }
 .section .slideList > li > a{
 	display: block;
