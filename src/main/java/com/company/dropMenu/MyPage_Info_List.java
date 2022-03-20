@@ -50,7 +50,7 @@ public class MyPage_Info_List extends HttpServlet {
 		try {
 			conn = JDBCconn.getConnection();
 			String sql = "select * from (select rownum rnum,A.* from "
-					+ "(select * from HomeBoard order by seq desc) A) where rnum between ? and ?";
+					+ "(select * from HomeBoard where order by seq desc) A) where rnum between ? and ?";
 			pstmt = conn.prepareStatement(sql);
 			System.out.println(sql);
 			
