@@ -9,66 +9,68 @@ package com.company.Vo;
 
 public class reservationVo {
 
-	private int rsno;
-	private String rsdate;          //예약한 날짜
-	private String checkin;       //체크인 날짜
-	private String checkout;      //체크아웃 날짜
-	private int people;           //예약한 인원수
-	private String rsroomname;    //룸이름
-	private int rsroomseq;        //룸테이블에 roomseq <= 외래키로 사용
-	private String rsuserid;      //유저테이블에 id <= 외래키로 사용
-	
-	
-	
-	public String getRsdate() {
-		return rsdate;
+	private int rs_no;
+	private String rs_date;          //예약한 날짜
+	private String rs_checkin;       //체크인 날짜
+	private String rs_checkout;      //체크아웃 날짜
+	private int rs_people;           //예약한 인원수
+	private String rs_roomname;    //룸이름
+	private int rs_roomseq;        //룸테이블에 roomseq <= 외래키로 사용
+	private String rs_rsuserid;      //유저테이블에 id <= 외래키로 사용
+	private int rs_price;
+	public int getRs_no() {
+		return rs_no;
 	}
-	public void setRsdate(String rsdate) {
-		this.rsdate = rsdate;
+	public void setRs_no(int rs_no) {
+		this.rs_no = rs_no;
 	}
-	public String getRsuserid() {
-		return rsuserid;
+	public String getRs_date() {
+		return rs_date;
 	}
-	public void setRsuserid(String rsuserid) {
-		this.rsuserid = rsuserid;
+	public void setRs_date(String rs_date) {
+		this.rs_date = rs_date;
 	}
-	public int getRsno() {
-		return rsno;
+	public String getRs_checkin() {
+		return rs_checkin;
 	}
-	public void setRsno(int rsno) {
-		this.rsno = rsno;
+	public void setRs_checkin(String rs_checkin) {
+		this.rs_checkin = rs_checkin;
 	}
-	public String getCheckin() {
-		return checkin;
+	public String getRs_checkout() {
+		return rs_checkout;
 	}
-	public void setCheckin(String checkin) {
-		this.checkin = checkin;
+	public void setRs_checkout(String rs_checkout) {
+		this.rs_checkout = rs_checkout;
 	}
-	public String getCheckout() {
-		return checkout;
+	public int getRs_people() {
+		return rs_people;
 	}
-	public void setCheckout(String checkout) {
-		this.checkout = checkout;
+	public void setRs_people(int rs_people) {
+		this.rs_people = rs_people;
 	}
-	public int getPeople() {
-		return people;
+	public String getRs_roomname() {
+		return rs_roomname;
 	}
-	public void setPeople(int people) {
-		this.people = people;
+	public void setRs_roomname(String rs_roomname) {
+		this.rs_roomname = rs_roomname;
 	}
-	public String getRsroomname() {
-		return rsroomname;
+	public int getRs_roomseq() {
+		return rs_roomseq;
 	}
-	public void setRsroomname(String rsroomname) {
-		this.rsroomname = rsroomname;
+	public void setRs_roomseq(int rs_roomseq) {
+		this.rs_roomseq = rs_roomseq;
 	}
-	public int getRsroomseq() {
-		return rsroomseq;
+	public String getRs_rsuserid() {
+		return rs_rsuserid;
 	}
-	public void setRsroomseq(int rsroomseq) {
-		this.rsroomseq = rsroomseq;
+	public void setRs_rsuserid(String rs_rsuserid) {
+		this.rs_rsuserid = rs_rsuserid;
 	}
-	
-	
+	public int getRs_price() {
+		return rs_price;
+	}
+	public void setRs_price(int rs_price) {
+		this.rs_price = rs_price;
+	}
 	
 }

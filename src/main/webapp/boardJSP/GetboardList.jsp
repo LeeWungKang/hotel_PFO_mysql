@@ -6,9 +6,11 @@
 
 <%
 request.setCharacterEncoding("utf-8");
+response.setContentType("text/hrml;charset=utf-8");
 
 String role = (String) session.getAttribute("role");
 String name = (String) session.getAttribute("name");
+String id = (String) session.getAttribute("id");
 int pg; // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
 int totalCount;
 
@@ -63,7 +65,7 @@ ArrayList<replyVo> reply =(ArrayList<replyVo>) request.getAttribute("reply");
 		<form action="SearchPro" method="get">
 			<table class="table" style="width: 100%">
 				<tr>
-					<td align="right"><select name="select_type">
+					<td align="right"><select name="select_type">               <!-- 검색기능  -->
 							<option value="title" selected="selected">제목</option>
 							<option value="content">내용</option>
 							<option value="nickname">닉네임</option>
@@ -131,6 +133,7 @@ ArrayList<replyVo> reply =(ArrayList<replyVo>) request.getAttribute("reply");
 					<%
 					if (role.equals("admin")) {
 					%>
+					<!-- 체크박스 삭제 이벤트  -->
 					<td width="50" style="text-align: center;"><input
 						type="button" onclick="Delete_Check_Popup()" value="삭제1"
 						style="background-color: rgba(0, 0, 10, 0.5); color: white; border: none; font-weight: 700; cursor: pointer;">

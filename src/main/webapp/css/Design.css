@@ -1,9 +1,15 @@
 @charset "UTF-8";
 *{
-	padding: 0px;
-	margin: 0px;
+	padding: 0 ;
+	margin: 0 ;
 	list-style: none;
 	text-decoration: none;
+}
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
 }
 /* h1{
 	font-size: 2.4em;
@@ -60,25 +66,38 @@ body{
 	display: inline-block;
 	z-index: 5;
 	position:absolute;
-	border-radius: 15px;
-	width: 150px;
-	height:120px;
+	border-radius: 25px;
+	width: 130px;
+	height:130px;
 	top:130px;
-	right: 7%;
-	font-size: 0.8em;
-	line-height: 35px;
-	padding: 22px 2% 22px 2%;
+	right: 7.5%;
+	line-height: 25px;
+	padding: 22px 0% 22px 0%;
+}
+.NAV .adminMenu > a{
+	font-size: 0.8em; color: yellow;
 }
 .NAV .adminMenu .subMenu li{
 	float: none;
-	border-bottom: solid 1px;  
 	text-align: center;
+	font-size: 0.8em;
+	font-family: sans-serif;
+	font-style: none;
 }
 .NAV .adminMenu .subMenu li:hover{   /*  a태그 배경색 통일해야됨  */
 	display:block;
-	background-color: orange;
+	background-color:rgba(255, 132, 0, 0.3);
+}
+#UL_right .adminMenu .subMenu li{
+	width: 100%;
+}
+.NAV .adminMenu .subMenu li a:hover{
+	background-color:rgba(255, 132, 0, 0.5);
+	padding: 15px 5px 15px 5px;
+	font-weight: 800;
 }
 
+          		 /*  드랍다운 끝 */
 #UL_left{
 	float: left;
 	margin-left: 7%;

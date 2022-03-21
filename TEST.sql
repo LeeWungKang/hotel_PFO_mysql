@@ -3,15 +3,22 @@ select * from HomeBoard;
 
 
 select max(seq) from HomeBoard;
-select * from (select rownum rnum,A.* from (select * from HomeBoard order by seq desc) A) where rnum between 1 and 10";
 
-select * from (select rownum as rnum,b.* from (select * from HomeBoard order by seq desc) b) where rnum between 1 and 5";
+select * from (select rownum rnum,A.* from (select * from HomeBoard order by seq desc) A) where rnum between 1 and 10;
 
+
+--특정 아이디만의 게시글만 가져오는 sql
+select * from (select rownum as rnum,b.* from (select * from HomeBoard where userid='kim' order by seq desc) b) where rnum between 1 and 5;
 
 --------------------------------------------------------------------
 select boardseq,replyseq,nickname,comments,to_char(regdate,'YYYY-MM-DD HH24:MI:SS') from reply;
 
 select * from HomeUsers;
+
+
+select * from (select rownum rnum,A.* from (select * from HomeBoard where userid='kim' order by seq desc) A) where rnum between 1 and 5
+
+
 
 
 
@@ -23,6 +30,10 @@ left outer join room RM
 on R.rs_roomseq = RM.roomseq 	  	 --룸번호가 예약된 룸번호와 같은지.
 where rs_userid = 'lee' 			 --이름이 ? 인 데이터만 뽑을떄.  (로그인한 회원 본인의 데이터만 뽑을떄)
 order by rs_no desc;
+
+
+select rs_roomname,R.* from reservation R left outer join HomeUsers U on R.rs_userid = U.id left outer join room RM on R.rs_roomseq = RM.roomseq where rs_userid = 'kim' order by rs_no desc;
+
 
 
 --룸번호가 ? 번인 테이블중 예약날짜가 3월1일~ 3월19일인 테이블의 개수 

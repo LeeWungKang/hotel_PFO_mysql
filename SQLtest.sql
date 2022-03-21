@@ -7,7 +7,7 @@ title varchar2(200) not null,   --게시물 제목
 content varchar2(3000) not null, --본문
 regdate date default sysdate, 	--게시물 쓴 날짜	
 cnt number(5) default 0,		--게시물 조회수
-userid varchar2(15) 					 
+userid varchar2(15) not null					 
 );
 
 ALTER TABLE HomeBoard ADD     --ALTER TABLE [FK를 생성시킬 테이블명] 
@@ -15,19 +15,20 @@ CONSTRAINT FK_HomeBoard foreign KEY (userid) references HomeUsers(id);
 
 select * from HomeBoard;
 
-insert into HomeBoard values(1,'김돌이','문의','견적문의합니다.','2022/02/28',0,'kim');
+insert into HomeBoard values(1,'김돌이','문의','견적문의합니다.','2022/02/28',0,'hong');
 insert into HomeBoard values(2,'이순','환불','환불 문의합니다.','2022/02/07',0,'lee');
-
 insert into HomeBoard values(3,'지지','환불',' 문의합니다.','2022/02/11',0,'aaaa');
 insert into HomeBoard values(4,'히히','기타','기타 문의합니다.','2022/02/05',0,'aaaa');
-insert into HomeBoard values(5,'치치','기타',' 기타 질문 ','2022/02/02',0,'bbbbb');
+insert into HomeBoard values(5,'치치','기타',' 기타 질문 ','2022/02/02',0,'bbbb');
 insert into HomeBoard values(6,'디디','기타','질문 문의합니다.','2022/02/03',0,'123123');
 insert into HomeBoard values(7,'비비','문의',' 문의합니다.','2022/01/17',0,'123123');
-insert into HomeBoard values(8,'스스','문의',' 문의합니다.','2022/01/27',0,'123');
-insert into HomeBoard values(9,'키키','환불','환불 문의합니다.','2022/01/09',0,'kkk');
+insert into HomeBoard values(8,'스스','문의',' 문의합니다.','2022/01/27',0,'12321');
+insert into HomeBoard values(9,'키키','환불','환불 문의합니다.','2022/01/09',0,'22');
 
+--게시글 추가 sql
+insert into HomeBoard values((select nvl(max(seq),0)+1 from HomeBoard),'김길동','환불','환불 문의합니다.','2022/02/07',0,'kim');
 insert into HomeBoard (seq,nickname,title,content,regdate,cnt,userid) values( (select nvl(max(seq),0)+1 from HomeBoard) ,'구군','환불','환불 문의합니다.','2022/01/09',0,'kim');
-rt into room(roomseq,roomname,roomsize,price) values((select nvl(max(roomseq),0)+1 from room), '로얄', 8, 200000);
+
 
 ------------------------------------------------------------------------------
 --유저 계정 디비
@@ -56,6 +57,7 @@ select substr(email,instr(email,'@')+1) as email_str_last from HomeUsers where e
 
 insert into HomeUsers values('lee','lee123','이웅강','010-3312-8325','2021/11/23','kjdndrkd@naver.com','admin');
 insert into HomeUsers values('hong','hong123','홍길동','010-1111-1111','2021/12/01','mmmm@naver.com','user');
+insert into HomeUsers values('kim','kim123','김길동','010-3331-5511','2022/03/20','mewq@naver.com','user');
 
 insert into HomeUsers values('aaaa','aaaa','미미','010-5555-1111','2021/12/01','mmmm@naver.com','user');
 insert into HomeUsers values('bbbb','aaaa','토토','010-6666-1111','2021/12/01','mmmm@naver.com','user');
@@ -139,23 +141,21 @@ rs_roomseq number(5) not null,            -- room테이블의 roomseq의 외래�
 rs_userid varchar2(25) not null,           -- 예약자, 유저 아이디
 rs_price number(12) not null
 );
+alter table reservation add
+constraint FK_reservation foreign key(rs_userid) REFERENCES HomeUsers(id)
 
-ALTER TABLE reservation ADD     --ALTER TABLE [FK를 생성시킬 테이블명] 
+
+--ALTER TABLE [FK를 생성시킬 테이블명]   seq 외래키는 잠시 사용안함.
+ALTER TABLE reservation ADD   
 CONSTRAINT FK_reservation foreign KEY(rs_roomseq) references room(roomseq); 
 --ADD CONSTRAINT [FK명] foreign KEY(FK가 될 컬럼명) references [PK가 위치하는 테이블] ([PK컬럼명]);
 
-ALTER TABLE reservation drop constraint FK_reservation; 
 --ALTER TABLE [삭제할 FK위치한 테이블명] drop constraint [삭제할 FK명];
-
-
-
-
---외래키는 잠시 사용 안함
-constraint FK_reservation_rs_roomseq foreign key(rs_roomseq) REFERENCES room(roomseq),
-constraint FK_reservation_rs_userid    foreign key(rs_userid) REFERENCES HomeUsers(id)
+ALTER TABLE reservation drop constraint FK_reservation; 
 
 
 select * from reservation;
+
 drop table  reservation;
 
 create sequence seq_reservation

@@ -17,6 +17,8 @@ if (name == null) {
 BoardVo vo = (BoardVo) request.getAttribute("vo");
 ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 
+
+
 Date nowTime = new Date();
 SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 %>
@@ -25,10 +27,18 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 <head>
 <meta charset="UTF-8">
 <title>게시물 클릭했을때 화면 폼 (게시글 상세페이지)</title>
-<link	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"	rel="stylesheet"	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"	crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="./css/FormDesign.css">
-<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  <!--폰트어썸  -->
-<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js">  <!--폰트어썸  -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!--폰트어썸  -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js">
+<!--폰트어썸  -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
@@ -38,7 +48,7 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 	<br>
 
 	<div id="container" style="margin: auto auto; padding-bottom: 50px;">
-		<form action="Update_Board?seq=<%=vo.getSeq()%>" method="post">
+		<form action="Update_Board?seq=<%=vo.getSeq()%>" method="post" id="add_Form" >
 
 			<input type="hidden" name="seq" value="<%=vo.getSeq()%>">
 			<!-- 화면에는 보이지 앉지만 키값으로 넘겨서 데이타뿌려줘야할떄 히든처리  -->
@@ -58,8 +68,10 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 
 				<tr>
 					<th>내용</th>
-					<td align="left"><textarea rows="10" cols="50" name="content"
-							class="form-control"> <%=vo.getContent()%>  </textarea></td>
+					<td align="left">
+					<textarea name="content" class="form-control" id="content">
+					 <%=vo.getContent()%>  </textarea>
+					</td>
 				</tr>
 
 				<tr>
@@ -74,13 +86,12 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 
 				<tr>
 					<td colspan="2" align="center">
-						<%if(name != null){ if(role.equals("admin")){ %> <input
-						type="submit" value="글수정" class="btn btn-outline-dark"> <input
-						type="button"
-						onclick="location.href='Delete_Board_Pro?num=<%=vo.getSeq()%>'"
-						value="글삭제" class="btn btn-outline-danger"> <%}} %> <input
-						type="button" value="글목록"
-						onclick="location.href='Get_Board_List_Pro'"
+				<%if(name != null){ if(id.equals(vo.getUserid()) || role.equals("admin")){ %>
+						<input type="submit" value="글수정" class="btn btn-outline-dark" id="TAbtn"> 
+						<input type="button"onclick="location.href='Delete_Board_Pro?num=<%=vo.getSeq()%>'"	value="글삭제" class="btn btn-outline-danger"> 
+						<%}} %> 
+						
+						<input type="button" value="글목록" onclick="location.href='Get_Board_List_Pro'"
 						class="btn btn-outline-primary">
 					</td>
 				</tr>
@@ -93,12 +104,15 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 				<table>
 					<tr>
 						<th colspan="2" style="vertical-align: top;">
-							<!--댓글의 닉네임은 로그인한 회원의 이름으로 고정값.  --> <input type="text"
-							name="nickname" value="<%=name%>" readonly="readonly"
-							style="border: none; text-align: center;"> <input
-							type="hidden" name="seq" value="<%=vo.getSeq()%>">
-						<td><textarea rows="3" cols="65" name="comments"
-								placeholder="댓글을 입력하세요." style="padding: 10px 15px;"></textarea></td>
+							<!--댓글의 닉네임은 로그인한 회원의 이름으로 고정값.  --> 
+							<input type="text" name="nickname" value="<%=name%>" readonly="readonly"
+									style="border: none; text-align: center;">
+							<input type="hidden" name="seq" value="<%=vo.getSeq()%>">
+						<td>
+							<textarea rows="3" cols="65" name="comments"placeholder="댓글을 입력하세요." 
+									style="padding: 10px 15px;">
+							</textarea>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="3" align="right"><input type="button"
@@ -115,16 +129,22 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 		for (int i = 0; i < reply.size(); i++) {
 			replyVo replyvo = reply.get(i);
 		%>
-		
-		
+
+
 		<table class="table table-striped table-hover"
 			style="line-height: 25px;">
 			<tr>
-				<td style="height: auto"><b><font style="color: green">
-							<%=replyvo.getNickname()%></font></b>&nbsp;|&nbsp;&nbsp; <!--작성자 이름  --> <small
-					style="color: #bbb;"> <%=replyvo.getRegdate()%></small><br> <!--작성된 날짜+시간  -->
-					<i class="fa-solid fa-angles-right"></i> &nbsp;&nbsp;<%=replyvo.getComments()%>
-					<!--작성된 내용 (댓글내용) --></td>
+				<td style="height: auto">
+					<font style="color: green; font-weight: 800;">
+					<%=replyvo.getNickname()%>
+					</font>
+				&nbsp;|&nbsp;&nbsp; <!--작성자 이름  --> 
+				<small style="color: #bbb;"> 	<%=replyvo.getRegdate()%>		</small>	<br> 	<!--작성된 날짜+시간  -->
+					<i class="fa-solid fa-angles-right"></i> &nbsp;&nbsp;<%=replyvo.getComments()%> <!--작성된 내용 (댓글내용) -->
+					</td>
+
+
+
 
 				<!--대 댓글 입력  -->
 				<td width="80" style="font-size: 0.8em; padding-top: 20px;"><a
@@ -132,10 +152,9 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 						답글달기 </a></td>
 				<%if( name != null){ if(name.equals(replyvo.getNickname()) ){  %>
 				<!--로그인한 회원의 이름과 댓글이름이 같을떄만 삭제버튼 활성화.  -->
-				<td width="50" style="font-size: 0.8em; padding-top: 20px;">
-				<a	href="DeleteReply?replyseq=<%=replyvo.getReplyseq()%>&&nickname=<%=replyvo.getNickname()%>&&boardseq=<%=vo.getSeq() %>"
-					style="color: red;"> 삭제 </a>
-					</td>
+				<td width="50" style="font-size: 0.8em; padding-top: 20px;"><a
+					href="DeleteReply?replyseq=<%=replyvo.getReplyseq()%>&&nickname=<%=replyvo.getNickname()%>&&boardseq=<%=vo.getSeq() %>"
+					style="color: red;"> 삭제 </a></td>
 				<%}} %>
 			</tr>
 
@@ -163,6 +182,16 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 		<%}%>
 
 	</div>
+
+
+
+
+
+	<script type="text/javascript"
+		src="./smarteditor2/demo/js/service/HuskyEZCreator.js" charset="utf-8">  </script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">  </script>
+
 	<script type="text/javascript">
 	function reply() {
 		var replyContent = document.replyForm.comments.value;
@@ -176,6 +205,55 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 		}
 	}
 
+	
+	
+	var oEditors = [];
+	$(function() {
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : oEditors,
+			elPlaceHolder : "content",
+			//SmartEditor2Skin.html 파일이 존재하는 경로
+			sSkinURI : "./smarteditor2/demo/SmartEditor2Skin.html",
+			htParams : {
+				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseToolbar : true,
+				// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseVerticalResizer : true,
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseModeChanger : true,
+				fOnBeforeUnload : function() {
+				}
+			},
+			fCreator : "createSEditor2"
+		});
+	})
+	
+	$("#TAbtn").click(function(){ 
+			// id가 smarteditor인 textarea에 에디터에서 대입 
+			oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []); 
+		// 이부분에 에디터 validation 검증 
+		if(validation()) { $("#add_Form").submit(); 
+		} 
+	}); 
+	
+		function validation(){ 
+			var contents = $.trim(oEditors[0].getContents()); 
+			if(contents === '<p>&bnsp;</p>' || contents === ''){ 
+				// 기본적으로 아무것도 입력하지 않아도 값이 입력되어 있음. 
+				alert("내용을 입력하세요."); 
+				oEditors.getById['content'].exec('FOCUS'); 
+				return false; } 
+			return true; }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 /* 	parent(). */     /* 대댓글 삽입하는 스크립 */
