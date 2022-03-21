@@ -26,52 +26,47 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물 클릭했을때 화면 폼 (게시글 상세페이지)</title>
+							<title>게시물 클릭했을때 화면 폼 (게시글 상세페이지)</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
+	rel="stylesheet"integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"	crossorigin="anonymous">
 <link rel="stylesheet" href="./css/FormDesign.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<!--폰트어썸  -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js">
-<!--폰트어썸  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 
-	<h2>상세 페이지</h2>
+	<h2 align="center">상세 페이지</h2>
 	<br>
 	<br>
 
 	<div id="container" style="margin: auto auto; padding-bottom: 50px;">
-		<form action="Update_Board?seq=<%=vo.getSeq()%>" method="post" id="add_Form" >
+		<form action="Get_Board_Modify?num=<%=vo.getSeq()%>" method="post"	id="add_Form">
 
 			<input type="hidden" name="seq" value="<%=vo.getSeq()%>">
+			<input type="hidden" name="userid" value="<%=vo.getUserid()%>">
+			
 			<!-- 화면에는 보이지 앉지만 키값으로 넘겨서 데이타뿌려줘야할떄 히든처리  -->
 
 			<table class="table" style="width: 800px">
 				<tr>
 					<th>제목</th>
 					<td align="left"><input type="text" name="title"
-						value="<%=vo.getTitle()%>" class="form-control"></td>
+						value="<%=vo.getTitle()%>" class="form-control" readonly="readonly"></td>
 				</tr>
 
 				<tr>
 					<th>작성자</th>
 					<td align="left"><input type="text" name="nickname"
-						value="<%=vo.getNickname()%>" class="form-control"></td>
+						value="<%=vo.getNickname()%>" class="form-control" readonly="readonly"></td>
 				</tr>
 
 				<tr>
 					<th>내용</th>
-					<td align="left">
-					<textarea name="content" class="form-control" id="content">
-					 <%=vo.getContent()%>  </textarea>
-					</td>
+					<td align="left" style="height: 150px;"> <%=vo.getContent()%>
+					 <input type="hidden" name="content" value="<%=vo.getContent()%>">
+					 </td>
 				</tr>
 
 				<tr>
@@ -86,13 +81,12 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 
 				<tr>
 					<td colspan="2" align="center">
-				<%if(name != null){ if(id.equals(vo.getUserid()) || role.equals("admin")){ %>
-						<input type="submit" value="글수정" class="btn btn-outline-dark" id="TAbtn"> 
-						<input type="button"onclick="location.href='Delete_Board_Pro?num=<%=vo.getSeq()%>'"	value="글삭제" class="btn btn-outline-danger"> 
-						<%}} %> 
-						
-						<input type="button" value="글목록" onclick="location.href='Get_Board_List_Pro'"
-						class="btn btn-outline-primary">
+					<%if(name != null){ if(id.equals(vo.getUserid()) || role.equals("admin")){ %>
+						<input type="submit" value="글수정" class="btn btn-outline-dark"	id="TAbtn">
+						<input type="button" onclick="location.href='Delete_Board_Pro?num=<%=vo.getSeq()%>'"
+						value="글삭제" class="btn btn-outline-danger"> 
+					<%}} %> 
+						<input type="button" value="글목록" onclick="location.href='Get_Board_List_Pro'" class="btn btn-outline-primary">
 					</td>
 				</tr>
 			</table>
@@ -104,15 +98,13 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 				<table>
 					<tr>
 						<th colspan="2" style="vertical-align: top;">
-							<!--댓글의 닉네임은 로그인한 회원의 이름으로 고정값.  --> 
-							<input type="text" name="nickname" value="<%=name%>" readonly="readonly"
-									style="border: none; text-align: center;">
-							<input type="hidden" name="seq" value="<%=vo.getSeq()%>">
-						<td>
-							<textarea rows="3" cols="65" name="comments"placeholder="댓글을 입력하세요." 
-									style="padding: 10px 15px;">
-							</textarea>
-						</td>
+							<!--댓글의 닉네임은 로그인한 회원의 이름으로 고정값.  --> <input type="text"
+							name="nickname" value="<%=name%>" readonly="readonly"
+							style="border: none; text-align: center;"> <input
+							type="hidden" name="seq" value="<%=vo.getSeq()%>">
+						<td><textarea rows="3" cols="65" name="comments"
+								placeholder="댓글을 입력하세요." style="padding: 10px 15px;">
+							</textarea></td>
 					</tr>
 					<tr>
 						<td colspan="3" align="right"><input type="button"
@@ -125,23 +117,20 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 		<hr>
 		<i class="fa-solid fa-arrow-turn-down-right"></i>
 		<!-- 댓글 목록  -->
+		
 		<%
 		for (int i = 0; i < reply.size(); i++) {
 			replyVo replyvo = reply.get(i);
 		%>
-
-
 		<table class="table table-striped table-hover"
 			style="line-height: 25px;">
 			<tr>
-				<td style="height: auto">
-					<font style="color: green; font-weight: 800;">
-					<%=replyvo.getNickname()%>
-					</font>
-				&nbsp;|&nbsp;&nbsp; <!--작성자 이름  --> 
-				<small style="color: #bbb;"> 	<%=replyvo.getRegdate()%>		</small>	<br> 	<!--작성된 날짜+시간  -->
-					<i class="fa-solid fa-angles-right"></i> &nbsp;&nbsp;<%=replyvo.getComments()%> <!--작성된 내용 (댓글내용) -->
-					</td>
+				<td style="height: auto"><font
+					style="color: green; font-weight: 800;"> <%=replyvo.getNickname()%>
+				</font> &nbsp;|&nbsp;&nbsp; <!--작성자 이름  --> <small style="color: #bbb;">
+						<%=replyvo.getRegdate()%>
+				</small> <br> <!--작성된 날짜+시간  --> <i class="fa-solid fa-angles-right"></i>
+					&nbsp;&nbsp;<%=replyvo.getComments()%> <!--작성된 내용 (댓글내용) --></td>
 
 
 
@@ -152,9 +141,10 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 						답글달기 </a></td>
 				<%if( name != null){ if(name.equals(replyvo.getNickname()) ){  %>
 				<!--로그인한 회원의 이름과 댓글이름이 같을떄만 삭제버튼 활성화.  -->
-				<td width="50" style="font-size: 0.8em; padding-top: 20px;"><a
-					href="DeleteReply?replyseq=<%=replyvo.getReplyseq()%>&&nickname=<%=replyvo.getNickname()%>&&boardseq=<%=vo.getSeq() %>"
-					style="color: red;"> 삭제 </a></td>
+				<td width="50" style="font-size: 0.8em; padding-top: 20px;">
+					<a href="DeleteReply?replyseq=<%=replyvo.getReplyseq()%>&&nickname=<%=replyvo.getNickname()%>&&boardseq=<%=vo.getSeq()%>"
+							style="color: red;"> 삭제 </a>
+				</td>
 				<%}} %>
 			</tr>
 
@@ -206,7 +196,7 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 	}
 
 	
-	
+			// 네이버 에디터 게시판 시작 
 	var oEditors = [];
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({

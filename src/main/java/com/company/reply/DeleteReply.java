@@ -20,9 +20,9 @@ import com.company.common.JDBCconn;
 public class DeleteReply extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		request.setCharacterEncoding("utf-8");
+		System.out.println("/DeleteReply");
 		
 		HttpSession session = request.getSession();
 		String name =(String) session.getAttribute("name");	
@@ -60,4 +60,7 @@ public class DeleteReply extends HttpServlet {
 	}finally {
 		JDBCconn.close(pstmt, conn);
 }}
-}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+	}
