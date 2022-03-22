@@ -27,7 +27,7 @@ public class Get_Board_List_Pro extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 	System.out.println("/Get_Board_List_Pro");
 	request.setCharacterEncoding("utf-8");
-	response.setContentType("text/hrml;charset=utf-8");
+	response.setContentType("text/html;charset=utf-8");
 	
 		int page; 
 	if(request.getParameter("page")== null)

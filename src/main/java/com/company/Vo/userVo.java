@@ -13,18 +13,6 @@ public class userVo {
 	private String email;
 	private String role;
 	
-	public userVo(String id, String pw, String name, String phone, String address, Date joindate, String email,
-			String role) {
-		super();
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.phone = phone;
-		this.address = address;
-		this.joindate = joindate;
-		this.email = email;
-		this.role = role;
-	}
 	public String getId() {
 		return id;
 	}

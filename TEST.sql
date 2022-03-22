@@ -15,9 +15,11 @@ select boardseq,replyseq,nickname,comments,to_char(regdate,'YYYY-MM-DD HH24:MI:S
 
 select * from HomeUsers;
 
+--특정아이디가 작성한 게시물
+select count(*) from (select rownum rnum,A.* from (select * from HomeBoard where userid='aaaa' order by seq desc) A) where rnum between 1 and 5
 
-select * from (select rownum rnum,A.* from (select * from HomeBoard where userid='kim' order by seq desc) A) where rnum between 1 and 5
-
+--특정아이디가 작성한 게시물 갯수
+select count(*) from HomeBoard where userid='aaaa';
 
 
 
@@ -32,7 +34,7 @@ where rs_userid = 'lee' 			 --이름이 ? 인 데이터만 뽑을떄.  (로그�
 order by rs_no desc;
 
 
-select rs_roomname,R.* from reservation R left outer join HomeUsers U on R.rs_userid = U.id left outer join room RM on R.rs_roomseq = RM.roomseq where rs_userid = 'kim' order by rs_no desc;
+select rs_roomname,R.* from reservation R left outer join HomeUsers U on R.rs_userid = U.id left outer join room RM on R.rs_roomseq = RM.roomseq where rs_userid = 'aaaa' order by rs_no desc;
 
 
 

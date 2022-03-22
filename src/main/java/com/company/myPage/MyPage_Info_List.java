@@ -1,4 +1,4 @@
-package com.company.dropMenu;
+package com.company.myPage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import com.company.Vo.BoardVo;
 import com.company.Vo.reservationVo;
+import com.company.Vo.userVo;
 import com.company.common.JDBCconn;
 
 @WebServlet("/MyPage_Info_List")
@@ -35,14 +36,14 @@ public class MyPage_Info_List extends HttpServlet {
 		String name = (String) session.getAttribute("name");
 		if (name == null || id == null) {
 			out.print(
-					"<script> alert('마이페이지를 이용하시려면 로그인 해주세요'); location.href='index.jsp?filePath=./login_check/Login_main'  </script>");
+				"<script> alert('마이페이지를 이용하시려면 로그인 해주세요'); location.href='index.jsp?filePath=./login_check/Login_main'  </script>");
 			out.close();
 			return;
 		}
 
 		int page;
 		if (request.getParameter("page") == null)
-			page = 1; // 페이지는 기본값 1로 설정
+			page = 1; 		// 페이지는 기본값 1로 설정
 		else
 			page = Integer.parseInt(request.getParameter("page"));
 
@@ -57,10 +58,9 @@ public class MyPage_Info_List extends HttpServlet {
 			System.out.println(sql);
 
 			// 페이지에 담기는 게시판이 로그인id와 일치하는 데이터만 페이징처리해서 뿌려준다.
-
 			pstmt.setString(1, id);
-			pstmt.setInt(2, page * 5 - 4);
-			pstmt.setInt(3, page * 5);
+			pstmt.setInt(2, page * 10 - 9);
+			pstmt.setInt(3, page * 10);
 
 			rs = pstmt.executeQuery();
 			ArrayList<BoardVo> boardList = new ArrayList<BoardVo>();
@@ -77,7 +77,7 @@ public class MyPage_Info_List extends HttpServlet {
 			}
 			pstmt.close();
 			rs.close();
-			// 재활용하기 위해 사용한자원을 잠시 닫아준다. totalCount 값은 따로 정해야 다시 정의해야 됨
+// 재활용하기 위해 사용한자원을 잠시 닫아준다. totalCount 값은 따로 정해야 다시 정의해야 됨
 
 //특정회원의 룸을 찾는다. 예약테이블의 유저id == 계정테이블에 id가 일치하는 조건에, 예약번호와 == 룸번호가 일치하는 방만 최신순으로.
 			sql = "select rs_roomname,R.* from reservation R " 
@@ -107,16 +107,35 @@ public class MyPage_Info_List extends HttpServlet {
 			}
 			pstmt.close();
 			rs.close();
-
-			sql = "select max(seq) from HomeBoard";
+			//특정 사용자가 작성한 총 게시물 갯수
+			sql = "select count(*) from HomeBoard where userid=?";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 
 			int totalCount = 0;
 			if (rs.next()) {
 				totalCount = rs.getInt(1);
 			}
-
+			pstmt.close();
+			rs.close();
+			
+			sql="select * from HomeUsers where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				userVo uservo = new userVo();
+				uservo.setId(rs.getString("id"));
+				uservo.setPw(rs.getString("pw"));
+				uservo.setName(rs.getString("name"));
+				uservo.setPhone(rs.getString("phone"));
+				uservo.setJoindate(rs.getDate("joindate"));
+				uservo.setEmail(rs.getString("email"));
+				request.setAttribute("uservo", uservo);
+			}
+			
 			System.out.println(totalCount);
 
 			request.setAttribute("boardList", boardList);

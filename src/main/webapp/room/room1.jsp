@@ -40,9 +40,8 @@ roomVo roomvo = (roomVo) request.getAttribute("roomvo");
 			<!-- 예약하러 가기 버튼  -->
 
 			<div class="wrap">
-				<button class="button"
-					onclick="location.href='RsRoomInput?roomseq=<%=roomvo.getRoomseq()%>'">예약하러
-					가기</button>
+				<button class="button" onclick="location.href='RsRoomInput?roomseq=<%=roomvo.getRoomseq()%>'">
+				 <%=roomvo.getRoomname()%> 예약</button>
 			</div>
 		</div>
 

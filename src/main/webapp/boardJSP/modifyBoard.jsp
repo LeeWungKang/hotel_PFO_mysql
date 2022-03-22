@@ -18,12 +18,15 @@ BoardVo vo = (BoardVo) request.getAttribute("vo");
 ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 
 
+
+Date nowTime = new Date();
+SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-							<title>게시물 클릭했을때 화면 폼 (게시글 상세페이지)</title>
+							<title> 클릭한 게시글주인 - 수정페이지 </title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"	crossorigin="anonymous">
@@ -34,38 +37,36 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 </head>
 <body>
 
-	<h2 align="center"> 상세 페이지 </h2>
+	<h2 align="center">상세 페이지 글수정 페이지. </h2>
 	<br>
 	<br>
 
-	<div id="container">
-		<form action="Get_Board_Modify?num=<%=vo.getSeq()%>" method="post"	id="add_Form">
+	<div id="container" style="margin: auto auto; padding-bottom: 50px;">
+		
+		<form action="Update_Board?seq=<%=vo.getSeq()%>" method="post"
+			id="add_Form">
 
 			<input type="hidden" name="seq" value="<%=vo.getSeq()%>">
 			<input type="hidden" name="userid" value="<%=vo.getUserid()%>">
-			
 			<!-- 화면에는 보이지 앉지만 키값으로 넘겨서 데이타뿌려줘야할떄 히든처리  -->
 
 			<table class="table" style="width: 800px">
 				<tr>
 					<th>제목</th>
-					<td align="left">
-						<input type="text" name="title"	value="<%=vo.getTitle()%>" class="form-control" readonly="readonly">
-					<%if( reply.size() > 0){ %> <i class="fa-regular fa-comment-dots"></i><%} %>
-					</td>
+					<td align="left"><input type="text" name="title"
+						value="<%=vo.getTitle()%>" class="form-control"></td>
 				</tr>
 
 				<tr>
 					<th>작성자</th>
 					<td align="left"><input type="text" name="nickname"
-						value="<%=vo.getNickname()%>" class="form-control" readonly="readonly"></td>
+						value="<%=vo.getNickname()%>" class="form-control"></td>
 				</tr>
 
 				<tr>
 					<th>내용</th>
-					<td align="left" style="height: 150px;"> <%=vo.getContent()%>
-					 <input type="hidden" name="content" value="<%=vo.getContent()%>">
-					 </td>
+					<td align="left"><textarea name="content" class="form-control"	id="content">
+					 <%=vo.getContent()%>  </textarea></td>
 				</tr>
 
 				<tr>
@@ -80,12 +81,14 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 
 				<tr>
 					<td colspan="2" align="center">
-					<%if(name != null){ if(id.equals(vo.getUserid()) || role.equals("admin")){ %>
-						<input type="submit" value="글수정" class="btn btn-outline-dark"	id="TAbtn">
-						<input type="button" onclick="location.href='Delete_Board_Pro?num=<%=vo.getSeq()%>'"
-						value="글삭제" class="btn btn-outline-danger"> 
-					<%}} %> 
-						<input type="button" value="글목록" onclick="location.href='Get_Board_List_Pro'" class="btn btn-outline-primary">
+						<%if(name != null){ if(id.equals(vo.getUserid()) || role.equals("admin")){ %>
+						<input type="submit" value="글수정" class="btn btn-outline-dark"
+						id="TAbtn"> <input type="button"
+						onclick="location.href='Delete_Board_Pro?num=<%=vo.getSeq()%>'"
+						value="글삭제" class="btn btn-outline-danger"> <%}} %> <input
+						type="button" value="글목록"
+						onclick="location.href='Get_Board_List_Pro'"
+						class="btn btn-outline-primary">
 					</td>
 				</tr>
 			</table>
@@ -116,15 +119,20 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 		<hr>
 		<i class="fa-solid fa-arrow-turn-down-right"></i>
 		<!-- 댓글 목록  -->
-		<%for (int i = 0; i < reply.size(); i++) {
-				replyVo replyvo = reply.get(i); %>
+		<%
+		for (int i = 0; i < reply.size(); i++) {
+			replyVo replyvo = reply.get(i);
+		%>
+
+
 		<table class="table table-striped table-hover"
-			style="line-height: 25px; width: 800px;">
+			style="line-height: 25px;">
 			<tr>
-				<td style="height: auto"><i class="fa-regular fa-comment-dots"></i>
-				<font style="color: green; font-weight: 800;"> <%=replyvo.getNickname()%></font> &nbsp;|&nbsp;&nbsp;  
-				<small style="color: #bbb;"><%=replyvo.getRegdate()%></small> <br> 
-					&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-angles-right"></i>
+				<td style="height: auto"><font
+					style="color: green; font-weight: 800;"> <%=replyvo.getNickname()%>
+				</font> &nbsp;|&nbsp;&nbsp; <!--작성자 이름  --> <small style="color: #bbb;">
+						<%=replyvo.getRegdate()%>
+				</small> <br> <!--작성된 날짜+시간  --> <i class="fa-solid fa-angles-right"></i>
 					&nbsp;&nbsp;<%=replyvo.getComments()%> <!--작성된 내용 (댓글내용) --></td>
 
 
@@ -136,10 +144,9 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 						답글달기 </a></td>
 				<%if( name != null){ if(name.equals(replyvo.getNickname()) ){  %>
 				<!--로그인한 회원의 이름과 댓글이름이 같을떄만 삭제버튼 활성화.  -->
-				<td width="50" style="font-size: 0.8em; padding-top: 20px;">
-					<a href="DeleteReply?replyseq=<%=replyvo.getReplyseq()%>&&nickname=<%=replyvo.getNickname()%>&&boardseq=<%=vo.getSeq()%>"
-							style="color: red;"> 삭제 </a>
-				</td>
+				<td width="50" style="font-size: 0.8em; padding-top: 20px;"><a
+					href="DeleteReply?replyseq=<%=replyvo.getReplyseq()%>&&nickname=<%=replyvo.getNickname()%>&&boardseq=<%=vo.getSeq() %>"
+					style="color: red;"> 삭제 </a></td>
 				<%}} %>
 			</tr>
 
@@ -155,13 +162,8 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 					class="input">
 					<button type="button" class="itemAdd">입력</button></td>
 			</tr>
-
-
 		</table>
-
-		<%}%>
-
-		<%if (reply.size() == 0) {	%>
+		<%} if (reply.size() == 0) {	%>
 		<p style="text-align: center;">등록된 댓글이 없습니다.</p>
 		<%}%>
 
@@ -189,7 +191,6 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 		}
 	}
 
-	
 			// 네이버 에디터 게시판 시작 
 	var oEditors = [];
 	$(function() {
@@ -211,6 +212,7 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 			fCreator : "createSEditor2"
 		});
 	})
+	
 	$("#TAbtn").click(function(){ 
 			// id가 smarteditor인 textarea에 에디터에서 대입 
 			oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []); 
@@ -218,71 +220,19 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 		if(validation()) { $("#add_Form").submit(); 
 		} 
 	}); 
-function validation(){ 
-	var contents = $.trim(oEditors[0].getContents()); 
-		if(contents === '<p>&bnsp;</p>' || contents === ''){ 
-			// 기본적으로 아무것도 입력하지 않아도 값이 입력되어 있음. 
-			alert("내용을 입력하세요."); 
-			oEditors.getById['content'].exec('FOCUS'); 
-			return false; } 
-		return true; }
+	
+		function validation(){ 
+			var contents = $.trim(oEditors[0].getContents()); 
+			if(contents === '<p>&bnsp;</p>' || contents === ''){ 
+				// 기본적으로 아무것도 입력하지 않아도 값이 입력되어 있음. 
+				alert("내용을 입력하세요."); 
+				oEditors.getById['content'].exec('FOCUS'); 
+				return false; } 
+			return true; }
 	
 	
 	
 	
-	
-/* 	parent(). */     /* 대댓글 삽입하는 스크립 */
-const input = document.querySelector('.input');
-const itemAdd = document.querySelector('.itemAdd');
-const items = document.querySelector('.items');
-
-const onAdd = () => {
-	const text = input.value;
-	console.log(text);
-	
-	if(input.value === ''){
-		input.focus();
-		alert("댓글입력");
-		return;
-	}
-const item = document.createElement('tr');
-item.setAttribute('class', 'item');
-
-const itemText = document.createElement('span');
-itemText.innerHTML = text;
-
-const itemDel = document.createElement('button');
-itemDel.setAttribute('class', 'itemDel');
-itemDel.innerHTML = 'X';
-itemDel.addEventListener('click', () => {
-	items.removeChild(item);
-});
-
-item.appendChild(itemText);
-item.appendChild(itemDel);
-items.appendChild(item);
-input.value = '';
-input.focus();
-};
-
-itemAdd.addEventListener('click', () => {
-	onAdd();
-});
-
-input.addEventListener('keypress',(event)=> {
-	if (event.key === 'Enter') {
-		onAdd();
-	}
-	return;
-});
-
-	function reReply() {
-		if($('.rereply').css('display')== 'none'){
-			$('.rereply').css('display' , 'block');
-		}else if($('.rereply').css('display')=='block'){
-			$('.rereply').css('display', 'none');
-		}
-	}
 		
 </script>
 

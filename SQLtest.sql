@@ -1,4 +1,5 @@
 drop table HomeBoard;
+select * from HomeBoard;
 
 create table HomeBoard(
 seq number(5) primary key,     --게시물 번호  	
@@ -13,7 +14,7 @@ userid varchar2(15) not null
 ALTER TABLE HomeBoard ADD     --ALTER TABLE [FK를 생성시킬 테이블명] 
 CONSTRAINT FK_HomeBoard foreign KEY (userid) references HomeUsers(id); 
 
-select * from HomeBoard;
+
 
 insert into HomeBoard values(1,'김돌이','문의','견적문의합니다.','2022/02/28',0,'hong');
 insert into HomeBoard values(2,'이순','환불','환불 문의합니다.','2022/02/07',0,'lee');
@@ -45,6 +46,8 @@ email varchar2(70),
 role varchar2(10) default 'user'   --관리자계정은 ="admin" 따로 디비 설정.
 );
 
+
+
 select substr(email,1,instr(email,'@')-1) as email_str from HomeUsers;
 --  instr(칼럼A ,'찾는문자열B', 시작자릿수m, n번째 문자열B의 자릿수)
 --  substr(문자열,자르고싶은 시작수,자르고 싶은 끝 수)
@@ -58,10 +61,8 @@ select substr(email,instr(email,'@')+1) as email_str_last from HomeUsers where e
 insert into HomeUsers values('lee','lee123','이웅강','010-3312-8325','2021/11/23','kjdndrkd@naver.com','admin');
 insert into HomeUsers values('hong','hong123','홍길동','010-1111-1111','2021/12/01','mmmm@naver.com','user');
 insert into HomeUsers values('kim','kim123','김길동','010-3331-5511','2022/03/20','mewq@naver.com','user');
-
 insert into HomeUsers values('aaaa','aaaa','미미','010-5555-1111','2021/12/01','mmmm@naver.com','user');
 insert into HomeUsers values('bbbb','aaaa','토토','010-6666-1111','2021/12/01','mmmm@naver.com','user');
-
 
 ----------------------------------------------------------------------------------------
 --댓글 데이터
@@ -77,7 +78,15 @@ regdate date default sysdate,
 primary key (replyseq, boardseq)         --제약조건을 2개를 묶어서 기본키로 설정
 );
 
-select * from reply;
+--제약조건 , 기본 테이블에 alter로 접근해서 제약조건을 추가하는 방법.
+--부모테이블인 보드의 seq를 댓글테이블의 boardseq를 >외래키로 설정하고, 
+-- 'cascade delete' 기능을 부여해서 삭제시 같이 삭제되게 함.
+alter table reply add constraint reply_fk 
+foreign key (boardseq) 
+references HomeBoard(seq) 
+on delete cascade;
+
+select * from reply order by regdate desc;     --최신날자순 검색
 
 insert into reply values ()
 

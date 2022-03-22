@@ -112,3 +112,16 @@ margin-bottom: 50px;
 
 
 /*  ------------------------------------------------------- */
+
+#container{
+ margin: auto auto; padding-bottom: 50px;
+}
+
+.fa-comment-dots{
+	color: gray;
+	font-size: 1.0em;
+	margin: 5px 10px 0 10px;
+}
+
+
+

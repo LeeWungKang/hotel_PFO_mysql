@@ -43,13 +43,13 @@ System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 
 <body>
 
 
-	<div id="container">
+<div id="container">
+	
+	
 	<div class="TEST_box1">
 
 		<div class="TEST_box2">
-			<%
-			if (se_roomname != null) {
-			%>
+			<%if (se_roomname != null) {%>
 			<h2>
 				선택하신 "<font style="color: red;"> <%=se_roomname%>
 				</font>"룸은 <br> 지정하신 "<font style="color: yellow; background-color: gray;"> 
@@ -57,40 +57,33 @@ System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 
 				</font>" 날짜에 <%=conMsg%> 합니다.
 			</h2>
 			<br> <br>
-			<%
-			} else {
-			%>
-			<h2>
-				(선택하신 방이 없습니다. <br> 바로 예약 하시려면 현황표에서 방을 선택해 주세요.)
-			</h2>
-			<%
-			}
-			%>
+			<%} else {%>
+			<h2>(선택하신 방이 없습니다. <br> 바로 예약 하시려면 현황표에서 방을 선택해 주세요.)	</h2>
+			<%}	%>
+				
+				<div class="userInfoBox">
+					<table align="center" class="reservelist1">
+						<tr>
+							<th align="left">예약자 이름 :</th>
+							<td align="center" colspan="2" ><%=name%></td>
+						</tr>
+						<tr>
+							<th align="left"  >예약자 아이디 :</th>
+							<td align="center"colspan="2"><%=id%></td>
+						</tr>
+					</table>
+				</div>
+		
 		</div>
-
-
-
-		<div class="TEST_box3">
-			<table align="center" class="reservelist1">
-				<tr>
-					<th align="left">예약자 이름 :</th>
-					<td align="center" colspan="2" ><%=name%></td>
-				</tr>
-				<tr>
-					<th align="left"  >예약자 아이디 :</th>
-					<td align="center"colspan="2"><%=id%></td>
-				</tr>
-			</table>
-		</div>
-
 	</div>
 
 
 
 	<div class="rs_Wrap" onsubmit="return reservationCheck()">
-		<form class="regForm_Wrap" action="Reservation_Ok" method="post"
-			name="regForm">
-			<table class="reserve1">
+		
+		<div class="reserve1 regForm_Wrap">
+		<form action="Reservation_Ok" method="post"	name="regForm">
+			<table class="res_table">
 
 				<tr align="center">
 					<td><input type="hidden" name="rs_date" value="<%=ndate%>"></td> <!-- 예약한 현재시간  -->
@@ -116,35 +109,33 @@ System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 
 					<td colspan="1">
 						<input type="date" name="rs_checkout" oninput="dateCheck()"></td>  <!--체크아웃 이벤트 -->
 					<td>
-						<input type="text" id="rs_Getprice" name="rs_Getprice"value=""> 
+						<input type="text" id="rs_Getprice" name="rs_Getprice"value="" placeholder=" = "> 
 						<input type="hidden" id="rs_setPrice_X"	value="<%=roomvo.getPrice()%>">
 						<input type="hidden" id="rs_price" name="rs_price" value=""></td>
 					<td>
-						<input type="text" maxlength="1" name="rs_people"
-						placeholder="기본 2명">
-						
-						<!-- 인원수에 따른 가격변동 기능 추가 <대기>  -->
-						<select name="rs_people_selector" onChange="calculateMoney()" >
-							<option value="0" /> 기본2명
-							<option value=""/> 4명
-							<option value="" /> 6명
-							<option value="" /> 8명
-						</select>						
-						</td>
+						<input type="text" maxlength="1" name="rs_people"placeholder="기본 2명">
+					</td>
 				</tr>
 
-				<tr align="center" style="height: 100px;">
+				<tr align="center" style="height: 60px;">
 					<td colspan="5"><B>예약을 원하는 날짜,인원,가격이 맞는지 확인해주세요 ^^ </B></td>
 				</tr>
-				<tr style="height: 50px;">
+				<tr style="height: 150px;">
 					<td align="center" colspan="5"><input type="submit"
 						class="rs_BTN" value="예약 신청합니다"> <input type="reset"
 						class="rs_BTN" value="다시 작성하기"></td>
 				</tr>
 			</table>
 		</form>
-	</div>
-</div>
+		</div>
+		
+		
+	</div> <!--rs_Wrap  -->
+</div>  <!-- 컨테이너 -->
+
+
+
+
 	<script type="text/javascript">
 	function dateCheck() {    //날짜 차이 계산 
 		var start_date = new Date(document.regForm.rs_checkin.value).getTime();   //체크인 

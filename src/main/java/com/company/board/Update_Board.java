@@ -63,6 +63,7 @@ public class Update_Board extends HttpServlet {
 			}
 
 
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {

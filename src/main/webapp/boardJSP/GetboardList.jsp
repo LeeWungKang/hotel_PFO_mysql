@@ -42,7 +42,7 @@ ArrayList<replyVo> reply =(ArrayList<replyVo>) request.getAttribute("reply");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+						<title> 게시판 리스트 </title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -85,7 +85,7 @@ ArrayList<replyVo> reply =(ArrayList<replyVo>) request.getAttribute("reply");
 				<tr style="color: red;" >
 					<th scope="col"align="center">번호</th>
 					<th scope="col">제목</th>
-					<th scope="col">닉네임</th>
+					<th scope="col">닉네임(아이디)</th>
 					<th scope="col">작성날짜</th>
 					<th scope="col">조회수</th>
 					<%
@@ -103,11 +103,9 @@ ArrayList<replyVo> reply =(ArrayList<replyVo>) request.getAttribute("reply");
 				<tr>
 					<td><%=vo.getSeq()%></td>
 					<td><a href="Get_Board_Pro?num=<%=vo.getSeq()%>"> <%=vo.getTitle()%>
-							&nbsp; &nbsp; 
-							<i class="fa-regular fa-comment-dots"></i></a>
+							&nbsp; &nbsp; </a>
 							</td>   <!-- 댓글달릴떄만 아이콘 뜨게 수정해야댐  -->
-					
-					<td><%=vo.getNickname()%></td>
+					<td><%=vo.getNickname()%>(<%=id %>)</td>
 					<td><%=vo.getRegdate()%></td>
 					<td><%=vo.getCnt()%> &nbsp; <i
 						class="fa-brands fa-creative-commons-by" style="font-size: 1.2em;"></i></td>

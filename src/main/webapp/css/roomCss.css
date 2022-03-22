@@ -39,21 +39,21 @@
 	padding-left: 8px;
 }
 
-.table a:link {					/* a 태그 클릭 안한 상태 */
+.table a:link {				/* a 태그 클릭 안한 상태 */
 	color:rgb(0, 0, 0);
 	text-decoration : none;	/*밑줄 제거*/
 }
 
-.table a:visited { 				/* a 태그 1회 이상 클릭 했을 때 상태 */
+.table a:visited { 			/* a 태그 1회 이상 클릭 했을 때 상태 */
  	color:#876234;
  	text-decoration: none;
 }
 
-.table a:hover { 					/* a 태그에 마우스 올렸을 때 상태 */
+.table a:hover { 			/* a 태그에 마우스 올렸을 때 상태 */
  	color:#fff; 
  	text-decoration: none;	
 }
-					/* 예약하기 버튼 디자인 */
+							/* 예약하기 버튼 디자인 */
 .wrap {
   height: 45%;
   display: flex;
