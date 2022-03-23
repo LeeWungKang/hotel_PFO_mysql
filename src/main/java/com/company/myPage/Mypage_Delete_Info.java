@@ -55,7 +55,6 @@ public class Mypage_Delete_Info extends HttpServlet {
 				}else {                //회원정보가 불일치 할때 다시 돌아가기.
 					out.println("<script> alert('입력정보가 올바르지 않습니다.'); history.back(); </script>");
 					session.setAttribute("deleteErrMsg", "회원 정보가 일치하지 않습니다.");
-					return;
 				}
 		
 		
