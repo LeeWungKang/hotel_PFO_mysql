@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%
     String deleteErrMsg =(String)session.getAttribute("deleteErrMsg");
-    if(deleteErrMsg == null) deleteErrMsg =" ";
+    if(deleteErrMsg == null) deleteErrMsg ="";
     %>
     
 <!DOCTYPE html>
@@ -25,7 +25,7 @@
 </head>
 <body>
 
-<div align="center" style="margin: auto auto; margin-top: 60px;">
+<div align="center" style="margin: auto auto; margin-top: 80px;">
 	<h1> 회원탈퇴 본인 확인 </h1>
 	<p>본인 아이디와 비밀번호를 입력하시면 <span>탈퇴처리</span>가 됩니다. </p>
 <form action="" method="post" name="deleteForm">
@@ -33,7 +33,7 @@
 
 	<tr>
 		<th align="right">아이디 : </th>
-		<td><input type="text" id="inputId" name="id" placeholder="아이디를 입력하세요." maxlength="20" value=""> 
+		<td><input type="text" id="inputId" name="id" placeholder="본인 아이디를 입력하세요." maxlength="20" value=""> 
 	</tr>	
 	<tr>
 		<th align="right">비밀번호 : </th>
@@ -50,8 +50,8 @@
 </table>
 </form>	
 		<div >
-		<input type="hidden" value="" id="deleteErrMsg">  <small style="color: red"> <%=deleteErrMsg %> </small></div>
-</div>	
+		<input type="hidden" id="deleteErrMsg">  <small style="color: red"> <%=deleteErrMsg %> </small></div>
+		</div>	
 
 	<script type="text/javascript">
 	function Delete() {

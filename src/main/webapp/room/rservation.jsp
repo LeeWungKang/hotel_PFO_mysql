@@ -48,6 +48,9 @@ A:visited {	color:orange;}
 A:hover { color: 'ff9900'; background-color: rgba(39, 255, 0, 0.32)  ; padding: 6px; border-radius: 15px;}
 a:active {	color: red;}
 
+.CALENDAR{
+width: 500px;
+}
 </style>
 </head>
 <body> <!-- 오늘날짜 이전 날짜를 클릭하면 , 서블릿에서  window.history.back(); 시키는 기능 넣어야됨.  -->
@@ -64,6 +67,7 @@ a:active {	color: red;}
 	<a href="RoomInfo?roomseq=1" > 방 선택하러 가기 </a>
 	<%} %>
 	</div>
+	
 	<script type="text/javascript">
      var monthName=new Array("1월","2월","3월","4월","5월","6월","7월",
      "8월","9월","10월","11월","12월")
@@ -77,7 +81,7 @@ a:active {	color: red;}
      {
   if ((year%4==0||year%100==0)&&(year%400==0)) monthDays[1]=29; else monthDays[1]=28 //leap year test
   var firstDay=new Date(year,month,1).getDay()
-  var calStr="<table border=0 cellpadding=5 cellspacing=1 align=center bgcolor=#CCCCCC>"
+  var calStr="<table border=0 cellpadding=5 cellspacing=1 align=center bgcolor=#CCCCCC class='CALENDAR'>"
   calStr+="<tr bgcolor=white><td colspan=7>"
   calStr+="<table border=0 cellpadding=0 cellspacing=0 align=center width=100%>"
   calStr+="<td><font size='2'><a href='javascript:;' onClick='nowm--; if (nowm<0) { nowy--; nowm=11; } showCalendar(nowd,nowm,nowy)' title='이전 월'> <<</a></font></td>"
@@ -145,7 +149,7 @@ calStr += "</table></form>";
 			<left> <br>
 			<h3>예약을 원하는 날짜를 선택해 주세요.!! </h3><br> <h3>예약 목록과 중복되는 방은 선택하실 수 없습니다.</h3><br>
 			(클릭시 해당 날짜의 예약 현황 페이지로 이동합니다.)<br>
-		</left>
+			</left>
 		</div>
 		
 		<div class="contentBox2"> 

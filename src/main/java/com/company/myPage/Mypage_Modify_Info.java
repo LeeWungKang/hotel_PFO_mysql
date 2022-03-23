@@ -63,7 +63,7 @@ public class Mypage_Modify_Info extends HttpServlet {
 			
 			System.out.println(name);
 			/* response.sendRedirect("index.jsp?filePath=./user_admin/getMy_modifyInfo"); */
-			 RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./user_admin/getMy_modifyInfo");
+			 RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./user/getMy_modifyInfo");
 			 dis.forward(request, response);
 			 
 

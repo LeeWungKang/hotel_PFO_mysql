@@ -25,7 +25,7 @@ padding: 15px 5px 15px 5px;
 box-shadow: 0 2px 5px rgb(192, 192, 192);
 }
 .subText{
-	background-color: rgba(84, 77, 0, 0.32);
+	background-color: rgba(20, 20, 0, 0.32);
 	text-align: center;
 	padding: 15px 5px 0px 5px;
 	border-radius: 20px;
@@ -101,6 +101,7 @@ padding: 50px 20px 20px 20px;
 }
 .regForm_Wrap input{
 	border-radius: 20px;
+	text-align: center;
 }
 
 .rs_Wrap .regForm_Wrap .res_table .rs_BTN{
@@ -141,7 +142,7 @@ padding: 50px 20px 20px 20px;
 }
 
 .regForm_Wrap input[type='date']{
-	width: 55%;
+	width: 70%;
 	text-align:center;
 	padding: 10px;
 	outline: none ;

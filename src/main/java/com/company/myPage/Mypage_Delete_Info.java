@@ -48,14 +48,16 @@ public class Mypage_Delete_Info extends HttpServlet {
 				
 				PrintWriter out = response.getWriter();
 				if(cnt !=0) {           //회원정보가 일치하면 회원탈퇴 완료 (o)
-					session.invalidate();   //세션 파괴
-					out.println("<script> alert('입력 정보와 일치한 \\n 회원정보가 삭제 되었습니다.'); location.href='index.jsp?filePath=./login_check/Login_main';  </script>");
+					session.invalidate();   //세션 파괴  부모창(팝업)닫고 원하는 경로로 이동
+					out.println("<script> alert('입력 정보와 일치한 \\n 회원정보가 삭제 되었습니다.');opener.document.location.href='index.jsp';\r\n"
+							+ "  self.close(); </script>");
 					out.flush();
 					return;
 				}else {                //회원정보가 불일치 할때 다시 돌아가기.
-					out.println("<script> alert('입력정보가 올바르지 않습니다.'); history.back(); </script>");
 					session.setAttribute("deleteErrMsg", "회원 정보가 일치하지 않습니다.");
-					return;
+					out.println("<script> alert('입력정보가 올바르지 않습니다.');opener.document.location.reload();\r\n"
+							+ "history.back(); </script>");
+					out.close();
 				}
 		
 		

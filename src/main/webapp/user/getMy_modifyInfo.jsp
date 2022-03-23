@@ -123,42 +123,74 @@ border-left: solid 2px black;
 	<div style="height: 100px; width: 30%;"> </div>
 	
 	
-		<h3>< 변경 할 정보 작성란 ></h3>
-	<table class="table table-hover" >
+		<h3> < 변경 할 정보 작성란 ></h3>
+		<p> * 표시 된것만 수정할 수 있습니다. </p>
+		
+		
+	<form action="UserInfo_Update?id=<%=uservo.getId()%>" method="post" name="modiForm" onsubmit="return modify_value()">
 	
+		<table class="table table-hover" >
   				<tr>
-					<th>회원 아이디</th>
-					<td><input type="text" value="<%=uservo.getId()%>"></td>
-					<td><input type="hidden" value="<%=uservo.getPw() %>"> </td>
+					<th>회원 아이디</th>   <!-- 아이디는 수정안됨.  -->
+					<td><input type="text" name="id" value="<%=uservo.getId()%>" readonly="readonly"></td>
 				</tr>
 				<tr>
-					<th>회원 이름</th>
-					<td><input type="text" value="<%=uservo.getName()%>"></td>
+					<th>*&nbsp;&nbsp;회원 이름</th>
+					<td><input type="text" name="name" value="<%=uservo.getName()%>"></td>
 				</tr> 
+				<tr>
+					<th>*&nbsp;&nbsp;패스 워드</th>
+					<td><input type="text" name="pw" min="2" value="<%=uservo.getPw()%>"></td>
+				</tr>
 		 		<tr>
-					<th>핸드폰 번호</th>
-					<td><input type="text" value="<%=uservo.getPhone()%>"></td>
+					<th>*&nbsp;&nbsp;핸드폰 번호</th>
+					<td><input type="text" name="phone" value="<%=uservo.getPhone()%>"></td>
 				</tr>
 				<tr>
-					<th>가입 날짜</th>
-					<td><input type="text" value="<%=uservo.getJoindate()%>"></td>
-				</tr>
-				<tr>
-					<th>이메일</th>
-					<td><input type="text" value="<%=uservo.getEmail()%>"></td>
+					<th>*&nbsp;&nbsp;이메일</th>
+					<td><input type="text" name="email" value="<%=uservo.getEmail()%>"></td>
 				</tr> 
 				
 				<tr>
 					<td colspan="3" align="center">
 					<div class="wrap">
-				<button class="button" onclick="#"> 수정완료</button>
+				<input type="submit" class="button" value="수정완료">
 					</div>
 					</td>
 				</tr>
-  
-  
-	</table>
+		</table>
+	</form>
 	
-	</div>
+<script type="text/javascript">
+function modify_value() {
+ 	var form = document.modiForm;
+	
+	if(form.pw.value == "" || form.pw.length == 0 ){
+		alert("비밀번호를 입력하세요.");
+		form.pw.focus();
+		return;
+	}
+	else if(!form.name.value){
+		alert("이름을 입력하세요.");
+		form.name.focus();
+		return;
+	}
+	else if(!form.phone.value) ){
+		alert("핸드폰 번호를 입력하세요.");
+		form.phone.focus();
+		return;
+	}
+	else if(!form.email.value){
+		alert("이메일을 입력하세요.");
+		form.email.focus();
+		return;
+	}else{
+		document.modiForm.submit();
+		document.modiForm.action="UserInfo_Update?id='<%=uservo.getId()%>'";
+	}
+}
+</script>
+</div>
+	
 </body>
 </html>

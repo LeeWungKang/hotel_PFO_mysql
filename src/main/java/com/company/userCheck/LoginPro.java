@@ -35,10 +35,10 @@ public class LoginPro extends HttpServlet {
 	System.out.println(cookeyId+"cookeyId");
 	Cookie cookie = new Cookie("cookid", id);
 	
-	if(cookeyId != null) {    //체크박스 체크되어있을떄.
+	if(cookeyId != null) {    	 //체크박스 체크되어있을떄.
 		response.addCookie(cookie);
 	} else {
-		cookie.setMaxAge(0);    //쿠키유효시간설정. (-1:시간제한없이 유지. 0:유효시간0초. 180:3분..)
+		cookie.setMaxAge(-1);    //쿠키유효시간설정. (-1:시간제한없이 유지. 0:유효시간0초. 180:3분..)
 		response.addCookie(cookie);
 	}
 	

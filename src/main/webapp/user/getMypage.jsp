@@ -96,7 +96,7 @@ border-left: solid 2px;
 			<tbody>
 				<tr>
 					<td align="center"><A href="Mypage_Modify_Info?id=<%=uservo.getId()%>"> 내 정보 수정 </A></td>
-					<td align="center"><A href="#" onclick="window.open('./user_admin/userInfo_Delete.jsp','LoginPopup','top=200, left=450, width=550, height=400, toolbar=no, status=yes, menubar=no')" style="color: red;"> 회원 탈퇴
+					<td align="center"><A href="#" onclick="window.open('./user_admin/userInfo_Delete.jsp','deletePopup','top=200, left=450, width=550, height=400, toolbar=no, status=yes, menubar=no')" style="color: red;"> 회원 탈퇴
 					</A></td>
 				</tr>
 			</tbody>
@@ -173,12 +173,12 @@ border-left: solid 2px;
 		}
 		if (startPage > 1) {
 		%>
-		<a href="MyPage_Info_List?page=1"> 처음 </a>
+		<a href="My_Info_List?page=1"> 처음 </a>
 		<%
 		}
 		if (pg > 1) {
 		%>
-		<a href="MyPage_Info_List?page=<%=pg - 1%>"> 이전 </a>
+		<a href="My_Info_List?page=<%=pg - 1%>"> 이전 </a>
 		<%
 		}
 		for (int iCount = startPage; iCount <= endPage; iCount++) {
@@ -189,7 +189,7 @@ border-left: solid 2px;
 		<%
 		} else {
 		%>
-		<a href="MyPage_Info_List?page=<%=iCount%>"> <%=iCount%>
+		<a href="My_Info_List?page=<%=iCount%>"> <%=iCount%>
 		</a>&nbsp;
 		<%
 		}
@@ -197,13 +197,13 @@ border-left: solid 2px;
 		if (pg < totalPage) {
 		%>
 
-		<a href="MyPage_Info_List?page=<%=pg + 1%>">다음</a>
+		<a href="My_Info_List?page=<%=pg + 1%>">다음</a>
 
 		<%
 		}
 		if (endPage < totalPage) {
 		%>
-		<a href="MyPage_Info_List?page=<%=totalPage%>">끝</a>
+		<a href="My_Info_List?page=<%=totalPage%>">끝</a>
 
 		<%
 		}
@@ -216,7 +216,7 @@ border-left: solid 2px;
 			var msg = confirm("정말로 삭제하시겠습니까?");
 			if (msg) {
 				chc_Form.method = "post";
-				chc_Form.action = "mypage_Delete_Check";
+				chc_Form.action = "Mypage_Delete_Check";
 				chc_Form.submit();
 			} else {
 				selfclose();
