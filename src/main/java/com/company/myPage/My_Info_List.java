@@ -21,8 +21,8 @@ import com.company.Vo.reservationVo;
 import com.company.Vo.userVo;
 import com.company.common.JDBCconn;
 
-@WebServlet("/MyPage_Info_List")
-public class MyPage_Info_List extends HttpServlet {
+@WebServlet("/My_Info_List")
+public class My_Info_List extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -55,7 +55,6 @@ public class MyPage_Info_List extends HttpServlet {
 			String sql = "select * from (select rownum as rnum,A.* from "
 					+ "(select * from HomeBoard where userid=? order by seq desc) A) where rnum between ? and ?";
 			pstmt = conn.prepareStatement(sql);
-			System.out.println(sql);
 
 			// 페이지에 담기는 게시판이 로그인id와 일치하는 데이터만 페이징처리해서 뿌려준다.
 			pstmt.setString(1, id);
@@ -101,7 +100,7 @@ public class MyPage_Info_List extends HttpServlet {
 				rsvo.setRs_people(rs.getInt("rs_people"));
 				rsvo.setRs_roomname(rs.getString("rs_roomname"));
 				rsvo.setRs_roomseq(rs.getInt("rs_roomseq"));
-				rsvo.setRs_rsuserid(rs.getString("rs_userid"));
+				rsvo.setRs_userid(rs.getString("rs_userid"));
 				rsvo.setRs_price(rs.getInt("rs_price"));
 				rsvoList.add(rsvo);
 			}
@@ -142,7 +141,7 @@ public class MyPage_Info_List extends HttpServlet {
 			request.setAttribute("rsvoList", rsvoList);
 			request.setAttribute("totalRows", totalCount);
 
-			RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./user_admin/getMypage");
+			RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./user/getMypage");
 			dis.forward(request, response);
 
 		} catch (ClassNotFoundException | SQLException e) {

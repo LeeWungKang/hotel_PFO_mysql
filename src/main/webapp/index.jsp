@@ -11,7 +11,6 @@
     String name = (String) session.getAttribute("name");
     String role = (String) session.getAttribute("role");
     role = "";
-
     
     %>
 <!DOCTYPE html>

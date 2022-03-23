@@ -58,9 +58,8 @@ ArrayList<replyVo> reply =(ArrayList<replyVo>) request.getAttribute("reply");
 <body>
 	<br><br>
 	<h2 align="center" >커뮤니티</h2>
-	<hr>
 	<br><br>
-	<div align="center" style="margin: auto auto;">
+	<div align="center" style="margin: auto auto; padding-top: 45px;">
 
 		<form action="SearchPro" method="get">
 			<table class="table" style="width: 100%">

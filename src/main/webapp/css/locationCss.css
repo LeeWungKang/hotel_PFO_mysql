@@ -1,15 +1,31 @@
 @charset "UTF-8";
 
+html{
+	width: 100%;
+}
+body{
+	width: 100%;
+}
+#container{
+	width: 100%;
+	margin: auto auto;
+}
 body H1{
 	margin: 0px 0px 15px 30px;
+	text-align: center;
+	color:#b1b1b1;
+	height:10%;
+	font-size:xx-large;
+	border-bottom: 4px solid #1abc9c;
+	font-weight:bolder;
+	padding-bottom: 10px;
 }
 
 .Wrap_location{
 	text-align:center;
-	width: 1650px;
-	padding: 4% 5.5% 5% 5.5%;
+	width: 90%;
+	padding: 5% 5.5% 5% 5.5%;
 	display: inline-block;
-	box-shadow: -2px 5px 10px silver;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -17,16 +33,19 @@ body H1{
 }
 
 #map{
-width:40%;	height:400px; 	z-index: 0;
+width:40%;	height:500px; 	z-index: 0;
 box-shadow: 2px 2px 5px 3px silver;
 border-radius: 30px;
-
+margin-top: 100px;
 }
-
+#side_text hr{
+	border-top: 1px dashed #bbb;
+	margin: 20px;
+	}
 #side_text{
-	width: 50%; height:400px;
+	width: 45%; height:850px;
 	display: inline-block;
-	background-color:  rgba(30,90,250, 0.2);
+	background-color: #212121;
 	z-index:1;
 	text-align: left;
 	box-sizing:border-box;
@@ -36,20 +55,23 @@ border-radius: 30px;
 	font-style: normal;
 	font-weight: 700;
 	border-radius: 25px;
+	overflow: hidden;
 }
 #side_text li{
-	width: 150px;
+	list-style: circle;
+	color: #bbb;
 }
 #side_text h3{
-	color: blue;
+	color: rgb(255, 128, 128);
 }
 
-#side_text pre{
-	height:350px;
+#side_text article{
+	text-align:center;
+	height:400px;
 	position: absolute;
-	box-sizing: content-box;
-	overflow: scroll;
-	width: 750px;
+	width: 90%;
+	line-height: 50px;
+	margin-left: 25px;
 }
 
 

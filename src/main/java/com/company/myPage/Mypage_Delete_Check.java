@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import com.company.common.JDBCconn;
 
-@WebServlet("/mypage_Delete_Check")
-public class mypage_Delete_Check extends HttpServlet {
+@WebServlet("/Mypage_Delete_Check")
+public class Mypage_Delete_Check extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
