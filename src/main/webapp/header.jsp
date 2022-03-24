@@ -13,6 +13,7 @@ if (name == null)
 <head>
 <meta charset="UTF-8">
 <title></title>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
 <link href="./css/Design.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -47,10 +48,10 @@ if (name == null)
 					
 	<nav>
 		<ul class="snip1284">
-			<li><a href="index.jsp?filePath=mainSection">Home</a></li> 
-			<li><a href="RoomInfo?roomseq=1"> Room & Rservation </a></li>
-			<li><a href="index.jsp?filePath=location"> Location </a></li>
-			<li><a href="Get_Board_List_Pro"> Community </a></li>
+			<li class="li_index"><a href="index.jsp?filePath=mainSection">Home</a></li> 
+			<li class="li_index"><a href="RoomInfo?roomseq=1"> Room & Rservation </a></li>
+			<li class="li_index"><a href="index.jsp?filePath=location"> Location </a></li>
+			<li class="li_index"><a href="Get_Board_List_Pro"> Community </a></li>
 		</ul>
 	</nav>
 		</nav>
@@ -63,17 +64,17 @@ if (name == null)
 					<%
 					if (name == null) {
 					%>
-					<li><a href="#"
+					<li class="li_index"><a href="#"
 						onclick="window.open('./login_check/LoginPopup.jsp','LoginPopup','top=200, left=450, width=550, height=400, toolbar=no, status=yes, menubar=no')">Login</a></li>
 
 					<%
 					} else {
 					%>
-					<li><a href="#" onclick="LogOut_Check_Popup();"> Logout </a></li>
+					<li class="li_index"><a href="#" onclick="LogOut_Check_Popup();"> Logout </a></li>
 					<%
 					}
 					%>
-					<li><a href="#"
+					<li class="li_index"><a href="#"
 						onclick="location.href='index.jsp?filePath=signUp'"> Sign Up </a></li>
 					<!-- 게시판  -->
 					
@@ -82,7 +83,7 @@ if (name == null)
 					if (role != null && role.equals("admin")) {
 					%>
 					<!--관리자만 보이는 메뉴얼 (회원목록, 예약한사람 목) -->
-					<li class="adminMenu"><a href="#"> 관리자 전용 &nbsp; 
+					<li class="adminMenu li_index"><a href="#"> 관리자 전용 &nbsp; 
 					<i class="fa-solid fa-list-ul"></i></a>
 						<ul class="subMenu">
 							<li><a href="#"> 회원 관리 </a>
@@ -133,12 +134,13 @@ if (name == null)
 	
 	//상단메뉴 active 활성화 
 	$(document).ready(function(){
-		$('li').each(function(index){
-			$(this).attr('menu-index', index);
+		$('.li_index').each(function(index){
+			$(this).attr('menu-index', index);   //.. li_index클래스의 메뉴들을 클릭하면 인덱스번호가 생성됨
+			
 		}).click(function(){
 			var index = $(this).attr('menu-index');
-			$('li[menu-index =' + index + ']').addClass('current');
-			$('li[menu-index !=' + index + ']').removeClass('current');
+			$('.li_index[menu-index=' + index + ']').addClass('current');
+			$('.li_index[menu-index!=' + index + ']').removeClass('current');
 		});
 
 

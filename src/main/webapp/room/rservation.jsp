@@ -37,45 +37,12 @@ System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 
 <meta charset="UTF-8">
 <title>예약하기 페이지</title>
 <link href="./css/reservationCss.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js">
+
 <style>
-
-/* 달력 css */
-td {
-	text-decoration: none;
-}
-
-#calendar td {
-	height: 80px;
-}
-
-font {
-	text-decoration: none;
-	line-height: 190%;
-}
-
-A:link {
-	text-decoration: none;
-	color: black;
-}
-
-A:visited {
-	color: orange;
-}
-
-A:hover {
-	color: 'ff9900';
-	background-color: rgba(39, 255, 0, 0.32);
-	padding: 6px;
-	border-radius: 15px;
-}
-
-a:active {
-	color: red;
-}
-
-.CALENDAR {
-	width: 500px;
-}
 </style>
 </head>
 <body>
@@ -87,7 +54,8 @@ a:active {
 			선택하신 "<font style="color: red;"> <%=roomvo.getRoomname()%>
 			</font>" 방 ,<br> 객실이 만석인지 조회 하기위해, 예약 할 날짜를 선택해 주세요.
 		</h2>
-		<br> <br>
+		<h4><font color="#A8A8A8" size="3"> 예약 목록과 중복되는 방은 선택하실 수 없습니다. </font></h4>
+		<br>
 		<%}else{%>
 		<h2 align="center">(선택하신 방이 없습니다. 예약 현황표에서 방을 선택해 주세요)</h2>
 		<br> <a href="RoomInfo?roomseq=1"> 방 선택하러 가기 </a>
@@ -110,19 +78,19 @@ a:active {
   var calStr="<table border=0 cellpadding=5 cellspacing=1 align=center bgcolor=#CCCCCC class='CALENDAR'>"
   calStr+="<tr bgcolor=white><td colspan=7>"
   calStr+="<table border=0 cellpadding=0 cellspacing=0 align=center width=100%>"
-  calStr+="<td><font size='2'><a href='javascript:;' onClick='nowm--; if (nowm<0) { nowy--; nowm=11; } showCalendar(nowd,nowm,nowy)' title='이전 월'> <<</a></font></td>"
+  calStr+="<td><font size='2'><a href='javascript:;' onClick='nowm--; if (nowm<0) { nowy--; nowm=11; } showCalendar(nowd,nowm,nowy)' title='이전 월'>  <i class='fa-solid fa-reply'></i> </i> </a></font></td>"
   calStr+="<td align=center><font size='5' weight='900'>"+monthName[month].toUpperCase()+" "+year+"년</font></td>"
-  calStr+="<td align=right><font size='2'><a href='javascript:;'  onClick='nowm++; if (nowm>11) { nowy++; nowm=0; } showCalendar(nowd,nowm,nowy)' title='다음 월'> >></a></font></td>"
+  calStr+="<td align=right><font size='2'><a href='javascript:;'  onClick='nowm++; if (nowm>11) { nowy++; nowm=0; } showCalendar(nowd,nowm,nowy)' title='다음 월'> <i class='fa-solid fa-share'></i>   </a></font></td>"
   calStr+="</tr></table>"
   calStr+="</td></tr>" 
-  calStr+="<tr align=center bgcolor='#336666'>"
-  calStr+="<th width='70px;'><font color='red' size='2'>일</font></th>"
-  calStr+="<th width='70px;'><font color='white' size='2'>월</font></th>"
-  calStr+="<th width='70px;'><font color='white' size='2'>화</font></th>"
-  calStr+="<th width='70px;'><font color='white' size='2'>수</font></th>"
-  calStr+="<th width='70px;'><font color='white' size='2'>목</font></th>"
-  calStr+="<th width='70px;'><font color='white' size='2'>금</font></th>"
-  calStr+="<th width='70px;'><font color='blue' size='2'>토</font></th>" 
+  calStr+="<tr class='days' align=center bgcolor='#336666'>"
+  calStr+="<th width='70px;'><font color='red' size='4'>일</font></th>"
+  calStr+="<th width='70px;'><font color='white' size='4'>월</font></th>"
+  calStr+="<th width='70px;'><font color='white' size='4'>화</font></th>"
+  calStr+="<th width='70px;'><font color='white' size='4'>수</font></th>"
+  calStr+="<th width='70px;'><font color='white' size='4'>목</font></th>"
+  calStr+="<th width='70px;'><font color='white' size='4'>금</font></th>"
+  calStr+="<th width='70px;'><font color='blue' size='4'>토</font></th>" 
   calStr+="</tr>" 
   var dayCount=1
   calStr+="<tr bgcolor=white>"
@@ -131,7 +99,7 @@ a:active {
   {
  
   if(dayCount==nowd) {
-  calStr+="<td align=center bgcolor='a0c0ff'>  Today<br>  <font size='4'><b>"  // 오늘 날짜일때 배경색 지정,글자 진하게
+  calStr+="<td align=center bgcolor='87E4FF'>  Today<br>  <font size='4'><b>"  // 오늘 날짜일때 배경색 지정,글자 진하게
   } else {
   calStr+="<td align=center><font size='3'>" 	 // 오늘 날짜가 아닐때 배경색 지정
   }
@@ -159,45 +127,27 @@ calStr += "</table></form>";
    }
      
 </script>
-
 	<div class="containerBox">
-		<!--달력 스크립트 // 객체소환  -->
+
 		<div class="calendarWrap">
-			<span id="calendar"
-				style="position: relative; display: inline-block;"></span>
-			<script type="text/javascript"> showCalendar(nowd,nowm,nowy);</script>
-			<br />
-		</div>
+			<br><font color="#8A8B8B" size="3"> (클릭시 해당 날짜의 예약 현황 페이지로 이동합니다.) </font><br>
 
-		<div class="cWrap">
-
-			<div class="contentBox1">
-				<left> <br>
-				<h3>예약을 원하는 날짜를 선택해 주세요.!!</h3>
-				<br>
-				<h3>예약 목록과 중복되는 방은 선택하실 수 없습니다.</h3>
-				<br>
-				(클릭시 해당 날짜의 예약 현황 페이지로 이동합니다.)<br>
-				</left>
-			</div>
-
-			<div class="contentBox2">
-				<a href="index.jsp" style="color: blue">홈으로 이동</a>
-			</div>
+				<div id="calendar">
+					<!--달력 스크립트 // 객체소환  -->
+					<script type="text/javascript"> showCalendar(nowd,nowm,nowy);</script>
+					<br />
+				</div>
 
 		</div>
+
+
+		<div class="outside_A">
+			<a href="index.jsp"> 홈으로 이동</a>
+		</div>
+
 	</div>
-
 </body>
 
-
-<script type="text/javascript">
-
-function TEST1() {
-	alert(" 달력 클릭 이벤트 ");
-}
-
-</script>
 
 
 </html>

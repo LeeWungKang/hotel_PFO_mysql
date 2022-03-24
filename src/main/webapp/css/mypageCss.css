@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+	/* 
+			getMypage 
+						 */
+
+#containerMypage{
+	width: 1300px; height: auto; 
+	text-align: center;
+	margin: auto;
+}						 
+						 
+						 
+.info_Wrap H2{
+	margin: 0px 0px 15px 30px;
+	text-align: center;
+	color:#b1b1b1;
+	height:10%;
+	font-size:xx-large;
+	border-bottom: 4px solid #1abc9c;
+	font-weight:bolder;
+	padding-bottom: 10px;
+}
+
+.table .TotalText{
+	color: red; font-size: 1.4em;
+}
+
+
+
+
+
+
+	/* 		
+			getMy_ReservationList	
+										 */
+
+.rsWrap{
+	margin: auto auto;
+	width: 80%;
+	line-height: 50px;
+	padding-top: 70px;
+}
+.rsWrap .table span{
+	color: red;
+	font-weight: 900;
+	font-size: 1.4em;
+}
+.rsWrap .table tr{
+	line-height: 40px;
+	}
+.rsWrap .table .Tbody th{
+	color: yellow;
+}
+.rsWrap .table .Tbody{
+padding: 10px;
+}
+.rsWrap h2{
+	border-left: solid 6px #1abc9c;
+	padding-left: 15px;
+}
+
+
+
+/* 
+		getMy_modifyInfo
+							 */
+
+
+.table-striped .table-dark th{
+	color: #ccc;
+}					 
+.table-striped .table-dark td{
+border-left: solid 2px white;
+color: #1abc9c;
+}
+
+table-hover td{
+border-left: solid 2px black;
+}
+.table-hover td input{
+	outline-color: #ccc;
+	border: 1px solid #eee;
+}
+.table-hover td input:focus{
+    outline: 3px solid rgba(46, 229, 157, 0.4);
+	outline-color: invert;    
+}
+.table-hover .star{
+	color: rgb(255, 128, 128);
+} 
+
+/* 수정완료 버튼 css */
+.wrap {
+  height: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrap .button {
+  width: 130px;
+  height: 40px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  font-size: 1.2em;
+  color: #000;
+  background-color: #eee;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(10, 40, 40, 0.2);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+							 

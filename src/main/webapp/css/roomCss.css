@@ -42,7 +42,7 @@
 }
 
 .table a:link {				/* a 태그 클릭 안한 상태 */
-	color:rgb(0, 0, 0);
+	color:rgb(255, 255, 255);
 	text-decoration : none;	/*밑줄 제거*/
 }
 

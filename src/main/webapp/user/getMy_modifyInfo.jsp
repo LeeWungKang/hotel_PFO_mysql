@@ -81,7 +81,7 @@ line-height: 40px;
 		<p> * 표시 된것만 수정할 수 있습니다. </p>
 		
 	
-	<form action="UserInfo_Update?id=<%=uservo.getId()%>" method="post" name="modify-Form">
+	<form action="UserInfo_Update?id=<%=uservo.getId()%>" method="post" name="modify_Form">
 	
 		<table class="table table-hover">
   				<tr>
@@ -119,9 +119,10 @@ line-height: 40px;
 
 function modiCheck() {
 	alert("modiCheck");
-	var mf= document.modify-Form;
+	var mf= document.modify_Form;
 	
-	if (mf.pw.value == "" || mf.pw.length == 0) {
+	
+	if (pw.value == "" || pw.length == 0) {
 		alert("비밀번호를 입력하세요.");
 		mf.pw.focus();
 		return;
@@ -142,8 +143,9 @@ function modiCheck() {
 		return;
 	} else {
 		alert("입력을 완료 했습니다.");
-/* 		document.modify-Form.submit();
- */		/* document.modiForm.action = "UserInfo_Update?"; */
+ 		document.modify-Form.method="post";
+ 	    document.modiForm.action = "UserInfo_Updateeee";
+ 		document.modify-Form.submit();
 	}
 }
 

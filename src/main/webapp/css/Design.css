@@ -36,6 +36,7 @@ body{
 	left: 0;
 	right: 0;
 	z-index: 10;
+	padding-bottom: 5px;
 }
 .NAV ul li{
 	display: inline-block;
@@ -71,7 +72,7 @@ body{
 	border-radius: 25px;
 	width:  175px;
 	height: auto;
-	top:130px;
+	top:140px;
 	right: 11%;
 	line-height: 25px;
 	padding: 22px 1% 15px 0%;
@@ -85,10 +86,6 @@ body{
 	font-size: 0.8em;
 	font-family: sans-serif;
 }
-/* .NAV .adminMenu .subMenu li:hover{    a태그 배경색 통일해야됨 
-	display:block;
-	background-color:rgba(255, 132, 0, 0.3);
-} */
 #UL_right .adminMenu .subMenu li{
 	width: 90%;
 }
@@ -157,7 +154,7 @@ font-size: 1.2em;
 .snip1284 li {
   display: inline-block;
   list-style: outside none none;
-  margin: 0.5em 1.2em;
+  margin: 0.6em 1.2em;
   padding: 0;
 }
 .snip1284 a {
@@ -194,7 +191,14 @@ font-size: 1.2em;
 .snip1284 .current a:after {
   height: 100%;
 }
-
+.current{
+	color: red;
+	padding: 20px;
+	background-color: white;
+}
+.snip1284 a:active{
+	color: red;
+}
  
 /* 상단메뉴 끝 */ 
  
