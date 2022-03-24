@@ -9,7 +9,8 @@
 	text-align: center;
 	z-index: 0;
 	position:absolute; 
-	top: 90%; left: 20%; 
+	top: 90%; left: 40%;
+	overflow: visible; 
 }
 
 .section .slideWrap{

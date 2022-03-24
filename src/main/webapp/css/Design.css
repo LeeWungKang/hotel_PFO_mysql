@@ -201,9 +201,8 @@ font-size: 1.2em;
  
  
 #mainSection{    					   /* 인클루딩된 모든 페이지의 부모 화면 */
-	margin-top: 50px;
+	margin: 50px 0 200px 0;
 	height: auto;
-	margin-bottom: 200px;
 	padding: 0px 80px;
 }
 #footer{

@@ -27,9 +27,11 @@ public class Delete_Check extends HttpServlet {
 		String name=(String) session.getAttribute("name"); 
 		if(name==null) {response.sendRedirect("index.jsp");
 		return;	} 
-		 
 		
-		String chcBox[]= request.getParameterValues("chcBox");   //체크박스 배열로 받아와서 클릭한 벨류만 값 삭제
+		
+		
+		String[] chcBox= request.getParameterValues("chcBox");   //체크박스 배열로 받아와서 클릭한 벨류만 값 삭제
+		System.out.println("chcBox");
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -37,19 +39,33 @@ public class Delete_Check extends HttpServlet {
 			conn=JDBCconn.getConnection();
 			
 			int cnt=0;
-			for(int i=0; i<chcBox.length; i++) {
+			for(int i=0; i<chcBox.length; i ++) {
 				String sql="delete from HomeBoard where seq=?";
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setInt(1,Integer.parseInt(chcBox[i]));
 				pstmt.executeUpdate();
 				cnt++;
-				if(cnt !=0) {
-					PrintWriter out = response.getWriter();
-					out.println("<script> alert('선택한 게시물이 삭제 되었습니다.'); location.href='Get_Board_List_Pro';  </script>");
+				
+				
+				PrintWriter out = response.getWriter();
+				if(cnt != 0) {
+					out.print(1+"");
 					out.flush();
 					return;
+				}else {
+					cnt = 0;
+					
+					return;
 				}
+				/*
+				 *
+				 * println("<script> alert('선택한 게시물이 삭제 되었습니다.'); location.href='Get_Board_List_Pro';  </script>"
+				 * ); out.flush();
+				 */
 			}
+		
+		
+		
 		
 		
 		} catch (ClassNotFoundException | SQLException e) {

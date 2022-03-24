@@ -34,13 +34,17 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 </head>
 <body>
 
+
+
+
 	<h2 align="center"> 상세 페이지 </h2>
 	<br>
 	<br>
 
-	<div id="container">
+	<div id="container" align="center">
 		<form action="Get_Board_Modify?num=<%=vo.getSeq()%>" method="post"	id="add_Form">
-
+			
+			<h4><%=vo.getUserid() %> 님의 게시글 </h4>
 			<input type="hidden" name="seq" value="<%=vo.getSeq()%>">
 			<input type="hidden" name="userid" value="<%=vo.getUserid()%>">
 			

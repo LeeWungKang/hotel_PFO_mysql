@@ -25,11 +25,12 @@
 </head>
 <body>
 
-<div align="center" style="margin: auto auto; margin-top: 80px;">
-	<h1> 회원탈퇴 본인 확인 </h1>
-	<p>본인 아이디와 비밀번호를 입력하시면 <span>탈퇴처리</span>가 됩니다. </p>
-<form action="" method="post" name="deleteForm">
-<table class="table" style="width: 400px;"> 
+	<div align="center" style="margin: auto auto; margin-top: 80px;">
+			<h1> 회원탈퇴 본인 확인 </h1>
+			<p>본인 아이디와 비밀번호를 입력하시면 <span>탈퇴처리</span>가 됩니다. </p>
+	
+	<form action="" method="post" name="deleteForm">
+		<table class="table" style="width: 400px;"> 
 
 	<tr>
 		<th align="right">아이디 : </th>
@@ -42,13 +43,14 @@
 	
 	<tr>  
 		<td colspan="2" align="center">   
-		<input type="submit" value="탈퇴하기" onclick="Delete(); return false;" class="logBtn">
-		<input type="button" value="창 닫기" onclick="Sign_Up()" class="logBtn">	
+		<input type="submit" value="탈퇴하기" onclick="Delete(); return false;" class="logBtn" formtarget="_parent">
+		<input type="button" value="창 닫기" onclick="Close()" class="logBtn">	
 		</td>
 	</tr>
 	
-</table>
-</form>	
+		</table>
+	</form>	
+		
 		<div >
 		<input type="hidden" id="deleteErrMsg">  <small style="color: red"> <%=deleteErrMsg %> </small></div>
 		</div>	
@@ -74,7 +76,7 @@
 		}
 	}
 	
-	function Sign_Up() {  //회원가입 화면으로 이동 > 팝업창은 내린다.
+	function Close() { //팝업창 그냥 내린다.
 		self.close();
 	}
 	</script>

@@ -27,7 +27,7 @@
 
 		<div id="side_text">
 					
-				<article>
+				<article class="article">
 					<h3> 안내 사항 </h3>
 					<ul>
 						<li>주소 : 경기도 수원시 팔달구 인계동 1234-123 </li>
@@ -36,6 +36,7 @@
 					<hr>
 					<h3> 전화번호 </h3>
 						<li>000-0000-0000</li>
+						<li>011-0111-0111</li>
 					<hr>
 					<h3> 이메일 </h3>
 					<li>kjdndrkd@naver.com</li>

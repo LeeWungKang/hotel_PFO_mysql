@@ -54,7 +54,6 @@ public class Get_Board_List_Pro extends HttpServlet {
 		String sql = "select * from (select rownum rnum,A.* from "
 				+ "(select * from HomeBoard order by seq desc) A) where rnum between ? and ?";
 		pstmt = conn.prepareStatement(sql);
-		System.out.println(sql);
 		
 		//각 페이지에 담기는 rownum값을 정의해준다. 
 		pstmt.setInt(1, page*5-4);
@@ -69,6 +68,7 @@ public class Get_Board_List_Pro extends HttpServlet {
 			vo.setContent(rs.getString("content"));
 			vo.setTitle(rs.getString("title"));
 			vo.setRegdate(rs.getDate("regdate"));
+			vo.setUserid(rs.getString("userid"));
 			vo.setCnt(rs.getInt("cnt"));
 			
 			list.add(vo);

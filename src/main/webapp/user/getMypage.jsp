@@ -42,6 +42,7 @@ if (name == null) {
 <head>
 <meta charset="UTF-8">
 <title>마이 페이지</title>
+<link rel="stylesheet" href="css/mypageCss.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -52,26 +53,13 @@ if (name == null) {
 a {
 	text-decoration: none;
 }
-.table-striped .table-dark td{
-border-left: solid 2px;
-}
-.info_Wrap H2{
-	margin: 0px 0px 15px 30px;
-	text-align: center;
-	color:#b1b1b1;
-	height:10%;
-	font-size:xx-large;
-	border-bottom: 4px solid #1abc9c;
-	font-weight:bolder;
-	padding-bottom: 10px;
-}
+
 </style>
 
 </head>
 <body>
 
-	<div id="container" align="right"
-		style="width: 1300px; height: auto; text-align: center;">
+	<div id="containerMypage" align="right">
 
 
 		<div class="info_Wrap" style="margin-bottom: 100px;">
@@ -105,7 +93,7 @@ border-left: solid 2px;
 			<tbody>
 				<tr>
 					<td align="center"><A href="Mypage_Modify_Info?id=<%=uservo.getId()%>"> 내 정보 수정 </A></td>
-					<td align="center"><A href="#" onclick="window.open('./user_admin/userInfo_Delete.jsp','deletePopup','top=200, left=450, width=550, height=400, toolbar=no, status=yes, menubar=no')" style="color: red;"> 회원 탈퇴
+					<td align="center"><A href="#" onclick="window.open('./user/userInfo_Delete.jsp','deletePopup','top=200, left=450, width=550, height=400, toolbar=no, status=yes, menubar=no')" style="color: red;"> 회원 탈퇴
 					</A></td>
 				</tr>
 			</tbody>
@@ -123,8 +111,7 @@ border-left: solid 2px;
 			<table class="table table-hover">
 				<thead class="table-dark">
 					<tr>
-						<th>총 <font> <%=totalCount%>
-						</font>개의 게시글
+						<th>총 <font class="TotalText"> " <%=totalCount%> " </font>개의 글
 						</th>
 						<th colspan="3"></th>
 						<th><input type="button" onclick="Delete_Check_Popup()"

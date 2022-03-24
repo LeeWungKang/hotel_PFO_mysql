@@ -8,6 +8,11 @@
 a {
 	text-decoration: none;
 }
+
+#container{
+	width: 85%;
+}
+
 table, tr, td, th, div, p, em, ol, ul, li, dl, dt, dd,a, address, img{
 	font-size: 11pt;
 	color: #666;
@@ -49,6 +54,14 @@ body H2{
 
 .table input[class='telLength'] {
 	width: 70px;
+}
+
+#add_Form{
+	margin-top: 50px;
+}
+#add_Form h4{
+	width: 250px;
+	color: rgb(255, 128, 128);
 }
 
 .id_btn {

@@ -37,37 +37,63 @@ System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 
 <meta charset="UTF-8">
 <title>예약하기 페이지</title>
 <link href="./css/reservationCss.css" rel="stylesheet">
-<style> 
+<style>
 
 /* 달력 css */
-td {	text-decoration: none;}
-#calendar td {	height: 80px;}
-font {	text-decoration: none;	line-height: 190%;}
-A:link{text-decoration: none; color: black;	}
-A:visited {	color:orange;}
-A:hover { color: 'ff9900'; background-color: rgba(39, 255, 0, 0.32)  ; padding: 6px; border-radius: 15px;}
-a:active {	color: red;}
+td {
+	text-decoration: none;
+}
 
-.CALENDAR{
-width: 500px;
+#calendar td {
+	height: 80px;
+}
+
+font {
+	text-decoration: none;
+	line-height: 190%;
+}
+
+A:link {
+	text-decoration: none;
+	color: black;
+}
+
+A:visited {
+	color: orange;
+}
+
+A:hover {
+	color: 'ff9900';
+	background-color: rgba(39, 255, 0, 0.32);
+	padding: 6px;
+	border-radius: 15px;
+}
+
+a:active {
+	color: red;
+}
+
+.CALENDAR {
+	width: 500px;
 }
 </style>
 </head>
-<body> <!-- 오늘날짜 이전 날짜를 클릭하면 , 서블릿에서  window.history.back(); 시키는 기능 넣어야됨.  -->
-	
+<body>
+	<!-- 오늘날짜 이전 날짜를 클릭하면 , 서블릿에서  window.history.back(); 시키는 기능 넣어야됨.  -->
+
 	<div class="subText">
-	<%	if (roomvo != null) {	%>
-	<h2>
-		선택하신 "<font style="color: red;"> <%=roomvo.getRoomname()%>	</font>" 방 ,<br>
-		 객실이 만석인지 조회 하기위해, 예약 할 날짜를 선택해 주세요.
-	</h2>
-	<br>	<br>
-	<%}else{%>
-	<h2 align="center">(선택하신 방이 없습니다. 예약 현황표에서 방을 선택해 주세요)</h2> <br>
-	<a href="RoomInfo?roomseq=1" > 방 선택하러 가기 </a>
-	<%} %>
+		<%	if (roomvo != null) {	%>
+		<h2>
+			선택하신 "<font style="color: red;"> <%=roomvo.getRoomname()%>
+			</font>" 방 ,<br> 객실이 만석인지 조회 하기위해, 예약 할 날짜를 선택해 주세요.
+		</h2>
+		<br> <br>
+		<%}else{%>
+		<h2 align="center">(선택하신 방이 없습니다. 예약 현황표에서 방을 선택해 주세요)</h2>
+		<br> <a href="RoomInfo?roomseq=1"> 방 선택하러 가기 </a>
+		<%} %>
 	</div>
-	
+
 	<script type="text/javascript">
      var monthName=new Array("1월","2월","3월","4월","5월","6월","7월",
      "8월","9월","10월","11월","12월")
@@ -134,30 +160,33 @@ calStr += "</table></form>";
      
 </script>
 
+	<div class="containerBox">
+		<!--달력 스크립트 // 객체소환  -->
+		<div class="calendarWrap">
+			<span id="calendar"
+				style="position: relative; display: inline-block;"></span>
+			<script type="text/javascript"> showCalendar(nowd,nowm,nowy);</script>
+			<br />
+		</div>
 
-<div class="containerBox">
- <!--달력 스크립트 // 객체소환  -->
-<div class="calendarWrap">
-		<span id="calendar" style="position: relative; display: inline-block;"></span>
-	 	<script type="text/javascript"> showCalendar(nowd,nowm,nowy);</script>
-		<br />
-</div>	
-	
-	<div class="cWrap">
-	
-	 	<div class="contentBox1" >
-			<left> <br>
-			<h3>예약을 원하는 날짜를 선택해 주세요.!! </h3><br> <h3>예약 목록과 중복되는 방은 선택하실 수 없습니다.</h3><br>
-			(클릭시 해당 날짜의 예약 현황 페이지로 이동합니다.)<br>
-			</left>
+		<div class="cWrap">
+
+			<div class="contentBox1">
+				<left> <br>
+				<h3>예약을 원하는 날짜를 선택해 주세요.!!</h3>
+				<br>
+				<h3>예약 목록과 중복되는 방은 선택하실 수 없습니다.</h3>
+				<br>
+				(클릭시 해당 날짜의 예약 현황 페이지로 이동합니다.)<br>
+				</left>
+			</div>
+
+			<div class="contentBox2">
+				<a href="index.jsp" style="color: blue">홈으로 이동</a>
+			</div>
+
 		</div>
-		
-		<div class="contentBox2"> 
-			<a href="index.jsp" style="color: blue">홈으로 이동</a>
-		</div>
-	
 	</div>
-</div>
 
 </body>
 
