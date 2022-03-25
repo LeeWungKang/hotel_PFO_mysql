@@ -30,7 +30,9 @@ public class Reservation_Ok extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 //최종 예약 insert 페이지.
 		//rs_no  자동생성 
-	    String rs_date =request.getParameter("rs_date");     //"20220317"  날자입력이 안댐  
+		
+		
+	    String rs_date =request.getParameter("rs_date");    	 //"20220317"  날자입력이 안댐  
 	    String rs_checkin = request.getParameter("rs_checkin");
 	    String rs_checkout = request.getParameter("rs_checkout");
 	    int rs_people =Integer.parseInt( request.getParameter("rs_people"));
@@ -51,16 +53,15 @@ public class Reservation_Ok extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			conn = JDBCconn.getConnection();
-			String sql = "insert into reservation (rs_no,rs_date,rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price) values (seq_reservation.nextval,?,?,?,?,?,?,?,?)";   //객실이름이랑 날자가 동일한 데이타가 있는지 검사해야댐.
+			String sql = "insert into reservation (rs_no,rs_date,rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price) values (seq_reservation.nextval,sysdate,?,?,?,?,?,?,?)";   //객실이름이랑 날자가 동일한 데이타가 있는지 검사해야댐.
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,rs_date);
-			pstmt.setString(2, rs_checkin);
-			pstmt.setString(3, rs_checkout);
-			pstmt.setInt(4, rs_people);
-			pstmt.setString(5, rs_roomname);
-			pstmt.setInt(6, rs_roomseq);
-			pstmt.setString(7, rs_userid);
-			pstmt.setInt(8, rs_price);
+			pstmt.setString(1, rs_checkin);
+			pstmt.setString(2, rs_checkout);
+			pstmt.setInt(3, rs_people);
+			pstmt.setString(4, rs_roomname);
+			pstmt.setInt(5, rs_roomseq);
+			pstmt.setString(6, rs_userid);
+			pstmt.setInt(7, rs_price);
 			int cnt =pstmt.executeUpdate();
 			
 			PrintWriter out = response.getWriter();

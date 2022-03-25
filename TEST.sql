@@ -34,7 +34,8 @@ where rs_userid = 'lee' 			 --이름이 ? 인 데이터만 뽑을떄.  (로그�
 order by rs_no desc;
 
 
-select rs_roomname,R.* from reservation R left outer join HomeUsers U on R.rs_userid = U.id left outer join room RM on R.rs_roomseq = RM.roomseq where rs_userid = 'aaaa' order by rs_no desc;
+select rs_no,to_char(rs_date,'YYYY-MM-DD HH24:MI:SS') as rs_date,rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price from reservation R left outer join HomeUsers U on R.rs_userid = U.id left outer join room RM on R.rs_roomseq = RM.roomseq where rs_userid = 'aaaa' order by rs_no desc;
+
 
 
 

@@ -36,14 +36,14 @@ public class My_Info_List extends HttpServlet {
 		String name = (String) session.getAttribute("name");
 		if (name == null || id == null) {
 			out.print(
-				"<script> alert('마이페이지를 이용하시려면 로그인 해주세요'); location.href='index.jsp?filePath=./login_check/Login_main'  </script>");
+					"<script> alert('마이페이지를 이용하시려면 로그인 해주세요'); location.href='index.jsp?filePath=./login_check/Login_main'  </script>");
 			out.close();
 			return;
 		}
 
 		int page;
 		if (request.getParameter("page") == null)
-			page = 1; 		// 페이지는 기본값 1로 설정
+			page = 1; // 페이지는 기본값 1로 설정
 		else
 			page = Integer.parseInt(request.getParameter("page"));
 
@@ -78,35 +78,7 @@ public class My_Info_List extends HttpServlet {
 			rs.close();
 // 재활용하기 위해 사용한자원을 잠시 닫아준다. totalCount 값은 따로 정해야 다시 정의해야 됨
 
-//특정회원의 룸을 찾는다. 예약테이블의 유저id == 계정테이블에 id가 일치하는 조건에, 예약번호와 == 룸번호가 일치하는 방만 최신순으로.
-			sql = "select rs_roomname,R.* from reservation R " 
-					+ "left outer join HomeUsers U on "
-					+ "R.rs_userid = U.id " 
-					+ "left outer join room RM on " 
-					+ "R.rs_roomseq = RM.roomseq "
-					+ "where rs_userid = ? " + "order by rs_no desc";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id); // 일치하는 아이디가 존재한다면, '예약 테이블' 리스트에 담아서 뿌려주자.
-
-			rs = pstmt.executeQuery();
-
-			ArrayList<reservationVo> rsvoList = new ArrayList<reservationVo>();
-			if (rs.next()) {
-				reservationVo rsvo = new reservationVo();
-				rsvo.setRs_no(rs.getInt("rs_no"));
-				rsvo.setRs_date(rs.getString("rs_date"));
-				rsvo.setRs_checkin(rs.getString("rs_date"));
-				rsvo.setRs_checkout(rs.getString("rs_checkout"));
-				rsvo.setRs_people(rs.getInt("rs_people"));
-				rsvo.setRs_roomname(rs.getString("rs_roomname"));
-				rsvo.setRs_roomseq(rs.getInt("rs_roomseq"));
-				rsvo.setRs_userid(rs.getString("rs_userid"));
-				rsvo.setRs_price(rs.getInt("rs_price"));
-				rsvoList.add(rsvo);
-			}
-			pstmt.close();
-			rs.close();
-			//특정 사용자가 작성한 총 게시물 갯수
+			// 특정 사용자가 작성한 총 게시물 갯수
 			sql = "select count(*) from HomeBoard where userid=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -118,13 +90,13 @@ public class My_Info_List extends HttpServlet {
 			}
 			pstmt.close();
 			rs.close();
-			
-			sql="select * from HomeUsers where id=?";
+
+			sql = "select * from HomeUsers where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				userVo uservo = new userVo();
 				uservo.setId(rs.getString("id"));
 				uservo.setPw(rs.getString("pw"));
@@ -134,11 +106,10 @@ public class My_Info_List extends HttpServlet {
 				uservo.setEmail(rs.getString("email"));
 				request.setAttribute("uservo", uservo);
 			}
-			
+
 			System.out.println(totalCount);
 
 			request.setAttribute("boardList", boardList);
-			request.setAttribute("rsvoList", rsvoList);
 			request.setAttribute("totalRows", totalCount);
 
 			RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./user/getMypage");

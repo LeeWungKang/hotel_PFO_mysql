@@ -49,7 +49,7 @@ if (name == null)
 	<nav>
 		<ul class="snip1284">
 			<li class="li_index"><a href="index.jsp?filePath=mainSection">Home</a></li> 
-			<li class="li_index"><a href="RoomInfo?roomseq=1"> Room & Rservation </a></li>
+			<li class="li_index"><a href="RoomInfo?roomseq=1"> Room & Reservation </a></li>
 			<li class="li_index"><a href="index.jsp?filePath=location"> Location </a></li>
 			<li class="li_index"><a href="Get_Board_List_Pro"> Community </a></li>
 		</ul>

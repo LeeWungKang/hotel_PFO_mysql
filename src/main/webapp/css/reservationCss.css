@@ -211,14 +211,19 @@ padding: 50px 20px 20px 20px;
 }
 
 .regForm_Wrap input[type='date']{
-	width: 70%;
+	width: 75%;
 	text-align:center;
-	padding: 10px;
+	font-weight:700;
+	padding: 12px;
 	outline: none ;
 	border:none;
 	box-shadow: 0px -1px 10px -2px rgba(0,100,300,0.7);
 }
-
+.regForm_Wrap .res_table .totalPrice_BOX{
+	width: 35%;
+	padding: 20px;
+	font-weight: 800;
+}
 .regForm_Wrap input[type='date']:hover{
 	box-shadow: 0px -1px 10px -2px rgba(300,100,0,0.7);
 }

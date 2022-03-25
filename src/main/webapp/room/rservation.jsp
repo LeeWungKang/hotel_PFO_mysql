@@ -12,10 +12,11 @@ String role = (String) session.getAttribute("role");
 
 
 String date = (String) request.getAttribute("date"); 			//(중복날짜확인)켈린더 서블릿 갓다가 다시내려오는 객체
+if(date == null) date = "";
+
+
 roomVo roomvo = (roomVo) request.getAttribute("roomvo");
-
 String se_roomname =(String) request.getAttribute("se_roomname");  //룸페이지에서 고객이 선택한 룸의 정보
-
 String roomname =(String) session.getAttribute("roomname"); 	 //세션에다 안넣으면 달력에서 매개로 줄때 코드가 꼬임.
 String conMsg =(String) session.getAttribute("conMsg");
 
@@ -23,12 +24,6 @@ String conMsg =(String) session.getAttribute("conMsg");
 		"<script> alert('죄송합니다. 예약은 로그인이 필요합니다.'); location.href='index.jsp?filePath=./login_check/Login_main'  </script>");
 		out.close(); return;
 }
-	//달력에서 넘어온 날자가 yyyy/m/d 형태라, 재사용 가능하게 변환시킴.
-Date nowdate1 = new Date();
-System.out.println(nowdate1);
-SimpleDateFormat sf = new SimpleDateFormat("YYYY년/MMM/dd일");
-String ndate = sf.format(nowdate1); //현재 시간, 페이지에 보여줄 현재시간 포맷.    (예약한 시간으로 데이타 들어감.)
-System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 sysdate라서 설정안해도 되지만 사용자에게 날짜를 보여주기위해.)
 
 %>
 <!DOCTYPE html>
@@ -127,6 +122,10 @@ calStr += "</table></form>";
    }
      
 </script>
+
+
+
+
 	<div class="containerBox">
 
 		<div class="calendarWrap">
@@ -137,7 +136,6 @@ calStr += "</table></form>";
 					<script type="text/javascript"> showCalendar(nowd,nowm,nowy);</script>
 					<br />
 				</div>
-
 		</div>
 
 

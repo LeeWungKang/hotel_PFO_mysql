@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.company.Vo.reservationVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -29,6 +31,14 @@ if (name == null) {
 	response.sendRedirect("index.jsp?filePath=./login_check/Login_main.jsp");
 	return;
 }
+
+// 현재시간 보다 5일전이면 예약취소 불가능 하게 제한 넣어야됨.
+Date nowDate = new Date();
+System.out.println(nowDate);
+SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+String ndate = sf.format(nowDate); 
+
+System.out.println(ndate+"--------------------현재시간");			
 %>
 
 
@@ -67,41 +77,77 @@ a {
 					</th>
 				</tr>
 			</thead>
+			
+			
+			<tbody class="Tbody">
+				<tr align="center">
+					<th>예약자 아이디</th>
+					<th>예약 날짜</th>
+					<th colspan="2">체크인 / 체크아웃</th>
+					<th>예약한 방</th>
+					<th>인원수</th>
+					<th>총 가격</th>
+					<th style="color: red;">예약 취소</th>
+				</tr>
+				
 			<%
 			for (int j = 0; j < rsList.size(); j++) {
 				reservationVo rsvo = rsList.get(j);
 			%>
-			<tbody class="Tbody">
-				<tr>
-					<th>예약자 아이디</th>
-					<th>예약 날짜</th>
-					<th>체크인</th>
-					<th>체크아웃</th>
-					<th>예약한 방</th>
-					<th>인원수</th>
-					<th>총 가격</th>
-					<th>예약 취소</th>
-				</tr>
-				<tr>
+				<tr align="center">
 					<td><%=rsvo.getRs_userid()%></td>
-					<td><%=rsvo.getRs_date()%></td>
-					<td><%=rsvo.getRs_checkin()%></td>
-					<td><%=rsvo.getRs_checkout()%></td>
+					<td><%=rsvo.getRs_date()%>
+					
+	<!--체크인시간  -->	   		<input type="hidden"  value="<%=rsvo.getRs_checkin()%>" id="rsdate">
+	<!--오늘날짜  -->		       <input type="hidden"  value="<%=ndate%>" id="now_date">
+					</td>
+					<td colspan="2"><%=rsvo.getRs_checkin()%>&nbsp; ~ &nbsp;<%=rsvo.getRs_checkout()%></td>
 					<td><%=rsvo.getRs_roomname()%></td>
 					<td><%=rsvo.getRs_people()%></td>
 					<td><%=rsvo.getRs_price()%></td>
-					<td></td>
+					<td>
+					<input type="button" onclick="rsDelete();" value="예약취소">
+					or  
+					<font>"ㅡ"</font>
+					 
+					</td>
 				</tr>
 				<%
 				}
 				%>
 			</tbody>
 		</table>
+			<div align="center"> 	<h5> :: 체크인 날짜 3일 이전에는 예약을 취소 하실 수 없습니다. :: </h5> </div>
+	
+	<script type="text/javascript">
+	
+	function rsDelete() {
+		var now_date = new Date(document.getElementById("now_date").value).getTime();      //오늘 날짜
+		var rsdate = new Date(document.getElementById("rsdate").value).getTime();      		      //체크인 시작 날짜
+		var diffdate = (( rsdate - now_date) / (24*60*60*1000));       												      //예약날짜 - 현재날짜  
+		
+		
+		if (rsdate != null && diffdate <= 3) { 				//체크인하는 날이  현재날짜보다 3일전일떄는 예약 취소 불가능.
+			alert("3일전 이라 취소가 불가능 합니다.");
+			console.log("취소 불가능");
+			return;
+			
+			
+		}else{
+			confirm("취소하시겠습니까?");
+			console.log(" 날짜차이가 3일 이상일떄 = 취소 가능 기능");
+			location.href="cccccc.jsp";
+		}
+	}
+	</script>
 
+
+
+	<!-- 페이징  -->
 		<div style="width: 100%; margin: auto; text-align: center;">
 			<%
-			int countList = 5; // 한 페이지에 출력될 게시물 수(10개를 기준으로 잡음)
-			int countPage = 5; // 한 화면에 출력될 페이지 수(통상적으로 10개 페이지를 나오게 함)
+			int countList = 5; 				// 한 페이지에 출력될 게시물 수(10개를 기준으로 잡음)
+			int countPage = 5; 			// 한 화면에 출력될 페이지 수(통상적으로 10개 페이지를 나오게 함)
 			int totalPage = totalCount / countList;
 
 			if (totalCount % countList > 0) {
@@ -156,5 +202,10 @@ a {
 			%>
 		</div>
 	</div>
+	
+
+	
+	
+	
 </body>
 </html>

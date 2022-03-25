@@ -12,7 +12,6 @@ String id = (String) session.getAttribute("id");
 
 userVo uservo = (userVo) request.getAttribute("uservo");
 ArrayList<BoardVo> boardList = (ArrayList<BoardVo>) request.getAttribute("boardList");
-ArrayList<reservationVo> rsvoList = (ArrayList<reservationVo>) request.getAttribute("rsvoList");
 
 int pg; // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
 int totalCount;
@@ -114,17 +113,18 @@ a {
 						<th>총 <font class="TotalText"> " <%=totalCount%> " </font>개의 글
 						</th>
 						<th colspan="3"></th>
-						<th><input type="button" onclick="Delete_Check_Popup()"
-							value="선택 삭제"
-							style="background-color: rgba(0, 0, 0, 0.2); color: red; border: none; font-weight: 700; cursor: pointer;">
-						</th>
+						<th width="50" style="text-align: center;">전체 <input
+							type="checkbox" name="checkAll" id="th_checkAll"
+							onclick="check_All()"></th>
 					</tr>
 					<tr>
 						<th width="150px;">글번호</th>
 						<th>제목</th>
 						<th>개시날짜</th>
 						<th>닉네임(아이디)</th>
-						<th width="130px;">-</th>
+						<th width="130px;"><input
+							type="button" onclick="Delete_Check()" value="삭제"
+							style="background-color:#212529; color: red; border: none; font-weight: 700; cursor: pointer;"></th>
 					</tr>
 				</thead>
 
@@ -138,7 +138,7 @@ a {
 						<td><%=bvo.getTitle()%></td>
 						<td><%=bvo.getRegdate()%></td>
 						<td><%=bvo.getNickname()%></td>
-						<td><input type="checkbox" id="checDelBox" name="checDelBox"
+						<td><input type="checkbox" id="chcBox" name="chcBox"
 							value="<%=bvo.getSeq()%>"></td>
 					</tr>
 					<%
@@ -212,19 +212,41 @@ a {
 
 	<!--페이지 리스트 끝 부분  -->
 	<script type="text/javascript">
-		function Delete_Check_Popup() {
-			var msg = confirm("정말로 삭제하시겠습니까?");
-			if (msg) {
-				chc_Form.method = "post";
-				chc_Form.action = "Mypage_Delete_Check";
-				chc_Form.submit();
-			} else {
-				selfclose();
-			}
+
+	//전체 선택
+	function check_All() {
+
+		if ($("#th_checkAll").is(':checked')) {
+			$("input[name=chcBox]").prop("checked", true);
+		} else {
+			$("input[name=chcBox]").prop("checked", false);
 		}
-		function infoDelete() {
-						
+	}
+	//선택한 체크박스 삭제요청
+	function Delete_Check() {
+		var chcBox = document.getElementById("chcBox").value;
+		
+		
+		if(chcBox.checked == null){
+			alert("삭제할 항목을 선택하세요,");
+			return false;
 		}
+		var msg = "";
+		if (chcBox.checked != null) {
+			msg=confirm("정말로 삭제하시겠습니까?");
+			chc_Form.method = "post";
+			chc_Form.action = "Mypage_Delete_Check";
+			chc_Form.submit();
+		} else {
+			selfclose();
+		}
+	}
+
+		
+		
+		
+		
+		
 		
 	</script>
 

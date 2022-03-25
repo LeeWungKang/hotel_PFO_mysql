@@ -143,7 +143,7 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 						%>
 						<!-- 체크박스 삭제 이벤트  -->
 						<td width="50" style="text-align: center;"><input
-							type="button" onclick="Delete_Check_Popup()" value="삭제1"
+							type="button" onclick="Delete_Check_Popup()" value="삭제"
 							style="background-color: rgba(0, 0, 10, 0.5); color: white; border: none; font-weight: 700; cursor: pointer;">
 						</td>
 						<%

@@ -81,7 +81,7 @@ line-height: 40px;
 		<p> * 표시 된것만 수정할 수 있습니다. </p>
 		
 	
-	<form action="UserInfo_Update?id=<%=uservo.getId()%>" method="post" name="modify_Form">
+	<form action="UserInfo_Update?id=<%=uservo.getId()%>" method="post" name="modify_Form" onsubmit="return modiCheck();">
 	
 		<table class="table table-hover">
   				<tr>
@@ -108,46 +108,15 @@ line-height: 40px;
 				<tr>
 					<td colspan="3" align="center">
 					<div class="wrap">
-				<input type="submit" class="button" value="수정완료" onclick="modiCheck(); return false;" formtarget="_parent">
+				<input type="submit" class="button" value="수정완료" onclick="return modiCheck();" formtarget="_parent">
 					</div>
 					</td>
 				</tr>
 		</table>
 	</form>
 	</div>
+	
 <script type="text/javascript">
-
-function modiCheck() {
-	alert("modiCheck");
-	var mf= document.modify_Form;
-	
-	
-	if (pw.value == "" || pw.length == 0) {
-		alert("비밀번호를 입력하세요.");
-		mf.pw.focus();
-		return;
-	}
-	else if (!mf.name.value) {
-		alert("이름을 입력하세요.");
-		mf.name.focus();
-		return;
-	}
-	else if (!mf.phone.value) {
-		alert("핸드폰 번호를 입력하세요.");
-		mf.phone.focus();
-		return;
-	}
-	else if (!mf.email.value) {
-		alert("이메일을 입력하세요.");
-		mf.email.focus();
-		return;
-	} else {
-		alert("입력을 완료 했습니다.");
- 		document.modify-Form.method="post";
- 	    document.modiForm.action = "UserInfo_Updateeee";
- 		document.modify-Form.submit();
-	}
-}
 
 </script>
 

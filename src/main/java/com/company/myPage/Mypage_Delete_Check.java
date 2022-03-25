@@ -23,13 +23,13 @@ public class Mypage_Delete_Check extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		
+		PrintWriter out = response.getWriter();
 		HttpSession session=request.getSession();
+		
 		String name=(String) session.getAttribute("name"); 
 		if(name==null) {response.sendRedirect("index.jsp");
 		return;	} 
 		 
-		
 		String checDelBox[]= request.getParameterValues("checDelBox");   //체크박스 배열로 받아와서 클릭한 벨류만 값 삭제
 		
 		Connection conn = null;
@@ -45,9 +45,10 @@ public class Mypage_Delete_Check extends HttpServlet {
 				pstmt.executeUpdate();
 				cnt++;
 				if(cnt !=0) {
-					PrintWriter out = response.getWriter();
-					out.println("<script> alert('선택한 게시물이 삭제 되었습니다.'); location.href='MyPage_Info_List';  </script>");
+					
+					out.println("<script> alert('선택한 게시물이 삭제 되었습니다.'); location.href='My_Info_List';  </script>");
 					out.flush();
+					out.close();
 					return;
 				}
 			}

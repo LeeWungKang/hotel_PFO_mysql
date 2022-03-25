@@ -18,13 +18,10 @@ CONSTRAINT FK_HomeBoard foreign KEY (userid) references HomeUsers(id);
 
 insert into HomeBoard values(1,'김돌이','문의','견적문의합니다.','2022/02/28',0,'hong');
 insert into HomeBoard values(2,'이순','환불','환불 문의합니다.','2022/02/07',0,'lee');
-insert into HomeBoard values(3,'지지','환불',' 문의합니다.','2022/02/11',0,'aaaa');
+insert into HomeBoard values(3,'지지','환불',' 문의합니다.','2022/02/11',0,'kim');
 insert into HomeBoard values(4,'히히','기타','기타 문의합니다.','2022/02/05',0,'aaaa');
 insert into HomeBoard values(5,'치치','기타',' 기타 질문 ','2022/02/02',0,'bbbb');
-insert into HomeBoard values(6,'디디','기타','질문 문의합니다.','2022/02/03',0,'123123');
-insert into HomeBoard values(7,'비비','문의',' 문의합니다.','2022/01/17',0,'123123');
-insert into HomeBoard values(8,'스스','문의',' 문의합니다.','2022/01/27',0,'12321');
-insert into HomeBoard values(9,'키키','환불','환불 문의합니다.','2022/01/09',0,'22');
+
 
 --게시글 추가 sql
 insert into HomeBoard values((select nvl(max(seq),0)+1 from HomeBoard),'김길동','환불','환불 문의합니다.','2022/02/07',0,'kim');
@@ -80,15 +77,16 @@ primary key (replyseq, boardseq)         --제약조건을 2개를 묶어서 기
 
 --제약조건 , 기본 테이블에 alter로 접근해서 제약조건을 추가하는 방법.
 --부모테이블인 보드의 seq를 댓글테이블의 boardseq를 >외래키로 설정하고, 
+
+
 -- 'cascade delete' 기능을 부여해서 삭제시 같이 삭제되게 함.
 alter table reply add constraint reply_fk 
 foreign key (boardseq) 
 references HomeBoard(seq) 
 on delete cascade;
 
-select * from reply order by regdate desc;     --최신날자순 검색
 
-insert into reply values ()
+select * from reply order by regdate desc;     --최신날자순 검색
 
 select * from reply where boardseq=9 order by replyseq desc;
 
@@ -137,6 +135,10 @@ insert into room(roomseq,roomname,roomsize,price) values(seq_room.nextval, '디�
 insert into room(roomseq,roomname,roomsize,price) values(seq_room.nextval, '로얄', 8, 200000);
 
 ----------------------------------------------------------------------------------
+
+
+select * from reservation;
+drop table  reservation;
 --예약 데이타
 --예약번호,예약날짜,체크인'아웃,인원수,룸이름,룸번호   ++예약한사람 이름이나 아이디
 create table reservation (
@@ -159,14 +161,12 @@ ALTER TABLE reservation ADD
 CONSTRAINT FK_reservation foreign KEY(rs_roomseq) references room(roomseq); 
 --ADD CONSTRAINT [FK명] foreign KEY(FK가 될 컬럼명) references [PK가 위치하는 테이블] ([PK컬럼명]);
 
+
 --ALTER TABLE [삭제할 FK위치한 테이블명] drop constraint [삭제할 FK명];
 ALTER TABLE reservation drop constraint FK_reservation; 
 
 
-select * from reservation;
-
-drop table  reservation;
-
+--자동 증가 시퀀스 생성  (예약번호에 적용시킴)
 create sequence seq_reservation
 increment by 1
 start with 1;
@@ -174,12 +174,28 @@ start with 1;
 select * from user_sequences;
 drop sequence seq_reservation;
 
+
+
+select rs_no,to_char(rs_date,'YYYY-MM-DD HH24:MI:SS'),rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price from reservation where rs_userid= 'aaaa';
+
+select * from (select rownum as rnum,A.* from (select rs_no,to_char(rs_date,'YYYY-MM-DD HH24:MI:SS') as rs_date,rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price from reservation where rs_userid='aaaa' order by rs_no desc) A) where rnum between 1 and 5
+
+
+
 insert into reservation values(
 seq_reservation.nextval,'2022/03/12','22/05/06','22/05/07', 2, '스위트',1,'lee',70000);
 insert into reservation values(
 seq_reservation.nextval,'2022/03/15','22/05/22','22/05/23', 2, '스위트',1,'lee',70000);
 insert into reservation values(
 seq_reservation.nextval,'2022/03/10','22/05/15','22/05/16', 2, '스탠다드',2,'hong',45000);
+
+
+insert into reservation values(
+seq_reservation.nextval,'2022/03/25','22/03/25','22/03/26', 4, '디럭스',2,'aaaa',130000);
+
+
+select * from reservation order by rs_no desc;
+delete from reservation where rs_no=32;
 
 --토탈가격은 결제 시스템 기능구현을 안해서 제외함 
 ----------------------------------------------------------

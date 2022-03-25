@@ -66,11 +66,6 @@ public class CalendarPro extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-
-		String name = (String) session.getAttribute("name");
-		String id = (String) session.getAttribute("id");
-		String role = (String) session.getAttribute("role");
-
 		System.out.println(date + "");
 
 		Connection conn = null;
@@ -121,7 +116,7 @@ public class CalendarPro extends HttpServlet {
 			pstmt.setString(1, se_roomname);
 			rs = pstmt.executeQuery();
 
-			System.out.println(se_roomname + "-------------------");
+			System.out.println(se_roomname + "---------사용자가 선택한 방 이름");
 			if (rs.next()) {
 				roomVo roomvo = new roomVo();
 				roomvo.setRoomseq(rs.getInt("roomseq"));
@@ -131,7 +126,7 @@ public class CalendarPro extends HttpServlet {
 				request.setAttribute("roomvo", roomvo);
 			}
 
-			System.out.println(date + "");
+			System.out.println(date + "-------예약2페이지로 넘어가는 date 객체");
 			RequestDispatcher dis = request.getRequestDispatcher("index.jsp?filePath=./room/rservation2");
 			dis.forward(request, response);
 

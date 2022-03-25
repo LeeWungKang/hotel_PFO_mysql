@@ -41,7 +41,7 @@ String emailCheck = request.getParameter("emailCheck");
 								<font id="msg" style="font-size: 0.8em;"> &nbsp; <!--중복확인 문구 --></font></td>
 							</tr>
 							<tr>
-								<th><span>이름2</span></th>
+								<th><span>이름</span></th>
 								<td><input type="text" name="name" placeholder="홍길동"></td>
 							</tr>
 							<tr>
