@@ -93,7 +93,7 @@ public class MyRs_List extends HttpServlet {
 				totalCount = rs.getInt(1);
 			}
 						
-			System.out.println(totalCount);
+			System.out.println(totalCount+"---예약테이블 갯수");
 
 			request.setAttribute("rsList", rsList);
 			request.setAttribute("totalCount", totalCount);

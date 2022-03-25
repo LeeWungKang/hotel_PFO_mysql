@@ -2,21 +2,21 @@
  * 
  */
 
-											/* 
-												rservation2  --js
-																  */
+									/* 
+										rservation2  --js
+														  			*/
 
 function dateCheck() {    //날짜 차이 계산 
-	var start_date = new Date(document.regForm.rs_checkin.value).getTime();   //체크인 
-	var end_date = new Date(document.regForm.rs_checkout.value).getTime();      //체크아웃
+	var start_date = new Date(document.regForm.rs_checkin.value).getTime();   		 //체크인 
+	var end_date = new Date(document.regForm.rs_checkout.value).getTime();    	 //체크아웃
 	var rs_setPrice_X = document.getElementById("rs_setPrice_X").value;							 //룸 가격 '히든'(표현식으로 방의 값이 바뀜)
-	var diffdate = ((end_date - start_date) / (24 * 60 * 60 * 1000));               //기간에 차이 결과 값 (ex:1일 2일 3일 4일 ...)
-	var rs_price = document.getElementById("rs_price").value;    //화면에 보여질 총 가격.
+	var diffdate = ((end_date - start_date) / (24 * 60 * 60 * 1000));            				 //기간에 차이 결과 값 (ex:1일 2일 3일 4일 ...)
+	var rs_price = document.getElementById("rs_price").value;   							 //화면에 보여질 총 가격.
 	var totalPrice = diffdate * rs_setPrice_X;
-	var diffdate1 = diffdate + 1;                                // 날짜차이에 더하기 1 값은=  [?박"?일"] 데이터로 사용.
-	var totalPriceF = totalPrice.toLocaleString();      	 	 //천자리수 마다 콤마찍는 스크립트 함수호출
+	var diffdate1 = diffdate + 1;                               											 // 날짜차이에 더하기 1 값은=  [?박"?일"] 데이터로 사용.
+	var totalPriceF = totalPrice.toLocaleString();      	 											 //천자리수 마다 콤마찍는 스크립트 함수호출
 	if (rs_price.value == null) {
-		document.getElementById("rs_price").value = totalPrice;          //화면에 안보이는 가격을 서블릿으로 보내고, 보이는 값은 눈으로만 보는값.
+		document.getElementById("rs_price").value = totalPrice;         						 //화면에 안보이는 가격을 서블릿으로 보내고, 보이는 값은 눈으로만 보는값.
 		document.getElementById("rs_Getprice").value = ("(" + diffdate + "박" + diffdate1 + "일)") + "         " + totalPriceF + "원";
 	}
 }

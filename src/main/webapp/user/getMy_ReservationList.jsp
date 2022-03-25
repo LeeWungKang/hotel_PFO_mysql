@@ -39,6 +39,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 String ndate = sf.format(nowDate); 
 
 System.out.println(ndate+"--------------------현재시간");			
+
 %>
 
 
@@ -93,13 +94,15 @@ a {
 			<%
 			for (int j = 0; j < rsList.size(); j++) {
 				reservationVo rsvo = rsList.get(j);
-			%>
+			String A = rsvo.getRs_checkin();
+				
+		%>
 				<tr align="center">
 					<td><%=rsvo.getRs_userid()%></td>
 					<td><%=rsvo.getRs_date()%>
 					
 	<!--체크인시간  -->	   		<input type="hidden"  value="<%=rsvo.getRs_checkin()%>" id="rsdate">
-	<!--오늘날짜  -->		       <input type="hidden"  value="<%=ndate%>" id="now_date">
+	<!--오늘날짜  -->		       <input type="hidden"  value="<%=ndate%>" id="now_date" >
 					</td>
 					<td colspan="2"><%=rsvo.getRs_checkin()%>&nbsp; ~ &nbsp;<%=rsvo.getRs_checkout()%></td>
 					<td><%=rsvo.getRs_roomname()%></td>
@@ -120,11 +123,11 @@ a {
 			<div align="center"> 	<h5> :: 체크인 날짜 3일 이전에는 예약을 취소 하실 수 없습니다. :: </h5> </div>
 	
 	<script type="text/javascript">
-	
+
 	function rsDelete() {
-		var now_date = new Date(document.getElementById("now_date").value).getTime();      //오늘 날짜
+		var now_date = new Date(document.getElementById("now_date").value).getTime();     	  //오늘 날짜
 		var rsdate = new Date(document.getElementById("rsdate").value).getTime();      		      //체크인 시작 날짜
-		var diffdate = (( rsdate - now_date) / (24*60*60*1000));       												      //예약날짜 - 현재날짜  
+		var diffdate = (( rsdate - now_date) / (24*60*60*1000));       										  //예약날짜 - 현재날짜  
 		
 		
 		if (rsdate != null && diffdate <= 3) { 				//체크인하는 날이  현재날짜보다 3일전일떄는 예약 취소 불가능.
