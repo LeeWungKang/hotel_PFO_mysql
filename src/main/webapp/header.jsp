@@ -103,7 +103,7 @@ if (name == null)
 							<li>
 							<li><a href="MyRs_List"> &nbsp; &nbsp; 예약내역  &nbsp; &nbsp;</a>
 							<li>
-							<li><a href="#"> Q & A </a>
+							<li><a href="index.jsp?filePath=./user/inquiryWrite"> Q & A </a>
 							<li>
 						</ul></li>
 					<%

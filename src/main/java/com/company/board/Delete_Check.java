@@ -39,7 +39,7 @@ public class Delete_Check extends HttpServlet {
 			conn=JDBCconn.getConnection();
 			
 			int cnt=0;
-			for(int i=0; i<chcBox.length; i ++) {
+			for(int i=0; i<chcBox.length; i++) {
 				String sql="delete from HomeBoard where seq=?";
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setInt(1,Integer.parseInt(chcBox[i]));
@@ -54,6 +54,7 @@ public class Delete_Check extends HttpServlet {
 					return;
 				}else {
 					cnt = 0;
+					out.close();
 					
 					return;
 				}

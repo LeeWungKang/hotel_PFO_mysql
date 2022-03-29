@@ -130,8 +130,6 @@ function check_All() {
 	}
 }
 
-
-
 /* 선택된 체크박스 배열에 담기  */
 
 function Delete_Check_Popup() {
@@ -169,7 +167,55 @@ function Delete_Check_Popup() {
 	});
 }
 				 
-							 
+					/*      
+						마이페이지 삭제버튼 기능
+																*/
+									
+	function check_All() {
+
+		if ($("#th_checkAll").is(':checked')) {
+			$("input[name=chcBox]").prop("checked", true);
+		} else {
+			$("input[name=chcBox]").prop("checked", false);
+		}
+	}
+	//선택한 체크박스 삭제요청
+	
+function Delete_Check() {
+	var chcBox = "";
+
+	$("input[name='chcBox']:checked").each(function() {
+		chcBox = chcBox + $(this).val() + ",";			 // 체크된 것만 값을 뽑아서 배열에 push
+		console.log(chcBox);
+	});
+
+	chcBox = chcBox.substring(0, chcBox.lastIndexOf(",")); //맨끝 콤마만 지우기
+
+	if (chcBox == "") { 				//체크가 없을떄 유효성.
+		alert("삭제할 대상을 선택하세요.");
+		return false;
+	}
+	console.log("==== chcBox => []" + chcBox);
+
+	$.ajax({
+		type : "POST",
+		url : "Delete_Check",
+		data : { chcBox : chcBox },
+		success : function(result) {
+			console.log(result);
+			if (result == "1") {
+				alert("선택한 게시물 삭제 완료");
+				location.reload();
+			}
+			return;
+		},
+		error : function() {
+			alert("서버요청 오류로 삭제 실패");
+			return;
+		}
+	});
+}
+				 		 
 							 
 
 

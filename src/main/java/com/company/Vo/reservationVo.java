@@ -18,8 +18,14 @@ public class reservationVo {
 	private int rs_roomseq;        //룸테이블에 roomseq <= 외래키로 사용
 	private String rs_userid;      //유저테이블에 id <= 외래키로 사용
 	private int rs_price;
+	private String rs_state;
 	
-	
+	public String getRs_state() {
+		return rs_state;
+	}
+	public void setRs_state(String rs_state) {
+		this.rs_state = rs_state;
+	}
 	public int getRs_no() {
 		return rs_no;
 	}

@@ -218,6 +218,7 @@ font-size: 1.2em;
 	color: rgb(192, 192, 192);
 	height: 60px;
 	padding: 20px;
+	clear: both;
 }
 
 #footer hr{

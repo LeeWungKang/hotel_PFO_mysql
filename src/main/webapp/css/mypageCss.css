@@ -14,7 +14,7 @@
 .info_Wrap H2{
 	margin: 0px 0px 15px 30px;
 	text-align: center;
-	color:#b1b1b1;
+	color: #212121;
 	height:10%;
 	font-size:xx-large;
 	border-bottom: 4px solid #1abc9c;
@@ -26,6 +26,14 @@
 	color: red; font-size: 1.4em;
 }
 
+.joinInfoWrap{
+	width: 40%;
+	height: auto;
+	display: inline-block;
+	float: left;
+	line-height: 40px;
+	
+}
 
 
 

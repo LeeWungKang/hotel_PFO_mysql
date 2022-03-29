@@ -150,7 +150,8 @@ rs_people number(2) not null,               -- 인원수
 rs_roomname varchar2(20) not null,        -- 룸 이름
 rs_roomseq number(5) not null,            -- room테이블의 roomseq의 외래키 FK 참조무결성(1번방=예약도1번방)
 rs_userid varchar2(25) not null,           -- 예약자, 유저 아이디
-rs_price number(12) not null
+rs_price number(12) not null,
+rs_state varchar2(20) default '예약중'
 );
 alter table reservation add
 constraint FK_reservation foreign key(rs_userid) REFERENCES HomeUsers(id)
@@ -158,12 +159,14 @@ constraint FK_reservation foreign key(rs_userid) REFERENCES HomeUsers(id)
 
 --ALTER TABLE [FK를 생성시킬 테이블명]   seq 외래키는 잠시 사용안함.
 ALTER TABLE reservation ADD   
-CONSTRAINT FK_reservation foreign KEY(rs_roomseq) references room(roomseq); 
+CONSTRAINT FK_reservation_rmseq foreign KEY(rs_roomseq) references room(roomseq); 
 --ADD CONSTRAINT [FK명] foreign KEY(FK가 될 컬럼명) references [PK가 위치하는 테이블] ([PK컬럼명]);
 
 
 --ALTER TABLE [삭제할 FK위치한 테이블명] drop constraint [삭제할 FK명];
 ALTER TABLE reservation drop constraint FK_reservation; 
+ALTER TABLE reservation drop constraint FK_reservation_rmseq; 
+
 
 
 --자동 증가 시퀀스 생성  (예약번호에 적용시킴)
@@ -183,20 +186,47 @@ select * from (select rownum as rnum,A.* from (select rs_no,to_char(rs_date,'YYY
 
 
 insert into reservation values(
-seq_reservation.nextval,'2022/03/12','22/05/06','22/05/07', 2, '스위트',1,'lee',70000);
+seq_reservation.nextval,'2022-03-28','2022-05-06','2022-05-07', 2, '스위트',1,'lee',70000,'예약중');
 insert into reservation values(
-seq_reservation.nextval,'2022/03/15','22/05/22','22/05/23', 2, '스위트',1,'lee',70000);
+seq_reservation.nextval,'2022-03-15','2022-05-22','2022-05-23', 2, '스위트',1,'lee',70000,'예약중');
 insert into reservation values(
-seq_reservation.nextval,'2022/03/10','22/05/15','22/05/16', 2, '스탠다드',2,'hong',45000);
+seq_reservation.nextval,'2022-03-10','2022-05-15','2022-05-16', 2, '스탠다드',2,'hong',45000,'예약중');
 
+insert into reservation values(
+seq_reservation.nextval,'2022-03-25','2022-03-25','2022-03-26', 4, '디럭스',2,'aaaa',130000,'예약중');
 
 insert into reservation values(
-seq_reservation.nextval,'2022/03/25','22/03/25','22/03/26', 4, '디럭스',2,'aaaa',130000);
+seq_reservation.nextval,'2022-03-25','2022-03-27','2022-03-29', 4, '디럭스',2,'aaaa',130000,'예약중');
+insert into reservation values(
+seq_reservation.nextval,'2022-03-25','2022-03-27','2022-03-29', 4, '디럭스',2,'aaaa',130000,'예약중');
+insert into reservation values(
+seq_reservation.nextval,'2022-03-25','2022-05-15','2022-05-17', 4, '디럭스',2,'aaaa',130000,'예약중');
+insert into reservation values(
+seq_reservation.nextval,'2022-03-25','2022-05-15','2022-05-17', 4, '디럭스',2,'aaaa',130000,'예약중');
+
 
 
 select * from reservation order by rs_no desc;
-delete from reservation where rs_no=32;
+delete from reservation where rs_no=33;
+
+
 
 --토탈가격은 결제 시스템 기능구현을 안해서 제외함 
 ----------------------------------------------------------
 --갤러리에 담을, 호텔객실 데이타베이스 필요함
+
+select * from inquiry order by b_no desc;
+
+create table inquiry( 
+b_no number(5) primary key,
+b_userid varchar2(25) not null,
+b_title varchar2(25) not null,
+b_content varchar2(1000) not null,
+b_writedate date default sysdate
+);
+
+insert into inquiry values(1,'aaaa','환불','환불해주세요',sysdate );
+insert into inquiry values( (select nvl(max(b_no),0)+1 from inquiry),'aaaa','환불','환불해주세요',sysdate );
+
+
+insert into inquiry (b_no, b_userid, b_title, b_content, b_writedate) values ( (select nvl(max(b_no),0)+1 from inquiry),'aaaa','제목1','내용추가', sysdate);
