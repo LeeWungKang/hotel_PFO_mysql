@@ -48,15 +48,20 @@ if (name == null) {
 <link rel="stylesheet" href="css/mypageCss.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
+	rel="stylesheet">
+	
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	
 
 <style type="text/css">
 a {
 	text-decoration: none;
 }
-
+.fa-bell-slash{
+	font-size: 1.2em; 
+	margin-right: 15px;
+}
 </style>
 
 </head>
@@ -112,10 +117,11 @@ a {
 
 			<div style="text-align: left; width: 600px; height: auto; display: inline-block; float: right;">
 			 <h3>:: 고객의 소리 </h3>
-			<div style="width: 600px; height: 325px;   background-color: #dcdcdc; padding: 10px;"> 
-				<table class="table table-hover">
-					<tr class="table-dark">
-						<th>작성날짜</th>
+			<div style="width: 600px; height: 325px;  padding: 10px; text-align: center; "> 
+				<form action="" name="inquiryForm">
+				<table class="table table-hover" style="vertical-align: middle;  line-height: 40px;">
+					<tr class="table-dark" >
+						<th width="150"  >작성날짜</th>
 						<th>제목</th>
 						<th>내용</th>
 						<th>- X -</th>
@@ -124,22 +130,35 @@ a {
 					 inquiryVo iqvo= inquiryList.get(j);
 				 %>	 
 					<tr>
-						<td><%=iqvo.getB_writedate() %></td>
+						<td style="font-size: 0.8em;"><%=iqvo.getB_writedate() %></td>
 						<td><%=iqvo.getB_title() %></td>
 						<td><%=iqvo.getB_content() %></td>
-						<td><a href="#"> 삭제 </a>  </td>
+						<td><a href="#" onclick="inquiryDeletePop()"> 삭제 </a>
+							<input type="hidden" name="b_no" value="<%=iqvo.getB_no() %>">
+						  </td>
 					</tr>
 				<%}if(inquiryList.size()== 0 ){ %>
 					<tr> 
-							<th>문의하신 내용이 없습니다. </th> 
+							<th colspan="4"> <i class="fa-regular fa-bell-slash"></i> 문의하신 내용이 없습니다. </th> 
 					</tr>
 					<%} %>
 				</table>
-					
+					</form>
 			</div>
 			</div>
 				
-	
+	<script type="text/javascript">
+	function inquiryDeletePop() {
+		var msg = confirm("정말로 삭제하시겠습니까?");
+		if (msg) {
+			inquiryForm.method = "post";
+			inquiryForm.action = "Myinquiry_Delete";
+			inquiryForm.submit();
+		} else {
+			selfclose();
+		}
+	} 
+	</script>
 
 
 
@@ -148,7 +167,7 @@ a {
 			<!--  ----------회원정보 끝---------------  -->
 
 
-	<div class="boardInfoWrap" style="display: inline-block; width: 90%;  ">
+	<div class="boardInfoWrap" style="display: inline-block; width: 100%;  ">
 		<form action="" name="chc_Form">
 		<h3 align="left" style="margin-top: 100px;">:: 내가 작성한 커뮤니티 게시글</h3>
 			<table class="table table-hover">
@@ -179,7 +198,7 @@ a {
 				<tbody>
 					<tr>
 						<td><%=bvo.getSeq()%></td>
-						<td><%=bvo.getTitle()%></td>
+						<td><a href="Get_Board_Pro?num=<%=bvo.getSeq()%>"> <%=bvo.getTitle()%> </a></td>
 						<td><%=bvo.getRegdate()%></td>
 						<td><%=bvo.getNickname()%></td>
 						<td><input type="checkbox" id="chcBox" name="chcBox"

@@ -230,3 +230,7 @@ insert into inquiry values( (select nvl(max(b_no),0)+1 from inquiry),'aaaa','환
 
 
 insert into inquiry (b_no, b_userid, b_title, b_content, b_writedate) values ( (select nvl(max(b_no),0)+1 from inquiry),'aaaa','제목1','내용추가', sysdate);
+
+select * from (select rownum as b_rnum, A.* from (select * from inquiry where b_userid='aaaa' order by b_no desc) A) where b_rnum between 6-5 and 5;
+
+

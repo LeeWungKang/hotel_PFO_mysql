@@ -109,7 +109,10 @@ public class My_Info_List extends HttpServlet {
 			}
 			pstmt.close();
 			rs.close();
-			sql = "select * from inquiry where b_userid=?";
+			// q&a 게시글은 최대 5개까지만 보여줌
+			
+			sql="select * from (select rownum as b_rnum, A.* from "
+					+ "	(select * from inquiry where b_userid=? order by b_no desc) A) where b_rnum between 6-5 and 5";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
