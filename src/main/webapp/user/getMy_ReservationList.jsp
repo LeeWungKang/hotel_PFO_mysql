@@ -1,54 +1,49 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.company.Vo.reservationVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
-String role = (String) session.getAttribute("role");
-String name = (String) session.getAttribute("name");
-String id = (String) session.getAttribute("id");
-
 ArrayList<reservationVo> rsList = (ArrayList<reservationVo>) request.getAttribute("rsList");
 
 int pg; // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
 int totalCount;
 if (request.getParameter("page") == null) {
 	pg = 1;
-} else {
-	pg = Integer.parseInt(request.getParameter("page"));
-}
+} else {	pg = Integer.parseInt(request.getParameter("page"));  }
 
-if (request.getAttribute("totalCount") == null) {
-	totalCount = 1;
-} else {
-	totalCount = (Integer) request.getAttribute("totalCount");
-}
+if (request.getAttribute("totalCount") == null) {	totalCount = 1;
+} else {	totalCount = (Integer) request.getAttribute("totalCount");}
 
-//로그인없이 접속하는 유저를 차단하고 로그인화면으로 이동
-if (name == null) {
-	response.sendRedirect("index.jsp?filePath=./login_check/Login_main.jsp");
-	return;
-}
+
 
 // 현재시간 보다 5일전이면 예약취소 불가능 하게 제한 넣어야됨.
 Date nowDate = new Date();
-System.out.println(nowDate);
-SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-String ndate = sf.format(nowDate); 
+			System.out.println(nowDate+"--------nowDate 생성 시간");
 
-System.out.println(ndate+"--------------------현재시간");			
-
+SimpleDateFormat sf = new SimpleDateFormat("YYYY-MM-dd");
+Calendar cal = Calendar.getInstance();
+cal.setTime(nowDate);
+cal.add(Calendar.DATE, +3);        //오늘날짜에 제한넣을 3일이라는 수를 넣어서 설정
+cal.add(Calendar.DAY_OF_MONTH, -1);      
+String ndate = sf.format(cal.getTime()); 
+			System.out.println(ndate+":--ndate--------");
 %>
 
+ <c:if test="${empty name }">
+    	<c:redirect url="index.jsp?filePath=./login_check/Login_main"/>
+    </c:if>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>예약 내역</title>
-
 <link rel="stylesheet" href="css/mypageCss.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -57,96 +52,111 @@ System.out.println(ndate+"--------------------현재시간");
 	crossorigin="anonymous">
 
 <style type="text/css">
-a {
-	text-decoration: none;
-}
-
-.table-hover {
-	margin-top: 120px;
-}
+a {	text-decoration: none;}
 </style>
 
 </head>
 <body>
-
+		
 	<div class="rsWrap">
 		<h2>예약 내역</h2>
+		
+		<form action="">
 		<table class="table table-dark table-hover">
 			<thead>
 				<tr>
-					<th align="center">총 예약횟수 " <span><%=totalCount%></span> " 건
+					<th align="center">예약 총 " <span> ${totalCount} </span>" 건
 					</th>
 				</tr>
 			</thead>
-			
-			
+
 			<tbody class="Tbody">
 				<tr align="center">
-					<th>예약자 아이디</th>
+					<th width="180px;">예약자 아이디</th>
 					<th>예약 날짜</th>
 					<th colspan="2">체크인 / 체크아웃</th>
 					<th>예약한 방</th>
 					<th>인원수</th>
 					<th>총 가격</th>
-					<th style="color: red;">예약 취소</th>
+					<th style="color: #4CA975; ">예약상태</th>
 				</tr>
-				
-			<%
+		<%
 			for (int j = 0; j < rsList.size(); j++) {
 				reservationVo rsvo = rsList.get(j);
 				
+			if(rsvo.getRs_checkin() != null )
+/* >>>>>>> caf7925d62cc3f86befdfa887dc1eaf5b76aab03 */
 		%>
 				<tr align="center">
 					<td><%=rsvo.getRs_userid()%></td>
-					<td><%=rsvo.getRs_date()%>
-					
-	<!--체크인시간  -->	   		<input type="hidden"  value="<%=rsvo.getRs_checkin()%>" id="rsdate">
-	<!--오늘날짜  -->		       <input type="hidden"  value="<%=ndate%>" id="now_date" >
-					</td>
-					<td colspan="2"><%=rsvo.getRs_checkin()%>&nbsp; ~ &nbsp;<%=rsvo.getRs_checkout()%></td>
+					<td style="border-right: 2px solid gray; color: orange;"><%=rsvo.getRs_date()%> <!--체크인시간  --> 
+							<input type="hidden" 	value="<%=rsvo.getRs_checkin()%>" id="rsdate"></td>
+					<td colspan="2" style="border-right: 2px solid gray; font-size: 1.3em;"><%=rsvo.getRs_checkin()%>&nbsp; ~ &nbsp;<%=rsvo.getRs_checkout()%></td>
 					<td><%=rsvo.getRs_roomname()%></td>
 					<td><%=rsvo.getRs_people()%></td>
 					<td><%=rsvo.getRs_price()%></td>
+					
 					<td>
-					<input type="button" onclick="rsDelete();" value="예약취소">
-					or  
-					<font>"ㅡ"</font>
-					 
+					<!--compareto()  함수는, 앞에변수가 크면 1, 같으면0, 작으면 -1  -->
+					<%if (rsvo.getRs_checkin().compareTo(ndate) >=1) {  %>
+							<a href="User_rsCencle?delNo=<%=rsvo.getRs_no() %>&&delDate=<%=rsvo.getRs_checkin()%>&&state=예약취소'" > 예약취소가능 </a>
+								
+					<%}else{%>
+							<font> 예약완료 </font>
+						<%} %> 
+						</td>
+				</tr>
+				
+	<%}%>  <!-- 반복문닫는 괄호 -->
+				<tr>
+					<td colspan="8">
+						<!--오늘날짜  --> <input type="hidden" value="<%=ndate%>"	id="now_date">
 					</td>
 				</tr>
-				<%
-				}
-				%>
 			</tbody>
 		</table>
-			<div align="center"> 	<h5> :: 체크인 날짜 3일 이전에는 예약을 취소 하실 수 없습니다. :: </h5> </div>
-	
-	<script type="text/javascript">
+		
+				
+		
+		</form>
+		<div align="center" class="textBox1">
+			<%
+				if(rsList.size() == 0 || rsList==null ){
+			%>
+				<p><B> :: 예약 내역이 존재 하지 않습니다. :: </B></p> 
+			<%}else{ %>
+				<h5><B> :: 체크인 날짜로부터<span> 3일 이전</span>에는 예약을 취소 하실 수 없습니다. :: </B></h5>
+			<%} %>
+		</div>
 
-	function rsDelete() {
+
+		<script type="text/javascript">
+
+	/* function rsDelete() {
 		var now_date = new Date(document.getElementById("now_date").value).getTime();     	  //오늘 날짜
 		var rsdate = new Date(document.getElementById("rsdate").value).getTime();      		      //체크인 시작 날짜
 		var diffdate = (( rsdate - now_date) / (24*60*60*1000));       										  //예약날짜 - 현재날짜  
 		
-		
 		if (rsdate != null && diffdate <= 3) { 				//체크인하는 날이  현재날짜보다 3일전일떄는 예약 취소 불가능.
-			alert("3일전 이라 취소가 불가능 합니다.");
+			alert("예약일 3일전이거나, 이미 지난예약은 취소가 불가능 합니다.");
 			console.log("취소 불가능");
 			return;
 			
-			
-		}else{
-			confirm("취소하시겠습니까?");
-			console.log(" 날짜차이가 3일 이상일떄 = 취소 가능 기능");
-			location.href="cccccc.jsp";
+		}else if(rsdate != null && diffdate > 3){
+			var con=confirm("예약을 취소 하시겠습니까?");
+				if(con==true){
+					location.href="User_rsCencle";
+					return;
+				}else{
+					self.close();
+				}
 		}
-	}
+	} */
 	</script>
 
 
-
-	<!-- 페이징  -->
-		<div style="width: 100%; margin: auto; text-align: center;">
+		<!-- 페이징  -->
+		<div class="pagingBtn" style="width: 100%; margin: auto; text-align: center;">
 			<%
 			int countList = 5; 				// 한 페이지에 출력될 게시물 수(10개를 기준으로 잡음)
 			int countPage = 5; 			// 한 화면에 출력될 페이지 수(통상적으로 10개 페이지를 나오게 함)
@@ -191,7 +201,7 @@ a {
 			if (pg < totalPage) {
 			%>
 
-			<a href="MyRs_List?page=<%=pg + 1%>">다음</a>
+			<a href="MyRs_List?page=${page+2}">다음</a>
 
 			<%
 			}
@@ -204,10 +214,10 @@ a {
 			%>
 		</div>
 	</div>
-	
 
-	
-	
-	
+
+
+
+
 </body>
 </html>

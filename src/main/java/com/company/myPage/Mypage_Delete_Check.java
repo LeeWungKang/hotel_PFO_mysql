@@ -23,14 +23,14 @@ public class Mypage_Delete_Check extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();
+	
 		HttpSession session=request.getSession();
 		
 		String name=(String) session.getAttribute("name"); 
 		if(name==null) {response.sendRedirect("index.jsp");
 		return;	} 
 		 
-		String checDelBox[]= request.getParameterValues("checDelBox");   //체크박스 배열로 받아와서 클릭한 벨류만 값 삭제
+		String chcBox[]= request.getParameterValues("chcBox");   //체크박스 배열로 받아와서 클릭한 벨류만 값 삭제
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -38,18 +38,23 @@ public class Mypage_Delete_Check extends HttpServlet {
 			conn=JDBCconn.getConnection();
 			
 			int cnt=0;
-			for(int i=0; i<checDelBox.length; i++) {
+			for(int i=0; i<chcBox.length; i++) {
 				String sql="delete from HomeBoard where seq=?";
 				pstmt=conn.prepareStatement(sql);
-				pstmt.setInt(1,Integer.parseInt(checDelBox[i]));
+				pstmt.setInt(1,Integer.parseInt(chcBox[i]));
 				pstmt.executeUpdate();
 				cnt++;
+				
+				PrintWriter out = response.getWriter();
 				if(cnt !=0) {
-					
-					out.println("<script> alert('선택한 게시물이 삭제 되었습니다.'); location.href='My_Info_List';  </script>");
+					out.print( 1 +  "");
 					out.flush();
 					out.close();
 					return;
+				}else {
+					cnt = 0 ;
+					out.print(" 삭제할 게시물을 체크해 주세요.  ");
+					out.close();
 				}
 			}
 		

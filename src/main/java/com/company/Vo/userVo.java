@@ -12,7 +12,16 @@ public class userVo {
 	private Date joindate;
 	private String email;
 	private String role;
+	private String grade;
 	
+	
+	
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 	public String getId() {
 		return id;
 	}

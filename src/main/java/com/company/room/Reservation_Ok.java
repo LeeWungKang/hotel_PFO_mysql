@@ -28,7 +28,7 @@ public class Reservation_Ok extends HttpServlet {
 		System.out.println("/Reservation_Ok");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-//최종 예약 insert 페이지.
+		//최종 예약 insert 페이지.
 		//rs_no  자동생성 
 		
 		

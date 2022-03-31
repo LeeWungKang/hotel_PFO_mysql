@@ -53,7 +53,7 @@ public class MyRs_List extends HttpServlet {
 			conn = JDBCconn.getConnection();
 			String sql = "select * from (select rownum as rnum,A.* from "
 					+ "(select rs_no,to_char(rs_date,'YYYY-MM-DD HH24:MI:SS') as rs_date,"
-					+ "rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price "
+					+ "rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price,rs_state "
 					+ "from reservation where rs_userid=? "
 					+ "order by rs_no desc) A) where rnum between ? and ?";
 			pstmt = conn.prepareStatement(sql);
@@ -76,6 +76,7 @@ public class MyRs_List extends HttpServlet {
 				rsvo.setRs_roomseq(rs.getInt("rs_roomseq"));
 				rsvo.setRs_userid(rs.getString("rs_userid"));
 				rsvo.setRs_price(rs.getInt("rs_price"));
+				rsvo.setRs_state(rs.getString("rs_state"));
 				rsList.add(rsvo);
 			}
 			pstmt.close();

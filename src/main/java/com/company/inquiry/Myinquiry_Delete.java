@@ -1,10 +1,9 @@
-package com.company.board;
+package com.company.inquiry;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -16,55 +15,40 @@ import javax.servlet.http.HttpSession;
 
 import com.company.common.JDBCconn;
 
-@WebServlet("/Delete_Check")
-public class Delete_Check extends HttpServlet {
+@WebServlet("/Myinquiry_Delete")
+public class Myinquiry_Delete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+	
 		HttpSession session=request.getSession();
-		String name=(String) session.getAttribute("name"); 
-		if(name==null) {response.sendRedirect("index.jsp");
-		return;	} 
 		
-		String[] chcBox= request.getParameterValues("chcBox");   //체크박스 배열로 받아와서 클릭한 벨류만 값 삭제
-		System.out.println("chcBox");
+		String id =(String) session.getAttribute("id");
+		String b_no= request.getParameter("b_no");   
+		
+		System.out.println(b_no+"///"+id+"");
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
 			conn=JDBCconn.getConnection();
-			
-			int cnt=0;
-			for(int i=0; i<chcBox.length; i++) {
-				String sql="delete from HomeBoard where seq=?";
+				String sql="delete from inquiry where b_no=? and b_userid=?";
 				pstmt=conn.prepareStatement(sql);
-				pstmt.setInt(1,Integer.parseInt(chcBox[i]));
-				pstmt.executeUpdate();
-				cnt++;
+				pstmt.setString(1, b_no);
+				pstmt.setString(2, id);
+				int cnt = pstmt.executeUpdate();
 				
-				
+				System.out.println("cnt"+ cnt);
 				PrintWriter out = response.getWriter();
-				if(cnt != 0) {
-					out.print(1+"");
+				if(cnt !=0) {
+					out.print("<script> alert('선택한 글을 삭제 하였습니다.'); location.href='My_Info_List';   </script>");
 					out.flush();
-					return;
-				}else {
-					cnt = 0;
 					out.close();
-					
 					return;
-				}
-				/*
-				 *
-				 * println("<script> alert('선택한 게시물이 삭제 되었습니다.'); location.href='Get_Board_List_Pro';  </script>"
-				 * ); out.flush();
-				 */
 			}
-		
-		
-		
 		
 		
 		} catch (ClassNotFoundException | SQLException e) {

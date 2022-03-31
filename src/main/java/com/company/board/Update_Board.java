@@ -32,7 +32,7 @@ public class Update_Board extends HttpServlet {
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute("name"); // 이페이지에서 시작하는 사람도 있어서 세션 구현.
 		if (name == null) {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("index.jsp?filePath=./login_check/Login_main");
 			return;
 		}
 		

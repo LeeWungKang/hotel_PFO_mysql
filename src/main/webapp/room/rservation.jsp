@@ -14,17 +14,20 @@ String role = (String) session.getAttribute("role");
 String date = (String) request.getAttribute("date"); 			//(중복날짜확인)켈린더 서블릿 갓다가 다시내려오는 객체
 if(date == null) date = "";
 
-
 roomVo roomvo = (roomVo) request.getAttribute("roomvo");
 String se_roomname =(String) request.getAttribute("se_roomname");  //룸페이지에서 고객이 선택한 룸의 정보
 String roomname =(String) session.getAttribute("roomname"); 	 //세션에다 안넣으면 달력에서 매개로 줄때 코드가 꼬임.
-String conMsg =(String) session.getAttribute("conMsg");
 
 	if (name == null) {	 out.print(
 		"<script> alert('죄송합니다. 예약은 로그인이 필요합니다.'); location.href='index.jsp?filePath=./login_check/Login_main'  </script>");
 		out.close(); return;
 }
 
+String overlap = request.getParameter("overlap");
+	if (overlap == null) 
+		overlap="";
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -78,7 +81,7 @@ String conMsg =(String) session.getAttribute("conMsg");
   calStr+="<td align=right><font size='2'><a href='javascript:;'  onClick='nowm++; if (nowm>11) { nowy++; nowm=0; } showCalendar(nowd,nowm,nowy)' title='다음 월'> <i class='fa-solid fa-share'></i>   </a></font></td>"
   calStr+="</tr></table>"
   calStr+="</td></tr>" 
-  calStr+="<tr class='days' align=center bgcolor='#336666'>"
+  calStr+="<tr class='days' align=center bgcolor='#1DD1AD'>"
   calStr+="<th width='70px;'><font color='red' size='4'>일</font></th>"
   calStr+="<th width='70px;'><font color='white' size='4'>월</font></th>"
   calStr+="<th width='70px;'><font color='white' size='4'>화</font></th>"
@@ -94,7 +97,7 @@ String conMsg =(String) session.getAttribute("conMsg");
   {
  
   if(dayCount==nowd) {
-  calStr+="<td align=center bgcolor='87E4FF'>  Today<br>  <font size='4'><b>"  // 오늘 날짜일때 배경색 지정,글자 진하게
+  calStr+="<td align=center bgcolor='#FF7878'>  Today<br>  <font size='5'><b>"  // 오늘 날짜일때 배경색 지정,글자 진하게
   } else {
   calStr+="<td align=center><font size='3'>" 	 // 오늘 날짜가 아닐때 배경색 지정
   }
@@ -136,10 +139,12 @@ calStr += "</table></form>";
 					<script type="text/javascript"> showCalendar(nowd,nowm,nowy);</script>
 					<br />
 				</div>
+		
 		</div>
 
 
 		<div class="outside_A">
+				<p>중복된 날 :  ${overlap }</p> <br><br>
 			<a href="index.jsp"> 홈으로 이동</a>
 		</div>
 

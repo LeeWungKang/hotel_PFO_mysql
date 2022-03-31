@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.company.Vo.BoardVo;
+import com.company.Vo.inquiryVo;
 import com.company.Vo.reservationVo;
 import com.company.Vo.userVo;
 import com.company.common.JDBCconn;
@@ -31,7 +32,7 @@ public class My_Info_List extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-
+		
 		String id = (String) session.getAttribute("id"); // 메뉴클릭시 넘겨받은 매개변수(로그인 한 유저 정보)
 		String name = (String) session.getAttribute("name");
 		if (name == null || id == null) {
@@ -40,7 +41,6 @@ public class My_Info_List extends HttpServlet {
 			out.close();
 			return;
 		}
-
 		int page;
 		if (request.getParameter("page") == null)
 			page = 1; // 페이지는 기본값 1로 설정
@@ -88,9 +88,10 @@ public class My_Info_List extends HttpServlet {
 			if (rs.next()) {
 				totalCount = rs.getInt(1);
 			}
+			System.out.println(totalCount+"= 총 게시물 갯수");
+			
 			pstmt.close();
 			rs.close();
-
 			sql = "select * from HomeUsers where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -106,9 +107,28 @@ public class My_Info_List extends HttpServlet {
 				uservo.setEmail(rs.getString("email"));
 				request.setAttribute("uservo", uservo);
 			}
-
-			System.out.println(totalCount);
-
+			pstmt.close();
+			rs.close();
+			// q&a 게시글은 최대 5개까지만 보여줌
+			
+			sql="select * from (select rownum as b_rnum, A.* from "
+					+ "	(select * from inquiry where b_userid=? order by b_no desc) A) where b_rnum between 6-5 and 5";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			ArrayList<inquiryVo> inquiryList = new ArrayList<inquiryVo>();     //고객의소리 리스트 뽑기
+			while(rs.next()) {
+				inquiryVo inquiryvo= new inquiryVo();
+				inquiryvo.setB_no(rs.getInt("b_no"));
+				inquiryvo.setB_userid(rs.getString("b_userid"));
+				inquiryvo.setB_title(rs.getString("b_title"));
+				inquiryvo.setB_content(rs.getString("b_content"));
+				inquiryvo.setB_writedate(rs.getString("b_writedate"));
+				inquiryList.add(inquiryvo);
+			}
+			
+			request.setAttribute("inquiryList", inquiryList);
 			request.setAttribute("boardList", boardList);
 			request.setAttribute("totalRows", totalCount);
 

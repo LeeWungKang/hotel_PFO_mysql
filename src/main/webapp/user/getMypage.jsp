@@ -1,3 +1,4 @@
+<%@page import="com.company.Vo.inquiryVo"%>
 <%@page import="com.company.Vo.userVo"%>
 <%@page import="com.company.Vo.reservationVo"%>
 <%@page import="com.company.Vo.BoardVo"%>
@@ -12,6 +13,7 @@ String id = (String) session.getAttribute("id");
 
 userVo uservo = (userVo) request.getAttribute("uservo");
 ArrayList<BoardVo> boardList = (ArrayList<BoardVo>) request.getAttribute("boardList");
+ArrayList<inquiryVo>inquiryList = (ArrayList<inquiryVo>) request.getAttribute("inquiryList");
 
 int pg; // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
 int totalCount;
@@ -40,19 +42,21 @@ if (name == null) {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이 페이지</title>
+							<title>마이 페이지</title>
+<script type="text/javascript" src="script/script.js"></script>
 <link rel="stylesheet" href="css/mypageCss.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-
+<link	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style type="text/css">
 a {
 	text-decoration: none;
 }
-
+.fa-bell-slash{
+	font-size: 1.2em; 
+	margin-right: 15px;
+}
 </style>
 
 </head>
@@ -60,13 +64,13 @@ a {
 
 	<div id="containerMypage" align="right">
 
-
 		<div class="info_Wrap" style="margin-bottom: 100px;">
 			<h2>내 정보</h2>
 		</div>
 
-		<h2 align="left" style="margin-top: 100px;">가입정보</h2>
-		<table class="table table-striped" style="width: 35%;">
+<div class="joinInfoWrap">
+		<h3 align="left" >:: 가입정보</h3>
+		<table class="table table-striped">
 			<thead class="table-dark">
 				<tr>
 					<th>회원 아이디</th>
@@ -100,13 +104,60 @@ a {
 				<tr>
 				</tr>
 			</tfoot>
-
-			<!--  ----------회원정보 끝---------------  -->
-
 		</table>
-		<h2 align="left" style="margin-top: 100px;">내가 작성한 게시글</h2>
+		</div>
+		
+		
+<!-- 문의 글  -->
 
+		<div class="inquiryBox1" >
+				<form action="" name="inquiryForm">
+			 <h3 align="left" >:: 고객의 소리 </h3>
+				<table class="table table-hover" >
+					<tr class="table-dark" >
+						<th width="150"  >작성날짜</th>
+						<th>제목</th>
+						<th>내용</th>
+						<th>- X -</th>
+					</tr>
+				 <% for(int j=0; j<inquiryList.size(); j++){ 
+					 inquiryVo iqvo= inquiryList.get(j);
+				 %>	 
+					<tr>
+						<td style="font-size: 0.8em;"><%=iqvo.getB_writedate() %></td>
+						<td><%=iqvo.getB_title() %></td>
+						<td><%=iqvo.getB_content() %></td>
+						<td><a href="#" onclick="inquiryDeletePop()"> 삭제 </a>
+							<input type="hidden" name="b_no" value="<%=iqvo.getB_no() %>">
+						  </td>
+					</tr>
+				<%}if(inquiryList.size()== 0 ){ %>
+					<tr> 
+							<th colspan="4"> <i class="fa-regular fa-bell-slash"></i> 문의하신 내용이 없습니다. </th> 
+					</tr>
+					<%} %>
+				</table>
+					</form>
+			</div>
+				
+	<script type="text/javascript">
+	function inquiryDeletePop() {
+		var msg = confirm("정말로 삭제하시겠습니까?");
+		if (msg) {
+			inquiryForm.method = "post";
+			inquiryForm.action = "Myinquiry_Delete";
+			inquiryForm.submit();
+		} else {
+			selfclose();
+		}
+	} 
+	</script>
+
+
+<!-- 커뮤니티  -->
+	<div class="boardInfoWrap" style="display: inline-block; width: 100%;  ">
 		<form action="" name="chc_Form">
+		<h3 align="left" style="margin-top: 100px;">:: 내가 작성한 커뮤니티 게시글</h3>
 			<table class="table table-hover">
 				<thead class="table-dark">
 					<tr>
@@ -135,9 +186,9 @@ a {
 				<tbody>
 					<tr>
 						<td><%=bvo.getSeq()%></td>
-						<td><%=bvo.getTitle()%></td>
+						<td><a href="Get_Board_Pro?num=<%=bvo.getSeq()%>"> <%=bvo.getTitle()%> </a></td>
 						<td><%=bvo.getRegdate()%></td>
-						<td><%=bvo.getNickname()%></td>
+						<td><%=bvo.getNickname()%>(${id })</td>
 						<td><input type="checkbox" id="chcBox" name="chcBox"
 							value="<%=bvo.getSeq()%>"></td>
 					</tr>
@@ -207,47 +258,17 @@ a {
 		<%if (boardList.size() == 0) {	%>
 		<p style="text-align: center; margin-top: 50px; font-weight: 800;">등록된 댓글이 없습니다.</p>
 		<%}%>
-		
+		</div>
 	</div>
-
 	<!--페이지 리스트 끝 부분  -->
+	
+	
+	
+	
+	
+	
 	<script type="text/javascript">
-
-	//전체 선택
-	function check_All() {
-
-		if ($("#th_checkAll").is(':checked')) {
-			$("input[name=chcBox]").prop("checked", true);
-		} else {
-			$("input[name=chcBox]").prop("checked", false);
-		}
-	}
-	//선택한 체크박스 삭제요청
-	function Delete_Check() {
-		var chcBox = document.getElementById("chcBox").value;
-		
-		
-		if(chcBox.checked == null){
-			alert("삭제할 항목을 선택하세요,");
-			return false;
-		}
-		var msg = "";
-		if (chcBox.checked != null) {
-			msg=confirm("정말로 삭제하시겠습니까?");
-			chc_Form.method = "post";
-			chc_Form.action = "Mypage_Delete_Check";
-			chc_Form.submit();
-		} else {
-			selfclose();
-		}
-	}
-
-		
-		
-		
-		
-		
-		
+	//   js 폴더 
 	</script>
 
 

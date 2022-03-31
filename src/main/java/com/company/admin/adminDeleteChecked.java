@@ -1,10 +1,9 @@
-package com.company.board;
+package com.company.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -16,21 +15,19 @@ import javax.servlet.http.HttpSession;
 
 import com.company.common.JDBCconn;
 
-@WebServlet("/Delete_Check")
-public class Delete_Check extends HttpServlet {
+@WebServlet("/adminDeleteChecked")
+public class adminDeleteChecked extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		HttpSession session=request.getSession();
-		String name=(String) session.getAttribute("name"); 
-		if(name==null) {response.sendRedirect("index.jsp");
-		return;	} 
+		request.setCharacterEncoding("utf-8");
+	
+		String chcBox[]= request.getParameterValues("chcBox");   //체크박스 배열로 받아와서 클릭한 벨류만 값 삭제
 		
-		String[] chcBox= request.getParameterValues("chcBox");   //체크박스 배열로 받아와서 클릭한 벨류만 값 삭제
-		System.out.println("chcBox");
-		
+		System.out.println(chcBox+" 받아온 값. ");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -38,37 +35,19 @@ public class Delete_Check extends HttpServlet {
 			
 			int cnt=0;
 			for(int i=0; i<chcBox.length; i++) {
-				String sql="delete from HomeBoard where seq=?";
+				String sql="delete from HomeUsers where id=?";
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setInt(1,Integer.parseInt(chcBox[i]));
+				System.out.println(chcBox[i] + " 체크박스 ");
 				pstmt.executeUpdate();
 				cnt++;
 				
-				
-				PrintWriter out = response.getWriter();
-				if(cnt != 0) {
-					out.print(1+"");
-					out.flush();
-					return;
-				}else {
-					cnt = 0;
-					out.close();
-					
-					return;
-				}
-				/*
-				 *
-				 * println("<script> alert('선택한 게시물이 삭제 되었습니다.'); location.href='Get_Board_List_Pro';  </script>"
-				 * ); out.flush();
-				 */
+				response.sendRedirect("Admin_UserInfoPro");
 			}
-		
-		
-		
 		
 		
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}finally {	JDBCconn.close(pstmt, conn);	}
 		}
-}
+	}
