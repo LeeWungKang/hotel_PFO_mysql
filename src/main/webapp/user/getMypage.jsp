@@ -15,7 +15,6 @@ userVo uservo = (userVo) request.getAttribute("uservo");
 ArrayList<BoardVo> boardList = (ArrayList<BoardVo>) request.getAttribute("boardList");
 ArrayList<inquiryVo>inquiryList = (ArrayList<inquiryVo>) request.getAttribute("inquiryList");
 
-
 int pg; // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
 int totalCount;
 
@@ -43,17 +42,13 @@ if (name == null) {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이 페이지</title>
+							<title>마이 페이지</title>
 <script type="text/javascript" src="script/script.js"></script>
 <link rel="stylesheet" href="css/mypageCss.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+<link	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-	
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-	
-
 <style type="text/css">
 a {
 	text-decoration: none;
@@ -68,7 +63,6 @@ a {
 <body>
 
 	<div id="containerMypage" align="right">
-
 
 		<div class="info_Wrap" style="margin-bottom: 100px;">
 			<h2>내 정보</h2>
@@ -111,15 +105,15 @@ a {
 				</tr>
 			</tfoot>
 		</table>
-		
 		</div>
+		
+		
 <!-- 문의 글  -->
 
-			<div style="text-align: left; width: 600px; height: auto; display: inline-block; float: right;">
-			 <h3>:: 고객의 소리 </h3>
-			<div style="width: 600px; height: 325px;  padding: 10px; text-align: center; "> 
+		<div class="inquiryBox1" >
 				<form action="" name="inquiryForm">
-				<table class="table table-hover" style="vertical-align: middle;  line-height: 40px;">
+			 <h3 align="left" >:: 고객의 소리 </h3>
+				<table class="table table-hover" >
 					<tr class="table-dark" >
 						<th width="150"  >작성날짜</th>
 						<th>제목</th>
@@ -145,7 +139,6 @@ a {
 				</table>
 					</form>
 			</div>
-			</div>
 				
 	<script type="text/javascript">
 	function inquiryDeletePop() {
@@ -161,12 +154,7 @@ a {
 	</script>
 
 
-
-
-
-			<!--  ----------회원정보 끝---------------  -->
-
-
+<!-- 커뮤니티  -->
 	<div class="boardInfoWrap" style="display: inline-block; width: 100%;  ">
 		<form action="" name="chc_Form">
 		<h3 align="left" style="margin-top: 100px;">:: 내가 작성한 커뮤니티 게시글</h3>
@@ -200,7 +188,7 @@ a {
 						<td><%=bvo.getSeq()%></td>
 						<td><a href="Get_Board_Pro?num=<%=bvo.getSeq()%>"> <%=bvo.getTitle()%> </a></td>
 						<td><%=bvo.getRegdate()%></td>
-						<td><%=bvo.getNickname()%></td>
+						<td><%=bvo.getNickname()%>(${id })</td>
 						<td><input type="checkbox" id="chcBox" name="chcBox"
 							value="<%=bvo.getSeq()%>"></td>
 					</tr>

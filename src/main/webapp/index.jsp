@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>"MUJI" 호텔 이용고객, 관리자 페이지</title>
+<title>"MUJI" 호텔 이용고객님 반갑습니다.</title>
 <link href="./css/Design.css" rel="stylesheet">
 </head>
 <body>

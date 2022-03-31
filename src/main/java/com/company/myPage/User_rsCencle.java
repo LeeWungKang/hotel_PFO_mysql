@@ -60,6 +60,7 @@ public class User_rsCencle extends HttpServlet {
 		if(diffday < 3) {     // 날짜차이가 3일 미만이면 취소 불가능 .
 			out.println("<script> alert('이 예약은 취소가 불가능합니다.');  history.back();       </script>  ");
 			out.flush();
+			return;
 		}
 		Connection conn = null;
 		PreparedStatement pstmt = null;

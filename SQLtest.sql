@@ -40,9 +40,9 @@ name varchar2(20) not null,
 phone varchar2(30) not null,  
 joindate date default sysdate,
 email varchar2(70),
+grade
 role varchar2(10) default 'user'   --관리자계정은 ="admin" 따로 디비 설정.
 );
-
 
 
 select substr(email,1,instr(email,'@')-1) as email_str from HomeUsers;

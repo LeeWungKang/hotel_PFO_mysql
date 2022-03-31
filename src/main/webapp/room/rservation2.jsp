@@ -4,18 +4,18 @@
 <%@page import="com.company.Vo.roomVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 request.setCharacterEncoding("utf-8");
 String name = (String) session.getAttribute("name");
 String id = (String) session.getAttribute("id");
-
 
 String date = (String) request.getAttribute("date");   //켈린더에서 > 중복날짜 조회 서블릿 갓다가 확인후 다시내려오는 객체(String)
 
 roomVo roomvo = (roomVo) request.getAttribute("roomvo");
 String se_roomname = (String) request.getAttribute("se_roomname");
 String roomname = (String) session.getAttribute("roomname");
-String conMsg = (String) session.getAttribute("conMsg");
 
 if (name == null) {
 	out.print(
@@ -23,26 +23,6 @@ if (name == null) {
 	out.close();
 	return;
 }
-//현재 시간 포맷.
-Date nowdate1 = new Date();
-System.out.println(nowdate1);
-SimpleDateFormat sf = new SimpleDateFormat("YYYY-MM-dd");
-String ndate = sf.format(nowdate1); //현재 시간, 페이지에 보여줄 현재시간 포맷.    (예약한 시간으로 데이타 들어감.)
-System.out.println(ndate); //예약하기 현재 날짜 셋팅.(디비설정이 sysdate라서 설정안해도 되지만 사용자에게 날짜를 보여주기위해.)
-//  = 현재시간 날짜 데이타를 포맷형식으로 변환. (현재시간 데이타)
-
-
-//달력에서 넘어온 String타입 ('date') 객체를 날짜타입으로 변환시키고, 포맷형식 적용.
-// date = 22020325
-SimpleDateFormat ssf = new SimpleDateFormat("yyyyMMdd");
-SimpleDateFormat newssf = new SimpleDateFormat("yyyy-MM-dd");
-Date formatDate = ssf.parse(date);   	 //스트링"22020325" 를 숫자로 변환하고, 다시 포맷넣어야댐;
-// String 타입이었던 날자를 Date 타입으로 변환 ---- (1)
-
-String Fdate = newssf.format(formatDate); 
-//Date타입으로 변환된 객체를 새롭게 지정한 포맷으로 변환. ----- (2)
-System.out.println(date+"===========date 변환전");
-System.out.println(Fdate+"=========Fdate  변환후 ");
 %>
 <!DOCTYPE html>
 <html>
@@ -56,6 +36,11 @@ System.out.println(Fdate+"=========Fdate  변환후 ");
 </head>
 <body>
 
+<c:set value="${date}"  var="Adate"/>   <!-- 달력 클릭으로 넘어온 String타입 날짜 -->
+<fmt:parseDate value="${Adate }"  var="Bdate"  pattern="yyyyMMdd"  />
+<fmt:formatDate value="${Bdate }" var="clickDate" pattern="YYYY년 MM월 dd일"/>  <!--상단에뿌릴 데이터  -->
+<fmt:formatDate value="${Bdate }" var="Fdate" pattern="YYYY-MM-dd"/>  <!--체크인 인풋박스  -->
+
 	<div id="container">
 
 		<div class="TEST_box1">
@@ -65,12 +50,10 @@ System.out.println(Fdate+"=========Fdate  변환후 ");
 				if (se_roomname != null) {
 				%>
 				<h2>
-					선택하신 "<font style="color: red;"> <%=se_roomname%>
+					선택하신 "<font style="color: red;"> ${se_roomname }
 					</font>"룸은 <br> 지정하신 "<font
-						style="color: yellow; background-color: gray; padding: 5px;"> <%=date.substring(0, 4) + "년" + date.substring(4, 6) + "월" + date.substring(6, 8) + "일"%>
-					</font>" 날짜에
-					<%=conMsg%>
-					합니다.
+						style="color: yellow; background-color: gray; padding: 5px;"> ${clickDate}
+					</font>" 날짜에 ${conMsg }	합니다.
 				</h2>
 				<br> <br>
 				<%
@@ -87,11 +70,11 @@ System.out.println(Fdate+"=========Fdate  변환후 ");
 					<table align="center" class="reservelist1">
 						<tr>
 							<th align="left">예약자 이름 :</th>
-							<td align="center" colspan="2"><%=name%></td>
+							<td align="center" colspan="2">${name }</td>
 						</tr>
 						<tr>
 							<th align="left">예약자 아이디 :</th>
-							<td align="center" colspan="2"><%=id%></td>
+							<td align="center" colspan="2">${id }</td>
 						</tr>
 					</table>
 				</div>
@@ -101,20 +84,18 @@ System.out.println(Fdate+"=========Fdate  변환후 ");
 
 
 
-
 		<div class="rs_Wrap" onsubmit="return reservationCheck()">
 
 			<div class="reserve1 regForm_Wrap">
 				<form action="Reservation_Ok" method="post" name="regForm">
 					<table class="res_table">
-
 						<tr align="center">
 							<td><input type="hidden" name="rs_date"></td>
 							<!-- 예약한 현재시간 sysdate로 자동입력  -->
-							<td><input type="hidden" name="name" value="<%=name%>"></td>
-							<td><input type="hidden" name="rs_userid" value="<%=id%>"></td>
+							<td><input type="hidden" name="name" value="${name }"></td>
+							<td><input type="hidden" name="rs_userid" value="${id }"></td>
 							<td><input type="hidden" name="rs_roomname"
-								value="<%=se_roomname%>"></td>
+								value="${se_roomname }"></td>
 							<!--최초로 클릭한 사용자가 선택한 룸 -->
 							<td><input type="hidden" name="rs_roomseq"
 								value="<%=roomvo.getRoomseq()%>"></td>
@@ -129,9 +110,9 @@ System.out.println(Fdate+"=========Fdate  변환후 ");
 
 						<tr align="center">
 							<td colspan="1"><input type="date" name="rs_checkin"
-								id="add_setDate" min="<%=Fdate%>"></td>            <!--달력에서 클릭한 날짜를 우선으로 체크인  -->
+								id="add_setDate" min="${Fdate }"></td>            <!--달력에서 클릭한 날짜를 우선으로 체크인  -->
 							<td colspan="1"><input type="date" name="rs_checkout"
-								min="<%=Fdate%>" oninput="dateCheck()"></td>
+								min="${Fdate }" oninput="dateCheck()"></td>
 							<!--체크아웃 이벤트 -->
 							<td class="totalPrice_BOX"><input type="text" id="rs_Getprice" name="rs_Getprice"
 								value="" placeholder=" = " > <input type="hidden"

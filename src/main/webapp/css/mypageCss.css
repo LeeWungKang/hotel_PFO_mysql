@@ -9,8 +9,6 @@
 	text-align: center;
 	margin: auto;
 }						 
-						 
-						 
 .info_Wrap H2{
 	margin: 0px 0px 15px 30px;
 	text-align: center;
@@ -32,13 +30,29 @@
 	display: inline-block;
 	float: left;
 	line-height: 40px;
-	
 }
 
 
-
-
-
+/* 고객의 소리 box */
+.inquiryBox1 {
+text-align: left;
+ width: 50%; height :400px;
+display: inline-block; 
+float: right; text-align: center;
+}
+.inquiryBox1 table{
+	margin-top: 20px;
+}
+.inquiryBox2 .table-hover{
+vertical-align: middle;  
+line-height: 40px;	
+}
+.boardInfoWrap .table{
+	margin-top: 20px;
+}
+.joinInfoWrap .table{
+	margin-top: 20px;
+}
 	/* 		
 			getMy_ReservationList	
 										 */
@@ -130,4 +144,25 @@ border-left: solid 2px black;
   color: #fff;
   transform: translateY(-7px);
 }
-							 
+.textBox1 span{
+	text-decoration: underline; 
+	color: #FFA2AD; 
+}
+.table-hover {
+	margin-top: 120px;
+}
+.table .Tbody a{
+	color: red;
+	padding: 5px;
+}
+.table .Tbody a:hover{
+	background-color: #FF6A89;
+	color: white;
+}
+.Tbody font{
+	color: #52E4DC;
+	text-shadow: 0 0.5px 16px silver;
+}
+
+
+

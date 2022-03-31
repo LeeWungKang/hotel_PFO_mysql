@@ -5,12 +5,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
-String role = (String) session.getAttribute("role");
-String name = (String) session.getAttribute("name");
-String id = (String) session.getAttribute("id");
-
 ArrayList<reservationVo> rsList = (ArrayList<reservationVo>) request.getAttribute("rsList");
 
 int pg; // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
@@ -22,30 +20,24 @@ if (request.getParameter("page") == null) {
 if (request.getAttribute("totalCount") == null) {	totalCount = 1;
 } else {	totalCount = (Integer) request.getAttribute("totalCount");}
 
-//로그인없이 접속하는 유저를 차단하고 로그인화면으로 이동
-if (name == null) {
-	response.sendRedirect("index.jsp?filePath=./login_check/Login_main.jsp");
-	return;
-}
+
 
 // 현재시간 보다 5일전이면 예약취소 불가능 하게 제한 넣어야됨.
 Date nowDate = new Date();
 			System.out.println(nowDate+"--------nowDate 생성 시간");
 
-SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+SimpleDateFormat sf = new SimpleDateFormat("YYYY-MM-dd");
 Calendar cal = Calendar.getInstance();
 cal.setTime(nowDate);
-cal.add(Calendar.DATE, -3);        //오늘날짜에 제한넣을 3일이라는 수를 넣어서 설정
+cal.add(Calendar.DATE, +3);        //오늘날짜에 제한넣을 3일이라는 수를 넣어서 설정
+cal.add(Calendar.DAY_OF_MONTH, -1);      
 String ndate = sf.format(cal.getTime()); 
-Date todate = sf.parse(ndate);
-
-
-
-
 			System.out.println(ndate+":--ndate--------");
-			System.out.println(todate+":--todate--------");
 %>
 
+ <c:if test="${empty name }">
+    	<c:redirect url="index.jsp?filePath=./login_check/Login_main"/>
+    </c:if>
 
 <!DOCTYPE html>
 <html>
@@ -60,20 +52,7 @@ Date todate = sf.parse(ndate);
 	crossorigin="anonymous">
 
 <style type="text/css">
-a {
-	text-decoration: none;
-}
-
-.table-hover {
-	margin-top: 120px;
-}
-.table .Tbody a{
-	color: red;
-}
-.table .Tbody a:hover{
-	background-color: red;
-	color: white;
-}
+a {	text-decoration: none;}
 </style>
 
 </head>
@@ -91,7 +70,6 @@ a {
 				</tr>
 			</thead>
 
-
 			<tbody class="Tbody">
 				<tr align="center">
 					<th width="180px;">예약자 아이디</th>
@@ -100,9 +78,8 @@ a {
 					<th>예약한 방</th>
 					<th>인원수</th>
 					<th>총 가격</th>
-					<th style="color: #CD2E57; ">예약</th>
+					<th style="color: #4CA975; ">예약상태</th>
 				</tr>
-
 		<%
 			for (int j = 0; j < rsList.size(); j++) {
 				reservationVo rsvo = rsList.get(j);
@@ -119,11 +96,11 @@ a {
 					
 					<td>
 					<!--compareto()  함수는, 앞에변수가 크면 1, 같으면0, 작으면 -1  -->
-					<%if (rsvo.getRs_checkin().compareTo(ndate)== 1) {  %>
-							<a href="location.href='User_rsCencle?delNo=<%=rsvo.getRs_no() %>&&delDate=<%=rsvo.getRs_checkin()%>&&state=예약취소'" > 예약취소 </a>
+					<%if (rsvo.getRs_checkin().compareTo(ndate) >=1) {  %>
+							<a href="User_rsCencle?delNo=<%=rsvo.getRs_no() %>&&delDate=<%=rsvo.getRs_checkin()%>&&state=예약취소'" > 예약취소가능 </a>
 								
 					<%}else{%>
-							<font color="#00AFFF"  style="text-shadow: 0 0.5px 16px silver;"> 예약완료 </font>
+							<font> 예약완료 </font>
 						<%} %> 
 						</td>
 				</tr>
@@ -140,17 +117,15 @@ a {
 				
 		
 		</form>
-		<div align="center">
+		<div align="center" class="textBox1">
 			<%
 				if(rsList.size() == 0 || rsList==null ){
 			%>
 				<p><B> :: 예약 내역이 존재 하지 않습니다. :: </B></p> 
 			<%}else{ %>
-				<h5><B> :: 체크인 날짜로부터 3일 이전에는 예약을 취소 하실 수 없습니다. :: </B></h5>
+				<h5><B> :: 체크인 날짜로부터<span> 3일 이전</span>에는 예약을 취소 하실 수 없습니다. :: </B></h5>
 			<%} %>
 		</div>
-
-
 
 
 		<script type="text/javascript">
