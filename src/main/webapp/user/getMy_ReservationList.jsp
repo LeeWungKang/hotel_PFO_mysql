@@ -94,7 +94,6 @@ a {
 			<%
 			for (int j = 0; j < rsList.size(); j++) {
 				reservationVo rsvo = rsList.get(j);
-			String A = rsvo.getRs_checkin();
 				
 		%>
 				<tr align="center">
