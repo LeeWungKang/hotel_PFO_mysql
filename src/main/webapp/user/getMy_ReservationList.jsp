@@ -19,9 +19,6 @@ if (request.getParameter("page") == null) {
 
 if (request.getAttribute("totalCount") == null) {	totalCount = 1;
 } else {	totalCount = (Integer) request.getAttribute("totalCount");}
-
-
-
 // 현재시간 보다 5일전이면 예약취소 불가능 하게 제한 넣어야됨.
 Date nowDate = new Date();
 			System.out.println(nowDate+"--------nowDate 생성 시간");
@@ -45,12 +42,7 @@ String ndate = sf.format(cal.getTime());
 <meta charset="UTF-8">
 <title>예약 내역</title>
 <link rel="stylesheet" href="css/mypageCss.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-
+<link	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"	rel="stylesheet">
 <style type="text/css">
 a {	text-decoration: none;}
 </style>
@@ -78,19 +70,17 @@ a {	text-decoration: none;}
 					<th>예약한 방</th>
 					<th>인원수</th>
 					<th>총 가격</th>
-					<th style="color: #4CA975; ">예약상태</th>
+					<th style="color: rgba(255, 255, 255, 0.58); ">예약상태</th>
 				</tr>
 		<%
 			for (int j = 0; j < rsList.size(); j++) {
 				reservationVo rsvo = rsList.get(j);
-				
 			if(rsvo.getRs_checkin() != null )
-/* >>>>>>> caf7925d62cc3f86befdfa887dc1eaf5b76aab03 */
 		%>
 				<tr align="center">
 					<td><%=rsvo.getRs_userid()%></td>
 					<td style="border-right: 2px solid gray; color: orange;"><%=rsvo.getRs_date()%> <!--체크인시간  --> 
-							<input type="hidden" 	value="<%=rsvo.getRs_checkin()%>" id="rsdate"></td>
+							<input type="hidden" value="<%=rsvo.getRs_checkin()%>" id="rsdate"></td>
 					<td colspan="2" style="border-right: 2px solid gray; font-size: 1.3em;"><%=rsvo.getRs_checkin()%>&nbsp; ~ &nbsp;<%=rsvo.getRs_checkout()%></td>
 					<td><%=rsvo.getRs_roomname()%></td>
 					<td><%=rsvo.getRs_people()%></td>
@@ -128,32 +118,6 @@ a {	text-decoration: none;}
 				<h5><B> :: 체크인 날짜로부터<span> 3일 이전</span>에는 예약을 취소 하실 수 없습니다. :: </B></h5>
 			<%} %>
 		</div>
-
-
-		<script type="text/javascript">
-
-	/* function rsDelete() {
-		var now_date = new Date(document.getElementById("now_date").value).getTime();     	  //오늘 날짜
-		var rsdate = new Date(document.getElementById("rsdate").value).getTime();      		      //체크인 시작 날짜
-		var diffdate = (( rsdate - now_date) / (24*60*60*1000));       										  //예약날짜 - 현재날짜  
-		
-		if (rsdate != null && diffdate <= 3) { 				//체크인하는 날이  현재날짜보다 3일전일떄는 예약 취소 불가능.
-			alert("예약일 3일전이거나, 이미 지난예약은 취소가 불가능 합니다.");
-			console.log("취소 불가능");
-			return;
-			
-		}else if(rsdate != null && diffdate > 3){
-			var con=confirm("예약을 취소 하시겠습니까?");
-				if(con==true){
-					location.href="User_rsCencle";
-					return;
-				}else{
-					self.close();
-				}
-		}
-	} */
-	</script>
-
 
 		<!-- 페이징  -->
 		<div class="pagingBtn" style="width: 100%; margin: auto; text-align: center;">

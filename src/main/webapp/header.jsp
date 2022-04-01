@@ -15,7 +15,7 @@
 <header id="HD">
 
 	<c:choose>
-		<c:when test="${!empty name and name eq'user' }">
+		<c:when test="${!empty name and role eq 'user' }">
 			<div class="I_info_Text">
 				<p>
 					<i class="fa-solid fa-child"></i> &nbsp; ${name} (${id} , ${role}
@@ -25,7 +25,7 @@
 		</c:when>
 
 
-		<c:when test="${!empty name and role eq'admin'}">
+		<c:when test="${!empty name and role eq 'admin'}">
 			<div class="I_info_Text">
 				<p>
 					<i class="fa-solid fa-user-gear"></i> &nbsp; ${name} ( ${id} ,

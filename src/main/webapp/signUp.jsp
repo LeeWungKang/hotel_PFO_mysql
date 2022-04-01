@@ -82,16 +82,25 @@ String emailCheck = request.getParameter("emailCheck");
 										<option value="yahoo.co.kr">yahoo.co.kr</option>
 										<option value="empas.com">empas.com</option>
 									</select><br><br> <font id="emailCheck" style="font-size: 0.8em;"> &nbsp;&nbsp; <!--이메일 체크 문구  --></font> </td>
-									<!-- <a href="javascript:;"	class="btn_confirm">인증번호 발송</a></td> -->
 							</tr>
-						<!-- 	<tr>
-								<th><span>인증번호 확인</span></th>
-								<td><input type="text" class="send_number"
-									placeholder="10:00"> <a href="javascript:;"
-									class="btn_confirm">인증번호 확인</a></td>
-							</tr> -->
 						</tbody>
 					</table>
+					<script type="text/javascript">
+					$('#email_value').change(function(){ 
+						$("#email_value option:selected").each(function () { 
+						if($(this).val()== '1'){ 				  //직접입력일 경우 
+							$("#email02").val('');			      //값 초기화 
+					 		$("#email02").attr("disabled",false);   //활성화 
+						}else{ 									  //직접입력이 아닐경우 
+						$("#email02").val($(this).text()); 			//선택값 입력 
+					  	$("#email02").attr("disabled",true);  		  //비활성화  
+						}  
+						}); 
+					});
+					
+					</script>
+					
+					
 					<div class="exform_txt">
 						<span>표시는 필수적으로 입력해주셔야 가입이 가능합니다.</span>
 					</div>

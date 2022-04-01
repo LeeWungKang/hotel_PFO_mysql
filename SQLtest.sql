@@ -11,8 +11,21 @@ cnt number(5) default 0,		--게시물 조회수
 userid varchar2(15) not null					 
 );
 
-ALTER TABLE HomeBoard ADD     --ALTER TABLE [FK를 생성시킬 테이블명] 
-CONSTRAINT FK_HomeBoard foreign KEY (userid) references HomeUsers(id); 
+--ALTER TABLE [FK를 생성시킬 테이블명]  
+--게시글은 유저테이블의 기본키를 참조하게하고, 보드의 부모인 유저테이블이 삭제되면, 
+--삭제된 유저가 작성한, 게시글도 삭제되개 한다.
+ALTER TABLE HomeBoard ADD     
+CONSTRAINT FK_HomeBoard 
+foreign KEY (userid) 
+references HomeUsers(id)
+on delete cascade;
+
+--제약조건 삭제 (외래키)
+ALTER TABLE HomeBoard DROP constraint FK_HomeBoard; 
+
+--외래키 조회 방법
+select * from information_schema.table_constraints where table_name = 'FK_HomeBoard';
+select * from USER_CONSTRAINTS
 
 
 
@@ -46,6 +59,11 @@ role varchar2(10) default 'user'   --관리자계정은 ="admin" 따로 디비 �
 alter table HomeUsers add grade varchar2(20) default '일반고객'
 update HOMEUSERS set grade='admin' where id='lee'
 
+
+
+
+
+
 select substr(email,1,instr(email,'@')-1) as email_str from HomeUsers;
 --  instr(칼럼A ,'찾는문자열B', 시작자릿수m, n번째 문자열B의 자릿수)
 --  substr(문자열,자르고싶은 시작수,자르고 싶은 끝 수)
@@ -53,7 +71,6 @@ select substr(email,1,instr(email,'@')-1) as email_str from HomeUsers;
 select email from HomeUsers;
 select substr(email,1,instr(email,'@')-1) as email_str from HomeUsers where email='kjdndrkd@naver.com';
 select substr(email,instr(email,'@')+1) as email_str_last from HomeUsers where email='kjdndrkd@naver.com';
-
 
 
 insert into HomeUsers values('lee','lee123','이웅강','010-3312-8325','2021/11/23','kjdndrkd@naver.com','admin');
@@ -156,7 +173,7 @@ rs_state varchar2(20) default '예약중'
 );
 alter table reservation add
 constraint FK_reservation foreign key(rs_userid) REFERENCES HomeUsers(id)
-
+on delete cascade;
 
 --ALTER TABLE [FK를 생성시킬 테이블명]   seq 외래키는 잠시 사용안함.
 ALTER TABLE reservation ADD   
@@ -210,13 +227,15 @@ seq_reservation.nextval,'2022-03-25','2022-05-15','2022-05-17', 4, '디럭스',2
 select * from reservation order by rs_no desc;
 delete from reservation where rs_no=33;
 
-
+select * from reservation where rs_userid='hong'
+update reservation set rs_checkin='2022-05-15', rs_checkout='2022-05-17'  where  rs_userid='hong'
 
 --토탈가격은 결제 시스템 기능구현을 안해서 제외함 
 ----------------------------------------------------------
 --갤러리에 담을, 호텔객실 데이타베이스 필요함
 
 select * from inquiry order by b_no desc;
+drop table inquiry;
 
 create table inquiry( 
 b_no number(5) primary key,
@@ -226,12 +245,21 @@ b_content varchar2(1000) not null,
 b_writedate date default sysdate
 );
 
+--유저계정 삭제시, 같이 삭제됨.
+ALTER TABLE inquiry ADD     
+CONSTRAINT FK_inquiry
+foreign KEY (b_userid) 
+references HomeUsers(id)
+on delete cascade;
+
+
+
 insert into inquiry values(1,'aaaa','환불','환불해주세요',sysdate );
 insert into inquiry values( (select nvl(max(b_no),0)+1 from inquiry),'aaaa','환불','환불해주세요',sysdate );
 
 
-insert into inquiry (b_no, b_userid, b_title, b_content, b_writedate) values ( (select nvl(max(b_no),0)+1 from inquiry),'aaaa','제목1','내용추가', sysdate);
+insert into inquiry (b_no, b_userid, b_title, b_content, b_writedate) values ( (select nvl(max(b_no),0)+1 from inquiry),'bbbb','제목1','내용추가', sysdate);
 
-select * from (select rownum as b_rnum, A.* from (select * from inquiry where b_userid='aaaa' order by b_no desc) A) where b_rnum between 6-5 and 5;
+select * from (select rownum as b_rnum, A.* from (select * from inquiry where b_userid='bbbb' order by b_no desc) A) where b_rnum between 6-5 and 5;
 
 

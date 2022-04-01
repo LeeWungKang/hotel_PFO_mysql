@@ -107,20 +107,38 @@ function modiCheck() {
 		GetboardList.jsp
 		-체크박스 전체선택/선택삭제-				 */
 
-/*  	function Delete_Check_Popup() {
-		var msg = confirm("정말로 삭제하시겠습니까?");
-		if (msg) {
-			chc_Form.method = "post";
-			chc_Form.action = "Delete_Check";
-			chc_Form.submit();
-		} else {
-			self.close();
-		}
-	} 
+								/*  	function Delete_Check_Popup() {
+										var msg = confirm("정말로 삭제하시겠습니까?");
+										if (msg) {
+											chc_Form.method = "post";
+											chc_Form.action = "Delete_Check";
+											chc_Form.submit();
+										} else {
+											self.close();
+										}
+									} 
+								 */
+
+
+/*
+[공용컨트롤]			체크박스 개별선택 컬러이벤트 
  */
-
-/*//  체크박스 전체 선택.   */
-
+$(document).ready(function() {
+				$(".chcBox").on('click', function() { 
+					
+				if ( $(this).is(':checked') == true ) { 
+					console.log("check");
+					$(this).parent().parent().addClass("selected"); 
+					
+				} else { 
+					console.log("Nocheck");
+					$(this).parent().parent().removeClass("selected"); 
+						} 
+					}); 
+				}); 	
+/*
+[공용컨트롤]	 			 체크박스 전체 선택.   
+*/
 function check_All() {
 
 	if ($("#th_checkAll").is(':checked')) {
@@ -130,19 +148,21 @@ function check_All() {
 	}
 }
 
+
+
 /* 선택된 체크박스 배열에 담기  */
 
 function Delete_Check_Popup() {
 	var chcBox = "";
 
 	$("input[name='chcBox']:checked").each(function() {
-		chcBox = chcBox + $(this).val() + ","; // 체크된 것만 값을 뽑아서 배열에 push
+		chcBox = chcBox + $(this).val() + ","; 				// 체크된 것만 값을 뽑아서 배열에 push
 		console.log(chcBox);
 	});
 
-	chcBox = chcBox.substring(0, chcBox.lastIndexOf(",")); //맨끝 콤마만 지우기
+	chcBox = chcBox.substring(0, chcBox.lastIndexOf(",")); 			//맨끝 콤마만 지우기
 
-	if (chcBox == "") { //체크가 없을떄 유효성.
+	if (chcBox == "") { 						//체크가 없을떄 유효성.
 		alert("삭제할 대상을 선택하세요.");
 		return false;
 	}
@@ -151,7 +171,7 @@ function Delete_Check_Popup() {
 	$.ajax({
 		type: "POST",
 		url: "Delete_Check",
-		data: { chcBox: chcBox },
+		data: { chcBox : chcBox },
 		success: function(result) {
 			console.log(result);
 			if (result == "1") {
@@ -170,15 +190,6 @@ function Delete_Check_Popup() {
 /*      
 	마이페이지 삭제버튼 기능
 											*/
-
-function check_All() {
-
-	if ($("#th_checkAll").is(':checked')) {
-		$("input[name=chcBox]").prop("checked", true);
-	} else {
-		$("input[name=chcBox]").prop("checked", false);
-	}
-}
 //선택한 체크박스 삭제요청
 
 function Delete_Check() {
@@ -199,7 +210,7 @@ function Delete_Check() {
 
 	$.ajax({
 		type: "POST",
-		url: "Delete_Check",
+		url: "Mypage_Delete_Check",
 		data: { chcBox: chcBox },
 		success: function(result) {
 			console.log(result);
@@ -218,7 +229,9 @@ function Delete_Check() {
 
 
 
-/*  헤더 메뉴 스크립트  */
+/*  
+헤더 메뉴 스크립트  
+*/
 
 window.name = "mainWindow";
 function LogOut_Check_Popup() {
@@ -244,7 +257,35 @@ $(document).ready(function() {
 });
 
 
+/*
+admin 유저정보 페이지 js
+*/
+	
+function admin_userchk_Delete() {
+		var chkarr = "";
+	$(".chcBox:checked").each(function() {
+		chkarr=chkarr + ($(this).val())+",";
+		console.log(chkarr);
+	});
+	chkarr=chkarr.substring(0, chkarr.lastIndexOf(","));  
+	
+	if(chkarr == ""){ 
+		alert("삭제할 대상을 선택하세요.");
+		 return false;
+	}
+	console.log(" chkarr[] =>" + chkarr);
 
+	if( confirm("[주의 !] \n 해당회원의 모든 정보가 삭제 됩니다. \n 정말 삭제?")) {
+		userInfoList.method= "post";
+		userInfoList.action = "adminDeleteChecked";
+		userInfoList.submit();
+		return true;
+	}else{
+		self.close();
+		return false;
+	}
+}
+	
 
 
 

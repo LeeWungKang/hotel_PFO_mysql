@@ -31,8 +31,6 @@ if (name == null) {
 }
 
 ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
-
-
 %>
 <!DOCTYPE html>
 <html>
@@ -126,7 +124,7 @@ ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
 				<tr style="text-align: right;">
 					<td colspan="5" align="center"><input type="button"
 						value=" 글쓰기 "
-						onclick="location.href='index.jsp?filePath=./JSP/addBoard'"
+							onclick="location.href='index.jsp?filePath=./boardJSP/addBoard'"
 						style="background-color: rgba(255, 169, 50, 0.75); color: white; border: none; font-weight: 700; cursor: pointer; padding: 5px 20px 5px 20px;">
 					</td>
 					<%

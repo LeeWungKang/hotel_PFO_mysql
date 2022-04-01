@@ -3,6 +3,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
 request.setCharacterEncoding("utf-8");
@@ -28,15 +29,12 @@ if (request.getAttribute("totalRows") == null) {
 	totalCount = (Integer) request.getAttribute("totalRows");
 }
 
-if (name == null) {
-	response.sendRedirect("./login_check/LoginPopup.jsp");
-	return;
-}
-
 ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
 ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 %>
-
+ <c:if test="${empty name } ">
+ 	<c:redirect url="index.jsp"/>
+ </c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,6 +54,11 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js">
+	<style type="text/css">
+	.selected{
+	background-color: rgba(255, 226, 41, 0.35)
+	}
+	</style>
 </head>
 <body>
 
@@ -98,12 +101,13 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 						if (role.equals("admin")) {
 						%>
 						<th width="50" style="text-align: center;">전체 <input
-							type="checkbox" name="checkAll" id="th_checkAll"
+							type="checkbox" name="checkAll"  id="th_checkAll"
 							onclick="check_All()"></th>
 						<%
 						}
 						%>
 					</tr>
+					<c:forEach items="${list}" var="list" varStatus="status"></c:forEach>
 					<%
 					for (int i = 0; i < list.size(); i++) {
 						BoardVo vo = list.get(i);
@@ -122,16 +126,13 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 						<%
 						if (role.equals("admin")) {
 						%>
-						<td><a><input type="checkbox" value="<%=vo.getSeq()%>"
-								id="chcBox" name="chcBox"> </a></td>
+						<td><input type="checkbox" value="<%=vo.getSeq()%>"
+								class="chcBox" name="chcBox"></td>
 						<!--체크박스 선택삭제시, seq키값 벨류에 넣어줘서 돌려야댐  -->
 						<%
-						}
+						}}
 						%>
 					</tr>
-					<%
-					}
-					%>
 					<tr style="text-align: right;">
 						<td colspan="5" align="center"><input type="button"
 							value=" 글쓰기 "
@@ -151,6 +152,9 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 						%>
 					</tr>
 				</table>
+				
+				
+				
 				<!--페이지 리스트 시작부분  -->
 				<%
 				int countList = 5; // 한 페이지에 출력될 게시물 수(10개를 기준으로 잡음)

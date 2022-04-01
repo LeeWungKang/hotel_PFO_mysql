@@ -25,18 +25,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>"MUJI" 회원 조회 </title>
+					<title>"MUJI" 회원 조회 </title>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
+<script type="text/javascript" src="./script/script.js"></script>
 <link href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css"rel="stylesheet" >
 <style type="text/css">
 .selected{
-background-color: red;
+background-color: rgba(255, 226, 41, 0.35);
 }
 
 </style>
 </head>
 <body>
-	<c:if test="${empty role and !role eq'user'  }">
+	<c:if test="${empty role and role eq'user'  }">
 		<c:redirect url="index.jsp"/>
 	</c:if>
 	
@@ -48,7 +49,7 @@ background-color: red;
 		<table class="table table-light" style="height: auto; margin-top: 60px;">
 		<thead>
 			<tr>
-				<th> 총 "<%=totalCount %>" 명</th>
+				<th> 총 "<%=totalCount%>" 명</th>
 			</tr>
 		</thead>	
 		<tbody>
@@ -63,67 +64,30 @@ background-color: red;
 			<th scope="col">Expulsion</th>
 		</tr>
 		<tr>
-		<th colspan="6" >-</th>
-		<th colspan="" ><a href="#">회원 등급 수정 </a></th>
-		<th colspan="" ><a href="#" onclick="admin_userchk_Delete()">회원 정보 삭제 </a></th>
+		<th> ▼ 정보보기 ▼</th>
+		<th colspan="6">-</th>
+		<th><a href="#" onclick="admin_userchk_Delete()">회원 삭제 </a></th>
 		</tr>
 		
 <c:forEach items="${uvo }" var="uvo"  varStatus="status" >
 	<tr>
-		<th scope="row">${status.count } .    ${uvo.id }   </th>
+		<th scope="row">${status.count } . <a href="Get_UserProfile?num=${uvo.id}">  ${uvo.id } </a></th>
 		<td>${uvo.pw }  </td>
 		<td>${uvo.name } </td>
 		<td>${uvo.phone } </td>
 		<td>${uvo.joindate } </td>
 		<td>${uvo.email } </td>
 		<td>${uvo.grade}  </td>
-		<td>회원삭제 &nbsp;&nbsp;<input type="checkbox" value="${uvo.id}" class="chcBox" name="chcBox"></td>
+		<td>Check &nbsp;&nbsp;<input type="checkbox" value="${uvo.id}" class="chcBox" name="chcBox"></td>
 	
 	</tr>
-	</c:forEach>
+		</c:forEach>
 	</tbody>
 	</table>
 	</form>
 	
-	
-	<script> 
-	$(document).ready(function() {
-		$(".chcBox").on('click', function() { 
-			if ( $(this).is(':checked') == true ) { 
-				console.log("check");
-				$(this).parent().parent().addClass("selected"); 
-				} else { 
-					console.log("Nocheck");
-					$(this).parent().parent().removeClass("selected"); 
-				} 
-			}); 
-		}); 	
-	
-function admin_userchk_Delete() {
-		var chkarr = "";
-	$(".chcBox:checked").each(function() {
-		chkarr=chkarr + ($(this).val())+",";
-		console.log(chkarr);
-	});
-	chkarr=chkarr.substring(0, chkarr.lastIndexOf(","));  
-	
-	if(chkarr == ""){ 
-		alert("삭제할 대상을 선택하세요.");
-		 return false;
-	}
-	console.log(" chkarr => [ ,]" + chkarr);
-
-	if( confirm("정말 삭제?")) {
-		userInfoList.method= "post";
-		userInfoList.action = "adminDeleteChecked";
-		userInfoList.submit();
-		return true;
-	}else{
-		self.close();
-		return false;
-	}
-}
-	
+	<script type="text/javascript">
+/* script.js  */
 	</script>
 
 	

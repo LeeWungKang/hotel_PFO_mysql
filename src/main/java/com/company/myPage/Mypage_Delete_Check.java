@@ -49,11 +49,9 @@ public class Mypage_Delete_Check extends HttpServlet {
 				if(cnt !=0) {
 					out.print( 1 +  "");
 					out.flush();
-					out.close();
 					return;
 				}else {
 					cnt = 0 ;
-					out.print(" 삭제할 게시물을 체크해 주세요.  ");
 					out.close();
 				}
 			}

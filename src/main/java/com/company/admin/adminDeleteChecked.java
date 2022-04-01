@@ -5,7 +5,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +29,10 @@ public class adminDeleteChecked extends HttpServlet {
 	
 		String chcBox[]= request.getParameterValues("chcBox");   //체크박스 배열로 받아와서 클릭한 벨류만 값 삭제
 		
-		System.out.println(chcBox+" 받아온 값. ");
+						System.out.println(Arrays.toString(chcBox)+"toString" );
+						System.out.println(Arrays.deepToString(chcBox) + "deep" );
+						System.out.println(chcBox+" 받아온 값. ");
+						
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -37,12 +42,25 @@ public class adminDeleteChecked extends HttpServlet {
 			for(int i=0; i<chcBox.length; i++) {
 				String sql="delete from HomeUsers where id=?";
 				pstmt=conn.prepareStatement(sql);
-				pstmt.setInt(1,Integer.parseInt(chcBox[i]));
-				System.out.println(chcBox[i] + " 체크박스 ");
+				pstmt.setString(1,(chcBox[i]));
 				pstmt.executeUpdate();
 				cnt++;
 				
-				response.sendRedirect("Admin_UserInfoPro");
+				PrintWriter out = response.getWriter();
+				if(cnt != 0) {
+					out.print( "<script> alert('회원 삭제 완료 '); location.href='Admin_UserInfoPro';  </script> "  );
+					out.flush();
+					
+					/*
+					 * RequestDispatcher dis = request.getRequestDispatcher("Admin_UserInfoPro");
+					 * dis.forward(request, response);
+					 */
+					
+					/*
+					 * response.sendRedirect("Admin_UserInfoPro");
+					 */
+					return;
+				}
 			}
 		
 		

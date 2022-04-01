@@ -9,14 +9,9 @@
 <%
 request.setCharacterEncoding("utf-8");
 String name = (String) session.getAttribute("name");
-String id = (String) session.getAttribute("id");
 
 String date = (String) request.getAttribute("date");   //켈린더에서 > 중복날짜 조회 서블릿 갓다가 확인후 다시내려오는 객체(String)
-
 roomVo roomvo = (roomVo) request.getAttribute("roomvo");
-String se_roomname = (String) request.getAttribute("se_roomname");
-String roomname = (String) session.getAttribute("roomname");
-
 if (name == null) {
 	out.print(
 	"<script> alert('죄송합니다. 예약은 로그인이 필요합니다.'); location.href='index.jsp?filePath=./login_check/Login_main'  </script>");
@@ -46,26 +41,22 @@ if (name == null) {
 		<div class="TEST_box1">
 
 			<div class="TEST_box2">
-				<%
-				if (se_roomname != null) {
-				%>
-				<h2>
+				<c:choose>
+					<c:when test="${!empty se_roomname }">
+						<h2>
 					선택하신 "<font style="color: red;"> ${se_roomname }
 					</font>"룸은 <br> 지정하신 "<font
 						style="color: yellow; background-color: gray; padding: 5px;"> ${clickDate}
 					</font>" 날짜에 ${conMsg }	합니다.
 				</h2>
 				<br> <br>
-				<%
-				} else {
-				%>
-				<h2>
-					(선택하신 방이 없습니다. <br> 바로 예약 하시려면 현황표에서 방을 선택해 주세요.)
-				</h2>
-				<%
-				}
-				%>
-
+					</c:when>
+				
+					<c:otherwise>
+						<h2>(선택하신 방이 없습니다. <br> 바로 예약 하시려면 현황표에서 방을 선택해 주세요.)</h2>
+					</c:otherwise>
+				</c:choose>
+				
 				<div class="userInfoBox">
 					<table align="center" class="reservelist1">
 						<tr>
