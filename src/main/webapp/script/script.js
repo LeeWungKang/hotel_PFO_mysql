@@ -277,7 +277,7 @@ function admin_userchk_Delete() {
 
 	if( confirm("[주의 !] \n 해당회원의 모든 정보가 삭제 됩니다. \n 정말 삭제?")) {
 		userInfoList.method= "post";
-		userInfoList.action = "adminDeleteChecked";
+		userInfoList.action = "AdminDeleteChecked";
 		userInfoList.submit();
 		return true;
 	}else{

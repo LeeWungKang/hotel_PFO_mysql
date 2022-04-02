@@ -87,7 +87,7 @@
 								<ul class="subMenu">
 									<li><a href="Admin_UserInfoPro"> 회원 관리 </a>
 									<li>
-									<li><a href="#"> 예약 관리 </a>
+									<li><a href="Admin_reservationPro"> 예약 관리 </a>
 									<li>
 									<li><a href="#"> Q & A </a>
 									<li>

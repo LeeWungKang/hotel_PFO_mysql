@@ -63,12 +63,13 @@ font {
 	color: black;
 }
 
+.containerBox .calendarWrap A{
+	padding: 15px;
+}
 .containerBox .calendarWrap A:hover {
 	color: 'ff9900';
 	background-color:#808080;
-	padding: 2px;
 	border-radius: 15px;
-	padding : 5px 20px 5px 20px;
 }
 
 .containerBox  a:active {
@@ -91,6 +92,7 @@ font {
 	height: 700px;
 }
 
+
 .outside_A{
 	color: #8c8c8c;
 	padding-top: 10px;
@@ -102,7 +104,6 @@ outside_A a{
 .fa-solid{
 	font-size: 1.4em;
 }
-
 
 
 

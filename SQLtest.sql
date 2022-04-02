@@ -73,11 +73,11 @@ select substr(email,1,instr(email,'@')-1) as email_str from HomeUsers where emai
 select substr(email,instr(email,'@')+1) as email_str_last from HomeUsers where email='kjdndrkd@naver.com';
 
 
-insert into HomeUsers values('lee','lee123','이웅강','010-3312-8325','2021/11/23','kjdndrkd@naver.com','admin');
-insert into HomeUsers values('hong','hong123','홍길동','010-1111-1111','2021/12/01','mmmm@naver.com','user');
-insert into HomeUsers values('kim','kim123','김길동','010-3331-5511','2022/03/20','mewq@naver.com','user');
-insert into HomeUsers values('aaaa','aaaa','미미','010-5555-1111','2021/12/01','mmmm@naver.com','user');
-insert into HomeUsers values('bbbb','aaaa','토토','010-6666-1111','2021/12/01','mmmm@naver.com','user');
+insert into HomeUsers values('lee','lee123','이웅강','010-3312-8325','2021/11/23','kjdndrkd@naver.com','admin','admin');
+insert into HomeUsers values('hong','hong123','홍길동','010-1111-1111','2021/12/01','mmmm@naver.com','user','일반고객');
+insert into HomeUsers values('kim','kim123','김길동','010-3331-5511','2022/03/20','mewq@naver.com','user','일반고객');
+insert into HomeUsers values('aaaa','aaaa','미미','010-5555-1111','2021/12/01','mmmm@naver.com','user','일반고객');
+insert into HomeUsers values('bbbb','aaaa','토토','010-6666-1111','2021/12/01','mmmm@naver.com','user','일반고객');
 
 ----------------------------------------------------------------------------------------
 --댓글 데이터
@@ -185,6 +185,12 @@ CONSTRAINT FK_reservation_rmseq foreign KEY(rs_roomseq) references room(roomseq)
 ALTER TABLE reservation drop constraint FK_reservation; 
 ALTER TABLE reservation drop constraint FK_reservation_rmseq; 
 
+select  (select count(*) from reservation where rs_roomname ='스탠다드')A,
+			(select count(*) from reservation where rs_roomname ='디럭스')B
+from reservation;
+
+select count(*) from reservation where rs_roomname ='디럭스';
+
 
 
 --자동 증가 시퀀스 생성  (예약번호에 적용시킴)
@@ -204,9 +210,9 @@ select * from (select rownum as rnum,A.* from (select rs_no,to_char(rs_date,'YYY
 
 
 insert into reservation values(
-seq_reservation.nextval,'2022-03-28','2022-05-06','2022-05-07', 2, '스위트',1,'lee',70000,'예약중');
+seq_reservation.nextval,'2022-03-28','2022-05-06','2022-05-07', 2, '스위트',1,'bbbb',70000,'예약중');
 insert into reservation values(
-seq_reservation.nextval,'2022-03-15','2022-05-22','2022-05-23', 2, '스위트',1,'lee',70000,'예약중');
+seq_reservation.nextval,'2022-03-15','2022-05-22','2022-05-23', 2, '스위트',1,'bbbb',70000,'예약중');
 insert into reservation values(
 seq_reservation.nextval,'2022-03-10','2022-05-15','2022-05-16', 2, '스탠다드',2,'hong',45000,'예약중');
 
@@ -255,7 +261,7 @@ on delete cascade;
 
 
 insert into inquiry values(1,'aaaa','환불','환불해주세요',sysdate );
-insert into inquiry values( (select nvl(max(b_no),0)+1 from inquiry),'aaaa','환불','환불해주세요',sysdate );
+insert into inquiry values( (select nvl(max(b_no),0)+1 from inquiry),'aaaa','문의','환불해주세요',sysdate );
 
 
 insert into inquiry (b_no, b_userid, b_title, b_content, b_writedate) values ( (select nvl(max(b_no),0)+1 from inquiry),'bbbb','제목1','내용추가', sysdate);

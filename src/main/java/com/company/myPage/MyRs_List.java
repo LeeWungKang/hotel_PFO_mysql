@@ -24,7 +24,6 @@ public class MyRs_List extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/MyRs_List----나의 예약정보 조회 ");
-	
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = request.getSession();
@@ -39,7 +38,6 @@ public class MyRs_List extends HttpServlet {
 			out.close();
 			return;
 		}
-
 		int page;
 		if (request.getParameter("page") == null)
 			page = 1; 		// 페이지는 기본값 1로 설정

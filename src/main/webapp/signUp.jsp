@@ -72,17 +72,17 @@ String emailCheck = request.getParameter("emailCheck");
 									<input type="text" class="email" placeholder="이메일 입력" name="email" id="email">
 										<span class="mar10">@</span> 
 									<input type="text" class="email email2"	placeholder="직접입력"  name="email02" id="email02" value=""> 
-									<select name="email_value" id="email_value" class="email_value" >
-										<option value="1">직접입력</option>
-										<option value="naver.com">naver.com</option>
-										<option value="daum.com">daum.net</option>
-										<option value="google.com">google.com</option>
-										<option value="hotmail.com">hotmail.com</option>
-										<option value="nate.com">nate.com</option>
-										<option value="yahoo.co.kr">yahoo.co.kr</option>
-										<option value="empas.com">empas.com</option>
-									</select><br><br> <font id="emailCheck" style="font-size: 0.8em;"> &nbsp;&nbsp; <!--이메일 체크 문구  --></font> </td>
-							</tr>
+											<select name="email_value" id="email_value" class="email_value" >
+												<option value="1">직접입력</option>
+												<option value="naver.com">naver.com</option>
+												<option value="daum.com">daum.net</option>
+												<option value="google.com">google.com</option>
+												<option value="hotmail.com">hotmail.com</option>
+												<option value="nate.com">nate.com</option>
+												<option value="yahoo.co.kr">yahoo.co.kr</option>
+												<option value="empas.com">empas.com</option>
+											</select><br><br> <font id="emailCheck" style="font-size: 0.8em;"> &nbsp;&nbsp; <!--이메일 체크 문구  --></font> </td>
+								</tr>
 						</tbody>
 					</table>
 					<script type="text/javascript">

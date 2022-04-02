@@ -7,7 +7,6 @@
         
     int pg;  // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
     int totalCount;
-
     // 현재 페이지 변수 받음.
     if(request.getParameter("page")==null){
     	pg=1;

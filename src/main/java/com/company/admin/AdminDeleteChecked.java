@@ -17,8 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import com.company.common.JDBCconn;
 
-@WebServlet("/adminDeleteChecked")
-public class adminDeleteChecked extends HttpServlet {
+@WebServlet("/AdminDeleteChecked")
+public class AdminDeleteChecked extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,15 +50,6 @@ public class adminDeleteChecked extends HttpServlet {
 				if(cnt != 0) {
 					out.print( "<script> alert('회원 삭제 완료 '); location.href='Admin_UserInfoPro';  </script> "  );
 					out.flush();
-					
-					/*
-					 * RequestDispatcher dis = request.getRequestDispatcher("Admin_UserInfoPro");
-					 * dis.forward(request, response);
-					 */
-					
-					/*
-					 * response.sendRedirect("Admin_UserInfoPro");
-					 */
 					return;
 				}
 			}
