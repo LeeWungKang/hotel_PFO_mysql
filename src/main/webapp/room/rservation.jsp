@@ -60,15 +60,15 @@ String overlap = request.getParameter("overlap");
 		<%} %>
 	</div>
 
-	<script type="text/javascript">
-     var monthName=new Array("1월","2월","3월","4월","5월","6월","7월",
-     "8월","9월","10월","11월","12월")
-     var monthDays=new Array(31,28,31,30,31,30,31,31,30,31,30,31)
-     var now=new Date()
-     var nowd=now.getDate()
-     var nowm=now.getMonth()
-     var nowy=now.getYear()+1900
-     
+<script type="text/javascript">
+    var monthName=new Array("1월","2월","3월","4월","5월","6월","7월",
+    "8월","9월","10월","11월","12월")
+    var monthDays=new Array(31,28,31,30,31,30,31,31,30,31,30,31)
+    var now=new Date()
+    var nowd=now.getDate()
+    var nowm=now.getMonth()
+    var nowy=now.getYear()+1900
+    
   function showCalendar(day,month,year)
      {
   if ((year%4==0||year%100==0)&&(year%400==0)) monthDays[1]=29; else monthDays[1]=28 //leap year test

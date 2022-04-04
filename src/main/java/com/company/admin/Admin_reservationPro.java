@@ -135,6 +135,35 @@ public class Admin_reservationPro extends HttpServlet {
 				DCount = rs.getInt(1);
 				DPrice = rs.getInt(2);
 			}
+			pstmt.close();
+			rs.close();
+			
+			
+			int month ;
+			for(int j=202201; j<=202212; j++) {
+				sql="SELECT count(*) as Acount,"
+						+ "		sum(rs_price) as APrice "
+						+ "	    FROM reservation\r\n"
+						+ "	    WHERE TO_CHAR(rs_date, 'YYYYMM') ="+ j;
+				pstmt=conn.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				/*
+				 * if(rs.next()) { month= rs.getInt(month[j]); }
+				 */
+				
+				
+				pstmt.close();
+				rs.close();	
+			}
+				
+				
+		
+			
+			
+			
+				
+				
+			
 			
 			request.setAttribute("ACount", ACount);
 			request.setAttribute("APrice", APrice);

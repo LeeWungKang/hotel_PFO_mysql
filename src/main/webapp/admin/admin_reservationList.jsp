@@ -271,7 +271,7 @@
 														   <span class="range-slider__value">0</span> 
 												</div> 
 											</td>
-											<td width="50px;">
+											<td width="50px;" align="left">
 												<span class="totalPoint_span">1천만원</span> 
 											</td>
 										</tr>

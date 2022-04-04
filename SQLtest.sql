@@ -201,15 +201,21 @@ SELECT count(*) as Acount,
     FROM reservation
     WHERE TO_CHAR(rs_date, 'YYYYMMDD') > '20220301' and TO_CHAR(rs_date, 'YYYYMMDD') < '20220401';
  
-    
+--22년 총 합   
 SELECT count(*) as Acount,
 		sum(rs_price) as APrice 
-    FROM reservation
-    WHERE TO_CHAR(rs_date, 'YYYYMM') > '202201' and TO_CHAR(rs_date, 'YYYYMM') < '202212';
+	    FROM reservation
+	    WHERE TO_CHAR(rs_date, 'YYYYMM') > '202201' and TO_CHAR(rs_date, 'YYYYMM') < '202212';
+    
+    
+-- 1달 매출 , 판매횟수 
+SELECT count(*) as Acount,
+		sum(rs_price) as APrice 
+	    FROM reservation
+	    WHERE TO_CHAR(rs_date, 'YYYYmm') = '202202';
 
 
-
-
+  
 --자동 증가 시퀀스 생성  (예약번호에 적용시킴)
 create sequence seq_reservation
 increment by 1
@@ -217,7 +223,6 @@ start with 1;
 
 select * from user_sequences;
 drop sequence seq_reservation;
-
 
 
 select rs_no,to_char(rs_date,'YYYY-MM-DD HH24:MI:SS'),rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price from reservation where rs_userid= 'aaaa';
