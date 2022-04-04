@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       <% 
         response.setContentType("text/html;charset=utf-8");
         
@@ -25,180 +26,17 @@
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
 <script type="text/javascript" src="./script/script.js"></script>
 <link href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css"rel="stylesheet" >
-<style type="text/css">
- table{
-	 	border-collapse: collapse;
-	 	width: 100%;
-	 }
-	 .table_text_align_center{
-				text-align: center;
-	 }	
-	 caption{
-	    visibility: hidden;
-	    width: 0;
-	    height: 0;
-	    font-size: 0;
-	    line-height: 0;
-	    overflow: hidden; 
-	 }	  
+<link href="./css/adminCss.css" rel="stylesheet">
 
-	 .content_subject{
-		height: 110px;
-	    line-height: 110px;
-	    background-color: #5080bd;
-	    margin-bottom: 60px; 
-	 
-	 }
-		 .content_subject span{ 
-		    padding-left: 30 px;
-		    display: inline-block;
-		    color: white;
-		    font-size: 50px;
-		    font-weight: bolder; 
-		 }
-	 
-	 .content_totalCount_section{
-	 	margin-bottom: 12px;
-	 }
-	 .subject_table{
-		font-size: 14px;
-	    line-height: 20px;
-	    width: 100%;
-	    text-align: center; 	
-	 }
-
-		 th{
-		text-align: center;
-	    color: #333;
-	    border-bottom: 1px solid #e7e7e7;
-	    border-top: 1px solid #3084d9;
-	    background: #f4f9fd;
-	    padding: 2px 0;	 
-		 }
-		.td_width_1{
-			width: 5%;
-		}	 	 	 
-		.td_width_2{
-			width: 10%;
-		}	 	 
-		.td_width_3{
-			width: 25%;
-		}	 
-		.td_width_4{
-			width: 15%;
-		}	
-		.cart_table{
-			font-size: 14px;
-			line-height: 20px;
-		}  
-			.cart_table tr{
-				height: 110px;
-			}
-			.price_td{
-				padding-left: 5px;
-			}
-				.red_color{
-					color : red;
-				}
-				.green_color{
-					color : green;
-				}
-			.cart_table td{
-				border-bottom: 1px solid #e7e7e7;
-			}
-			.quantity_div{
-				position: relative;
-			    width: 42px;
-			    height: 25px;
-			    text-align: left;
-			    margin: 5px auto;		
-			}
-			.quantity_input{
-				position: absolute;
-				width: 27px;
-			    height: 23px;
-			    text-align: center;
-			    border: 1px solid #c6c6c6;
-			    border-right: 0px;
-			    line-height: 19px;
-			    font-size: 12px;
-			    color: #4c4848;	
-			    left: 0;
-			}
-			.quantity_btn{
-				position: absolute;
-			    border: 1px solid #aaa;
-			    color: #3a60df;
-			    width: 14px;
-			    height: 13px;
-			    padding: 0px;
-			    background-color: #fff;
-			    font-weight: bold;
-			    font-size: 7px;
-			    line-height: 6px;
-			    vertical-align: middle;	
-			}
-			.plus_btn{
-				top: 0;
-				right: 0
-			}
-			.minus_btn{
-				bottom: 0;
-				right: 0
-			}		
-			.quantity_modify_btn{
-				border: 1px solid #d0d0d0;
-			    height: 13px;
-			    line-height: 13px;
-			    background-color: #fff;
-			    text-align: center;
-			    width: 28px;
-			    display: inline-block;
-			    padding: 3px 6px 2px;
-			    margin-top: 3px;		
-			}
-			.table_text_align_center{
-				text-align: center;
-			}
-			.delete_btn{
-				width: 40px;		
-			}
-		
-	.content_total_section{
-		    background-color: rgb(227, 237, 247);
-	}		
-		.total_wrap{
-			width: 80%;
-		    margin: auto;
-		    padding: 10px 0 10px 0;	
-		}
-			.total_wrap td{
-				width : 50%;
-			}
-			.finalTotalPrice_span{
-				color: #854A72;
-				font-size: 17px;
-				font-weight: bold;
-			}
-			.totalPoint_span{
-				font-size: 17px;
-				font-weight: bold;		
-			}
-			.boundary_div{
-				font-size: 0;
-			    border: 1px dotted #d1c7c7;
-			    margin: 5px 0 5px 0;		
-			}
-</style>
 </head>
 <body>
 
-<c:if test="${empty role and role eq'user'  }">
+<c:if test="${empty role}">
 		<c:redirect url="index.jsp"/>
 	</c:if>
 	
 	
-	<div style="width: 90%; margin: auto;">
+	<div style="width: 90%; margin: auto; margin-bottom: 100px;">
 	
 			 <h3>::<B> 회원 예약 리스트</B></h3>
 			<form action="" name="userInfoList">
@@ -223,13 +61,13 @@
 			<th scope="col">-</th>
 		</tr>
 		<tr>
-		<th> ▼ 정보보기 ▼</th>
+		<th> ▼ 정보 ▼</th>
 		<th colspan="9">-</th>
-		<th><a href="#" onclick="">예약 데이터 삭제 </a></th>
+		<th><a href="#" onclick=""> 결제시스템  </a></th>
 		</tr>
 		
 <c:forEach items="${rsList }" var="rsList"  varStatus="status" >
-	<tr>
+	<tr align="center">
 		<th scope="row"> ${rsList.rs_no}</th>
 		<td>${rsList.rs_date }  </td>
 		<td>${rsList.rs_checkin } </td>
@@ -240,7 +78,6 @@
 		<td>${rsList.rs_userid}  </td>
 		<td>${rsList.rs_price}  </td>
 		<td>${rsList.rs_state}  </td>
-		<td>Check &nbsp;&nbsp;<input type="checkbox" value="${rsList.rs_no}" class="chcBox" name="chcBox"></td>
 	
 	</tr>
 		</c:forEach>
@@ -273,20 +110,20 @@
         endPage = totalPage;
      }
     if (startPage > 1) {%>
-       <a href="Admin_UserInfoPro?page=1"> 처음 </a>
+       <a href="Admin_reservationPro?page=1"> 처음 </a>
     <% }
     if (pg > 1) { %>
-        <a href="Admin_UserInfoPro?page=<%=pg-1 %>"> 이전 </a>
+        <a href="Admin_reservationPro?page=<%=pg-1 %>"> 이전 </a>
     <% }
     for (int iCount = startPage; iCount <= endPage; iCount++) {
         if (iCount == pg) { %>
           <b><%=iCount %></b>&nbsp;
     <%} else {%>
-          <a href="Admin_UserInfoPro?page=<%=iCount %>"> <%=iCount %> </a>&nbsp;
+          <a href="Admin_reservationPro?page=<%=iCount %>"> <%=iCount %> </a>&nbsp;
         <%} }  if (pg < totalPage) { %>
-       <a href="Admin_UserInfoPro?page=<%=pg+1 %>" >다음</a>
+       <a href="Admin_reservationPro?page=<%=pg+1 %>" >다음</a>
     <%} if (endPage < totalPage) { %>
-        <a href="Admin_UserInfoPro?page=<%=totalPage %>">끝</a>
+        <a href="Admin_reservationPro?page=<%=totalPage %>">끝</a>
     <%}%>
     		</div>
 	</div>
@@ -299,9 +136,9 @@
 					<caption>표 제목 부분</caption>
 					<tbody>
 
-						<tr>
-							<th class="td_width_1">-</th>
-							<th class="td_width_2">-</th>
+						<tr align="center">
+							<th class="td_width_1" >-</th>
+							<th class="td_width_2" >-</th>
 							<th class="td_width_3">룸Type</th>
 							<th class="td_width_4">예약횟수</th>
 							<th class="td_width_4"> -- </th>
@@ -313,48 +150,50 @@
 				<table class="cart_table">
 					<caption>표 내용 부분</caption>
 					<tbody>
-					<%-- 	<c:forEach items="" var="ci"> --%>
 					<c:set var="ACount"  value="${ACount }" />
+					<c:set var="APrice"  value="${APrice }"/>
 							<tr align="center">
-								<td class="td_width_1"></td>
-								<td class="td_width_2" colspan="2"></td>  
+							<th class="td_width_1" >1</th>
+								<td class="td_width_2" ></td>  
 								<td class="td_width_3"> 스탠다드 룸</td>
 								<td class="td_width_4 ">${ACount } 회</td>
 								<td class="td_width_4 table_text_align_center">--	</td>
-								<td class="td_width_4 table_text_align_center"> 총가격 --	</td>
+								<td class="td_width_4 table_text_align_center"> 총매출 :<fmt:formatNumber pattern=",##0" value="${APrice}"/></td>
 								<td class="td_width_4 table_text_align_center delete_btn"><button>합산</button></td>
 							</tr>
 					<c:set var="BCount"  value="${BCount }" />
+					<c:set var="BPrice"  value="${BPrice }" />
 							<tr align="center">
-								<td class="td_width_1"></td>
-								<td class="td_width_2" colspan="2"></td>  
+							<th class="td_width_1" >2</th>
+								<td class="td_width_2" ></td>  
 								<td class="td_width_3"> 디럭스 룸</td>
 								<td class="td_width_4 ">${BCount } 회</td>
 								<td class="td_width_4 table_text_align_center">--	</td>
-								<td class="td_width_4 table_text_align_center"> 총가격 --	</td>
+								<td class="td_width_4 table_text_align_center"> 총매출 : <fmt:formatNumber pattern=",##0" value="${BPrice}"/></td>
 								<td class="td_width_4 table_text_align_center delete_btn"><button>합산</button></td>
 							</tr>
 							<c:set var="CCount"  value="${CCount }" />
+							<c:set var="CPrice"  value="${CPrice }" />
 							<tr align="center">
-								<td class="td_width_1"></td>
-								<td class="td_width_2" colspan="2"></td>  
+								<th class="td_width_1" >3</th>
+								<td class="td_width_2" ></td>  
 								<td class="td_width_3"> 스위트 룸</td>
 								<td class="td_width_4 ">${CCount } 회</td>
 								<td class="td_width_4 table_text_align_center">--	</td>
-								<td class="td_width_4 table_text_align_center"> 총가격 --	</td>
+								<td class="td_width_4 table_text_align_center"> 총매출 : <fmt:formatNumber pattern=",##0" value="${CPrice}"/></td>
 								<td class="td_width_4 table_text_align_center delete_btn"><button>합산</button></td>
 							</tr>
-							<c:set var="ACount"  value="${DCount }" />
+							<c:set var="DCount"  value="${DCount }" />
+							<c:set var="DPrice"  value="${DPrice }" />
 							<tr align="center">
-								<td class="td_width_1"></td>
-								<td class="td_width_2" colspan="2"></td>  
+								<th class="td_width_1" >4</th>
+								<td class="td_width_2" ></td>  
 								<td class="td_width_3"> 스탠다드</td>
 								<td class="td_width_4 ">${DCount } 회</td>
 								<td class="td_width_4 table_text_align_center">--	</td>
-								<td class="td_width_4 table_text_align_center"> 총가격 --	</td>
+								<td class="td_width_4 table_text_align_center"> 총매출: <fmt:formatNumber pattern=",##0" value="${DPrice}"/>	</td>
 								<td class="td_width_4 table_text_align_center delete_btn"><button>합산</button></td>
 							</tr>
-					<%-- 	</c:forEach> --%>
 					</tbody>
 				</table>
 				
@@ -370,20 +209,24 @@
 							<td>
 								<table>
 									<tr>
-										<td>총 상품 가격</td>
+										<td>스탠다드 총 매출</td>
 										<td>
-											<span class="totalPrice_span">70000</span> 원
+											<span class="totalPrice_span"><fmt:formatNumber pattern=",##0" value="${APrice}"/> </span> 원
 										</td>
 									</tr>
 									<tr>
-										<td>배송비</td>
+										<td>디럭스 총 매출</td>
 										<td>
-											<span class="delivery_price">3000</span>원
+											<span class="delivery_price"><fmt:formatNumber pattern=",##0" value="${BPrice}"/></span>원
 										</td>
 									</tr>									
 									<tr>
-										<td>총 주문 상품수</td>
-										<td><span class="totalKind_span"></span>종 <span class="totalCount_span"></span>권</td>
+										<td>스위트 총 매출</td>
+										<td><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${CPrice}"/></span> 원 
+									</tr>
+									<tr>
+										<td>로얄 총 매출</td>
+										<td><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원
 									</tr>
 								</table>
 							</td>
@@ -397,7 +240,7 @@
 							</td>
 						</tr>
 					</table>
-					<div class="boundary_div">구분선</div>
+					<div class="boundary_div" >구분선</div>
 					<table>
 						<tr>
 							<td>
@@ -405,12 +248,15 @@
 									<tbody>
 										<tr>
 											<td>
-												<strong>총 결제 예상 금액</strong>
+												<strong>합산 매출</strong>
 											</td>
 											<td>
-												<span class="finalTotalPrice_span">70000</span> 원
+											<c:set value="${APrice+BPrice+CPrice+DPrice}" var="nowtotal"/>
+											<fmt:setLocale value="ko_kr"/>
+											<fmt:formatNumber value="${nowtotal}" groupingUsed="true" type="currency"/>
 											</td>
 										</tr>
+										
 									</tbody>
 								</table>
 							</td>
@@ -419,8 +265,124 @@
 									<tbody>
 										<tr>
 											<td>
-												<strong>총 적립 예상 마일리지</strong>
-											
+												<font size="5"><b/> 목표 매출 </font>
+												<div class="range-slider">
+														  <input class="range-slider__range" type="range" value="${nowtotal}" min="0" max="10000000">
+														   <span class="range-slider__value">0</span> 
+												</div> 
+											</td>
+											<td width="50px;">
+												<span class="totalPoint_span">1천만원</span> 
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<br><br>
+	<!-- ////////////////////////////////    -->
+			<div class="content_total_section">
+				<div class="total_wrap">
+					<table>
+						<tr>
+							<td>
+								<table>
+									<tr>
+										<th>1월 매출</th>
+										<th><span class="totalPrice_span"><fmt:formatNumber pattern=",##0" value="${APrice}"/> </span> 원 </th>
+									</tr>
+									<tr>
+										<th>2월 매출</th>
+										<th><span class="delivery_price"><fmt:formatNumber pattern=",##0" value="${BPrice}"/></span>원</th>
+									
+									</tr>									
+									<tr>
+										<th>3월 매출</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${CPrice}"/></span> 원 </th>
+									</tr>
+									<tr>
+										<th>4월 매출</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원 </th>
+									</tr>
+									<tr>
+										<th>5월 매출</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+									</tr>
+									<tr>
+										<th>6월 매출</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+									</tr>
+									<tr>
+										<th>7월 매출</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+									</tr>
+									<tr>
+										<th>8월 매출</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+									</tr>
+									<tr>
+										<th>9월 매출</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+									</tr>
+									<tr>
+										<th>10월 매출</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+									</tr>
+									<tr>
+										<th>11월 매출</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+									</tr>
+									<tr>
+										<th>12월 매출</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+									</tr>
+								</table>
+							</td>
+							<td>
+								<table>
+									<tr>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>							
+							</td>
+						</tr>
+					</table>
+					<div class="boundary_div" >구분선</div>
+					<table>
+						<tr>
+							<td>
+								<table>
+									<tbody>
+										<tr>
+											<th>
+												<strong>현재 총 매출</strong>
+											</th>
+											<th>
+											<c:set value="${APrice+BPrice+CPrice+DPrice}" var="nowtotal"/>
+											<fmt:setLocale value="ko_kr"/>
+											<fmt:formatNumber value="${nowtotal}" groupingUsed="true" type="currency"/>
+											</th>
+										</tr>
+										
+									</tbody>
+								</table>
+							</td>
+							<td>
+								<table style="margin-left: 40px;">
+									<tbody>
+										<tr>
+											<td>
+												<strong>해당 '달' 매출</strong>
+												<select>
+														<option>1월</option>
+														<option>2월</option>
+														<option>3월</option>
+												</select>											
 											</td>
 											<td>
 												<span class="totalPoint_span">70000</span> 원
@@ -433,6 +395,35 @@
 					</table>
 				</div>
 			</div>
+
+
+<script type="text/javascript">
+
+var rangeSlider = function(){
+	  var slider = $('.range-slider'),
+	      range = $('.range-slider__range'),
+	      value = $('.range-slider__value');
+	    
+	  slider.each(function(){
+
+	    value.each(function(){
+	      var value = $(this).prev().attr('value');
+	      $(this).html(value);
+	    });
+
+	    range.on('input', function(){
+	      $(this).next(value).html(this.value);
+	    });
+	  });
+	};
+
+	rangeSlider();
+
+
+
+</script>
+
+
 
 
 </body>

@@ -89,51 +89,65 @@ public class Admin_reservationPro extends HttpServlet {
 			
 			pstmt.close();
 			rs.close();
-			sql="select count(*) from reservation where rs_roomname ='스탠다드'";
+			sql="select count(*) as ACount, sum(rs_price) as APrice from reservation where rs_roomname ='스탠다드'";
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			
 			int ACount = 0;
+			int APrice = 0;
 			if(rs.next()) {
-				ACount = rs.getInt(1);
+				ACount = rs.getInt("ACount");
+				APrice = rs.getInt("APrice");
 			}
 			pstmt.close();
 			rs.close();
-			sql="select count(*) from reservation where rs_roomname ='디럭스'";
+			sql="select count(*) as BCount,sum(rs_price) as BPrice from reservation where rs_roomname ='디럭스'";
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			
 			int BCount = 0;
+			int BPrice = 0;
 			if(rs.next()) {
 				BCount = rs.getInt(1);
+				BPrice = rs.getInt(2);
 			}
 			pstmt.close();
 			rs.close();
-			sql="select count(*) from reservation where rs_roomname ='스위트'";
+			sql="select count(*) as CCount,sum(rs_price) as CPrice from reservation where rs_roomname ='스위트'";
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			
 			int CCount = 0;
+			int CPrice = 0;
 			if(rs.next()) {
 				CCount = rs.getInt(1);
+				CPrice = rs.getInt(2);
 			}
 			pstmt.close();
 			rs.close();
-			sql="select count(*) from reservation where rs_roomname ='로얄'";
+			sql="select count(*) as DCount,sum(rs_Price) as DPrice from reservation where rs_roomname ='로얄'";
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			
 			int DCount = 0;
+			int DPrice = 0;
 			if(rs.next()) {
 				DCount = rs.getInt(1);
+				DPrice = rs.getInt(2);
 			}
 			
-			
-			System.out.println(totalCount+"명 ,,"+BCount+"디럭스,");
 			request.setAttribute("ACount", ACount);
+			request.setAttribute("APrice", APrice);
+			
 			request.setAttribute("BCount", BCount);
+			request.setAttribute("BPrice", BPrice);
+			
 			request.setAttribute("CCount", CCount);
+			request.setAttribute("CPrice", CPrice);
+
 			request.setAttribute("DCount", DCount);
+			request.setAttribute("DPrice", DPrice);
+			
 			request.setAttribute("rsList", rsList);
 			request.setAttribute("totalRows", totalCount);
 			

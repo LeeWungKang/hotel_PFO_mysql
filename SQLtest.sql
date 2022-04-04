@@ -185,11 +185,28 @@ CONSTRAINT FK_reservation_rmseq foreign KEY(rs_roomseq) references room(roomseq)
 ALTER TABLE reservation drop constraint FK_reservation; 
 ALTER TABLE reservation drop constraint FK_reservation_rmseq; 
 
-select  (select count(*) from reservation where rs_roomname ='스탠다드')A,
-			(select count(*) from reservation where rs_roomname ='디럭스')B
-from reservation;
-
 select count(*) from reservation where rs_roomname ='디럭스';
+
+
+select count(*) as Acount,sum(rs_price) as APrice from reservation where rs_roomname ='스탠다드';
+
+select count(*) as Acount,
+		sum(rs_price) as APrice 
+		from reservation where rs_roomname ='스탠다드';
+
+		
+--지정 날짜에 대한 매출,판매 갯수.
+SELECT count(*) as Acount,
+		sum(rs_price) as APrice 
+    FROM reservation
+    WHERE TO_CHAR(rs_date, 'YYYYMMDD') > '20220301' and TO_CHAR(rs_date, 'YYYYMMDD') < '20220401';
+ 
+    
+SELECT count(*) as Acount,
+		sum(rs_price) as APrice 
+    FROM reservation
+    WHERE TO_CHAR(rs_date, 'YYYYMM') > '202201' and TO_CHAR(rs_date, 'YYYYMM') < '202212';
+
 
 
 
@@ -204,7 +221,6 @@ drop sequence seq_reservation;
 
 
 select rs_no,to_char(rs_date,'YYYY-MM-DD HH24:MI:SS'),rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price from reservation where rs_userid= 'aaaa';
-
 select * from (select rownum as rnum,A.* from (select rs_no,to_char(rs_date,'YYYY-MM-DD HH24:MI:SS') as rs_date,rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price from reservation where rs_userid='aaaa' order by rs_no desc) A) where rnum between 1 and 5
 
 
@@ -237,12 +253,12 @@ select * from reservation where rs_userid='hong'
 update reservation set rs_checkin='2022-05-15', rs_checkout='2022-05-17'  where  rs_userid='hong'
 
 --토탈가격은 결제 시스템 기능구현을 안해서 제외함 
-----------------------------------------------------------
+-------------------------------------------------------------------------------------
 --갤러리에 담을, 호텔객실 데이타베이스 필요함
 
 select * from inquiry order by b_no desc;
 drop table inquiry;
-
+-- 고객의소리 테이블
 create table inquiry( 
 b_no number(5) primary key,
 b_userid varchar2(25) not null,
