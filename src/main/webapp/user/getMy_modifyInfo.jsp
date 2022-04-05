@@ -1,20 +1,7 @@
 <%@page import="com.company.Vo.userVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%
-	userVo uservo =(userVo) request.getAttribute("uservo");
-
-String role = (String) session.getAttribute("role");
-String name = (String) session.getAttribute("name");
-String id = (String) session.getAttribute("id");
-
-if (name == null) {
-	response.sendRedirect("index.jsp?filePath=./login_check/Login_main.jsp");
-	return;
-}
-%>    
-    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,8 +11,6 @@ if (name == null) {
 <link rel="stylesheet" href="css/mypageCss.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"crossorigin="anonymous">
-	
-	
 <style type="text/css">
  a{
  text-decoration: none;
@@ -41,68 +26,69 @@ text-align: center; width: 55%;
 width: 55%; box-shadow: 0px 2px 5px silver; text-align: center;
 line-height: 40px;
 }
-				
 </style>
 	
 </head>
 <body>
 
+	<c:if test="${empty name }">
+		<c:redirect url="index.jsp?filePath=./login_check/Login_main.jsp"/> 
+	</c:if>
+
 	<div id="container" align="center">
-		<h2> 정보 수정 전 </h2>
+		<h2> 기본 내정보</h2>
 <table class="table table-striped" >
 			<thead class="table-dark">
 			 	<tr>
 					<th>회원 아이디</th>
-					<td><%=uservo.getId()%></td>
+					<td>${uservo.id}</td>
 				</tr>
 				<tr>
 					<th>회원 이름</th>
-					<td><%=uservo.getName()%></td>
+					<td>${uservo.name}</td>
 				</tr> 
 		 		<tr>
 					<th>핸드폰 번호</th>
-					<td><%=uservo.getPhone()%></td>
+					<td>${uservo.phone }</td>
 				</tr>
 				<tr>
 					<th>가입 날짜</th>
-					<td><%=uservo.getJoindate()%></td>
+					<td>${uservo.joindate }</td>
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td><%=uservo.getEmail()%></td>
+					<td>${uservo.email }</td>
 				</tr> 
 			</thead>
 	</table>
 	
 	<div style="height: 100px; width: 30%;"> </div>
 	
-	
-		<h3> < 정보 수정 후 > </h3>
+	<div>
+		<h3> < 수정하시고 완료 버튼 눌러 주세요. > </h3>
 		<p> * 표시 된것만 수정할 수 있습니다. </p>
-		
+	<form action="UserInfo_Update?id=${uservo.id}" method="post" name="modify_Form" onsubmit="return modiCheck();">
 	
-	<form action="UserInfo_Update?id=<%=uservo.getId()%>" method="post" name="modify_Form" onsubmit="return modiCheck();">
-	
-		<table class="table table-hover">
+		<table class="table table-hover" style="margin-top: 0">
   				<tr>
 					<th>회원 아이디</th>   <!-- 아이디는 수정안됨.  -->
-					<td><input type="text" name="id" value="<%=uservo.getId()%>" readonly="readonly"></td>
+					<td><input type="text" name="id" value="${uservo.id}" readonly="readonly"></td>
 				</tr>
 				<tr>
 					<th><span class="star">*</span>&nbsp;&nbsp;회원 이름</th>
-					<td><input type="text" name="name" value="<%=uservo.getName()%>"></td>
+					<td><input type="text" name="name" value="${uservo.name}"></td>
 				</tr> 
 				<tr>
 					<th><span class="star">*</span>&nbsp;&nbsp;패스 워드</th>
-					<td><input type="text" name="pw" min="2" value="<%=uservo.getPw()%>"></td>
+					<td><input type="text" name="pw" min="2" value="${uservo.pw}"></td>
 				</tr>
 		 		<tr>
 					<th><span class="star">*</span>&nbsp;&nbsp;핸드폰 번호</th>
-					<td><input type="text" name="phone" value="<%=uservo.getPhone()%>"></td>
+					<td><input type="text" name="phone" value="${uservo.phone}"></td>
 				</tr>
 				<tr>
 					<th><span class="star">*</span>&nbsp;&nbsp;이메일</th>
-					<td><input type="text" name="email" value="<%=uservo.getEmail()%>"></td>
+					<td><input type="text" name="email" value="${uservo.email}"></td>
 				</tr> 
 				
 				<tr>
@@ -114,6 +100,8 @@ line-height: 40px;
 				</tr>
 		</table>
 	</form>
+	
+	</div>
 	</div>
 	
 <script type="text/javascript">

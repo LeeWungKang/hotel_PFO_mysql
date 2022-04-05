@@ -94,7 +94,6 @@ function modiCheck() {
 		mf.email.focus();
 		return false;
 	} else {
-		alert("입력을 완료 했습니다.");
 		document.modify_Form.method = "post";
 		document.modify_Form.action = "UserInfo_Update";
 		document.modify_Form.submit();

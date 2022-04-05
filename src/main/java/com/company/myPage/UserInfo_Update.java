@@ -21,7 +21,7 @@ public class UserInfo_Update extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		System.out.println("내정보 수정sql 페이지");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 
@@ -58,7 +58,6 @@ public class UserInfo_Update extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.println("<script> alert('개인정보가 수정 되었습니다.'); location.href='My_Info_List';  </script>");
 				out.flush();
-				return;
 			}
 
 

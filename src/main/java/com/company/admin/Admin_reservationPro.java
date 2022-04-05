@@ -139,31 +139,65 @@ public class Admin_reservationPro extends HttpServlet {
 			rs.close();
 			
 			
-			int month ;
-			for(int j=202201; j<=202212; j++) {
-				sql="SELECT count(*) as Acount,"
-						+ "		sum(rs_price) as APrice "
-						+ "	    FROM reservation\r\n"
-						+ "	    WHERE TO_CHAR(rs_date, 'YYYYMM') ="+ j;
+			//가장 잘 나가는방 sql 
+			sql="select max(count(rs_roomname)) as maxCount, "
+					+ " max(rs_roomname) as maxRoom "
+					+ " from reservation group by rs_roomname";
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			int maxCount = 0;
+			String maxRoom = "";
+			if(rs.next()) {
+				maxCount = rs.getInt(1);
+				maxRoom = rs.getString(2);
+			}
+			pstmt.close();
+			rs.close();
+			
+			
+			
+			// 월별 매출 sql 반복문으로~
+			int[] month = new int[13];
+			for( int j=0;    j<=12;    j++ ) {
+				sql="SELECT TO_CHAR(rs_date, 'MM'), "
+						+ " sum(rs_price) as APrice "
+						+ " FROM reservation "
+						+ " where TO_CHAR(rs_date, 'mm') ="+ j
+						+ " GROUP BY  TO_CHAR(rs_date, 'MM') order by 1";
 				pstmt=conn.prepareStatement(sql);
 				rs=pstmt.executeQuery();
-				/*
-				 * if(rs.next()) { month= rs.getInt(month[j]); }
-				 */
-				
+				 if(rs.next()) { 
+					 
+					 month[j]= rs.getInt("APrice"); 
+					 
+					 System.out.println(rs.getInt(1) + "월-  rs.next");
+					 
+					 System.out.println(month[1] + "시작"); 
+					 System.out.println(month[2]);
+					 System.out.println(month[3]);
+					 System.out.println(month[4]);
+					 System.out.println(month[5]+">> -----------");
+					 System.out.println(month[6]);
+					 System.out.println(month[7]);
+					 System.out.println(month[8]);
+					 System.out.println(month[9]);
+					 System.out.println(month[10]+" >> 10월시작-----------");
+					 System.out.println(month[11]);
+					 System.out.println(month[12]);
+				 }
 				
 				pstmt.close();
 				rs.close();	
 			}
-				
-				
-		
+			System.out.println(month +" >>>>반복벗어난 month");
 			
 			
 			
-				
-				
+			request.setAttribute("maxCount", maxCount);
+			request.setAttribute("maxRoom", maxRoom);
 			
+			request.setAttribute("month", month);
 			
 			request.setAttribute("ACount", ACount);
 			request.setAttribute("APrice", APrice);
@@ -193,5 +227,4 @@ public class Admin_reservationPro extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
-
 }

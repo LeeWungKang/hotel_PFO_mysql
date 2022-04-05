@@ -11,7 +11,6 @@
 <%
 int pg; // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
 int totalCount;
-
 // 현재 페이지 변수 받음.
 if (request.getParameter("page") == null) {
 	pg = 1;
@@ -106,7 +105,7 @@ background-color: rgba(255, 226, 41, 0.35);
 
 		<div class="inquiryBox1">
 			<form action="" name="inquiryForm">
-				<h3 align="left">:: 고객의 소리</h3>
+				<h3 align="left">:: 고객의 소리 </h3>
 				<table class="table table-hover">
 					<tr class="table-dark">
 						<th width="162">작성날짜</th>
@@ -118,9 +117,9 @@ background-color: rgba(255, 226, 41, 0.35);
 						<c:when test="${ inquiryList.size() > 0}">
 							<c:forEach items="${inquiryList }" var="B" varStatus="status">
 
-								<tr>
-									<td style="font-size: 0.8em;">${status.count }-${B.b_writedate }</td>
-									<td>${B.b_title }</td>
+								<tr> 
+									<td style="font-size: 0.8em;">${status.count } ♥ ${B.b_writedate }</td>
+									<td><a href="getUserInquiry?num=${B.b_no }">${B.b_title } </a></td>
 									<td>${B.b_content }</td>
 									<td>
 									<a href="#" onclick="inquiryDeletePop()"> 삭제 </a>

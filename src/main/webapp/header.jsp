@@ -89,7 +89,7 @@
 									<li>
 									<li><a href="Admin_reservationPro"> 예약 관리 </a>
 									<li>
-									<li><a href="#"> Q & A </a>
+									<li><a href="Admin_InquiryPro"> Q & A </a>
 									<li>
 								</ul></li>
 						</c:when>

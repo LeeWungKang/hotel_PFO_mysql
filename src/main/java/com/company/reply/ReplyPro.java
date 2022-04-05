@@ -53,7 +53,8 @@ public class ReplyPro extends HttpServlet {
 		pstmt.setString(3, comments);
 		
 		int cnt=pstmt.executeUpdate();
-		if(cnt != 0)response.sendRedirect("Get_Board_Pro?num="+seq);
+		if(cnt != 0)
+			response.sendRedirect("Get_Board_Pro?num="+seq);
 	//jsp로 바로 전송하면 boardVo값이 널값처리되버려서, 보드리스트가 들어있는 서블릿으로 조건에 맞는 seq값을 함께 요청하여 댓글을 
 	//댓글을 입력하고자하는 페이지에 출력하게 한다
 		} catch (ClassNotFoundException | SQLException e) {

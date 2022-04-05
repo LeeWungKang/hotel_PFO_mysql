@@ -44,12 +44,12 @@ html,body{
 }
 
 .inquiryInfo a:visited { 				/* a 태그 1회 이상 클릭 했을 때 상태 */
- 	color: black; 
+ 	color:rgb(128, 128, 128); 
  	text-decoration: none;
 }
 
 .inquiryInfo a:hover { 					/* a 태그에 마우스 올렸을 때 상태 */
- 	color: black; 
+ 	color: rgb(255, 0, 128); 
  	text-decoration: none;	
 }
 
@@ -189,3 +189,62 @@ html,body{
 	margin: auto;
 	background-color: black;
 }
+
+
+/* 관리자 고객의소리 css  */
+#reserveTitle{
+	height:7%;
+	margin:3% auto;
+	text-align:center;
+}
+
+.reserveInfo{
+	width:70%;
+	margin-top:60px;
+	margin-bottom:80px;
+	border-top: 3px solid #623f30;
+	border-collapse: collapse;
+}
+
+.reserveInfo tr{
+	border-bottom:2px solid #e6e6e6;
+	padding:10px;
+}
+
+.reserveInfo tr td{
+	border-bottom:2px solid #e6e6e6;
+	padding:10px;
+	height:45px;
+}
+
+#list > td{
+	color:#967e5d;
+    font-weight:900;
+    background-color:#e6dfc6;
+    height:50px;
+}
+
+/*InquiryList.jsp*/
+.reserveInfo a:link {					/* a 태그 클릭 안한 상태 */
+	text-align:center; 
+	color: blue;
+	text-decoration : none;	/*밑줄 제거*/
+}
+
+.reserveInfo a:visited { 				/* a 태그 1회 이상 클릭 했을 때 상태 */
+ 	color: rgb(128, 128, 64); 
+ 	text-decoration: none;
+}
+
+.reserveInfo a:hover { 					/* a 태그에 마우스 올렸을 때 상태 */
+ 	color: rgb(255, 128, 0); 
+ 	text-decoration: none;	
+}
+
+.tableBox{
+	width: 100%;
+}
+.tableBox .reserveInfo{
+	margin: auto;	
+}
+

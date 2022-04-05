@@ -17,6 +17,10 @@
     }else{
     	totalCount= (Integer)request.getAttribute("totalRows");
     }
+    
+    String[] month = request.getParameterValues("month");
+    
+    
     %>
 <!DOCTYPE html>
 <html>
@@ -137,9 +141,9 @@
 					<tbody>
 
 						<tr align="center">
-							<th class="td_width_1" >-</th>
-							<th class="td_width_2" >-</th>
-							<th class="td_width_3">룸Type</th>
+							<th class="td_width_1" >v</th>
+							<th class="td_width_2" >ROOM</th>
+							<th class="td_width_3"> Type</th>
 							<th class="td_width_4">예약횟수</th>
 							<th class="td_width_4"> -- </th>
 							<th class="td_width_4"> 총 가격</th>
@@ -154,7 +158,7 @@
 					<c:set var="APrice"  value="${APrice }"/>
 							<tr align="center">
 							<th class="td_width_1" >1</th>
-								<td class="td_width_2" ></td>  
+								<td class="td_width_2" ><img alt="" src="./img/size200/stan.jpg">  </td>  
 								<td class="td_width_3"> 스탠다드 룸</td>
 								<td class="td_width_4 ">${ACount } 회</td>
 								<td class="td_width_4 table_text_align_center">--	</td>
@@ -165,7 +169,7 @@
 					<c:set var="BPrice"  value="${BPrice }" />
 							<tr align="center">
 							<th class="td_width_1" >2</th>
-								<td class="td_width_2" ></td>  
+								<td class="td_width_2" ><img alt="" src="./img/size200/drux1.jpg"></td>  
 								<td class="td_width_3"> 디럭스 룸</td>
 								<td class="td_width_4 ">${BCount } 회</td>
 								<td class="td_width_4 table_text_align_center">--	</td>
@@ -176,7 +180,7 @@
 							<c:set var="CPrice"  value="${CPrice }" />
 							<tr align="center">
 								<th class="td_width_1" >3</th>
-								<td class="td_width_2" ></td>  
+								<td class="td_width_2" ><img alt="" src="./img/size200/sweet.jpg"></td>  
 								<td class="td_width_3"> 스위트 룸</td>
 								<td class="td_width_4 ">${CCount } 회</td>
 								<td class="td_width_4 table_text_align_center">--	</td>
@@ -187,7 +191,7 @@
 							<c:set var="DPrice"  value="${DPrice }" />
 							<tr align="center">
 								<th class="td_width_1" >4</th>
-								<td class="td_width_2" ></td>  
+								<td class="td_width_2" ><img alt="" src="./img/size200/royal.jpg"></td>  
 								<td class="td_width_3"> 스탠다드</td>
 								<td class="td_width_4 ">${DCount } 회</td>
 								<td class="td_width_4 table_text_align_center">--	</td>
@@ -263,16 +267,14 @@
 							<td>
 								<table>
 									<tbody>
+									<c:set target="${maxRoom}" var="maxRoom" value="${maxRoom}"/>
+									<c:set target="${maxCount}" var="maxCount" value="${maxCount}"/>
 										<tr>
 											<td>
-												<font size="5"><b/> 목표 매출 </font>
-												<div class="range-slider">
-														  <input class="range-slider__range" type="range" value="${nowtotal}" min="0" max="10000000">
-														   <span class="range-slider__value">0</span> 
-												</div> 
+												<b/>★  가장 잘 나가는 방 = 
 											</td>
-											<td width="50px;" align="left">
-												<span class="totalPoint_span">1천만원</span> 
+											<td align="left">
+												<font color="rgba(255, 0, 149, 0.8)">	${maxRoom}  ,  ${maxCount}번 예약 되었습니다. </font>
 											</td>
 										</tr>
 									</tbody>
@@ -293,52 +295,52 @@
 								<table>
 									<tr>
 										<th>1월 매출</th>
-										<th><span class="totalPrice_span"><fmt:formatNumber pattern=",##0" value="${APrice}"/> </span> 원 </th>
+										<th><span class="totalPrice_span"><fmt:formatNumber pattern=",##0" value="${month[1] }"/> </span> 원 </th>
 									</tr>
 									<tr>
 										<th>2월 매출</th>
-										<th><span class="delivery_price"><fmt:formatNumber pattern=",##0" value="${BPrice}"/></span>원</th>
+										<th><span class="delivery_price"><fmt:formatNumber pattern=",##0" value="${month[2] }"/></span>원</th>
 									
 									</tr>									
 									<tr>
 										<th>3월 매출</th>
-										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${CPrice}"/></span> 원 </th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${month[3] }"/></span> 원 </th>
 									</tr>
 									<tr>
 										<th>4월 매출</th>
-										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원 </th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${month[4] }"/></span> 원 </th>
 									</tr>
 									<tr>
 										<th>5월 매출</th>
-										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${month[5] }"/></span> 원</th>
 									</tr>
 									<tr>
 										<th>6월 매출</th>
-										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${month[6] }"/></span> 원</th>
 									</tr>
 									<tr>
 										<th>7월 매출</th>
-										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${month[7] }"/></span> 원</th>
 									</tr>
 									<tr>
 										<th>8월 매출</th>
-										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${month[8] }"/></span> 원</th>
 									</tr>
 									<tr>
 										<th>9월 매출</th>
-										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${month[9] }"/></span> 원</th>
 									</tr>
 									<tr>
 										<th>10월 매출</th>
-										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${month[10] }"/></span> 원</th>
 									</tr>
 									<tr>
 										<th>11월 매출</th>
-										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${month[11] }"/></span> 원</th>
 									</tr>
 									<tr>
 										<th>12월 매출</th>
-										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원</th>
+										<th><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${month[12] }"/></span> 원</th>
 									</tr>
 								</table>
 							</td>
@@ -373,19 +375,18 @@
 								</table>
 							</td>
 							<td>
-								<table style="margin-left: 40px;">
+								<table style="margin-left: 100px;">
 									<tbody>
 										<tr>
 											<td>
-												<strong>해당 '달' 매출</strong>
-												<select>
-														<option>1월</option>
-														<option>2월</option>
-														<option>3월</option>
-												</select>											
+												<div class="range-slider">
+												<font size="5"><b/> 목표 매출 </font>
+														  <input class="range-slider__range" type="range" value="${nowtotal}" min="0" max="100000000">
+														   <span class="range-slider__value">0</span> 
+												</div> 	
 											</td>
-											<td>
-												<span class="totalPoint_span">70000</span> 원
+											<td width="50px;" align="left">
+												<span class="totalPoint_span">1억</span> 
 											</td>
 										</tr>
 									</tbody>

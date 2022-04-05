@@ -45,7 +45,7 @@ public class InquiryPro extends HttpServlet {
 			int cnt = pstmt.executeUpdate();
 			
 			if(cnt != 0) {
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("My_Info_List");
 			}
 
 

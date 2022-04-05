@@ -47,7 +47,6 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 			<h4><%=vo.getUserid() %> 님의 게시글 </h4>
 			<input type="hidden" name="seq" value="<%=vo.getSeq()%>">
 			<input type="hidden" name="userid" value="<%=vo.getUserid()%>">
-			
 			<!-- 화면에는 보이지 앉지만 키값으로 넘겨서 데이타뿌려줘야할떄 히든처리  -->
 
 			<table class="table" style="width: 800px">

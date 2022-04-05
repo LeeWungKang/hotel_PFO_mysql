@@ -100,7 +100,7 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 						<%
 						if (role.equals("admin")) {
 						%>
-						<th width="50" style="text-align: center;">전체 <input
+						<th width="100" style="text-align: center;">전체 <input
 							type="checkbox" name="checkAll"  id="th_checkAll"
 							onclick="check_All()"></th>
 						<%
