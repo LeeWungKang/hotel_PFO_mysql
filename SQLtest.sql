@@ -36,12 +36,12 @@ insert into HomeBoard values(4,'히히','기타','기타 문의합니다.','2022
 insert into HomeBoard values(5,'치치','기타',' 기타 질문 ','2022/02/02',0,'bbbb');
 
 
---게시글 추가 sql
+--게시글 추가 servlet sql
 insert into HomeBoard values((select nvl(max(seq),0)+1 from HomeBoard),'김길동','환불','환불 문의합니다.','2022/02/07',0,'kim');
 insert into HomeBoard (seq,nickname,title,content,regdate,cnt,userid) values( (select nvl(max(seq),0)+1 from HomeBoard) ,'구군','환불','환불 문의합니다.','2022/01/09',0,'kim');
 
 
-------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
 --유저 계정 디비
 drop table HomeUsers;
 select * from HomeUsers;
@@ -56,21 +56,19 @@ email varchar2(70),
 role varchar2(10) default 'user'   --관리자계정은 ="admin" 따로 디비 설정.
 );
 
+--grade 등급 추가
 alter table HomeUsers add grade varchar2(20) default '일반고객'
 update HOMEUSERS set grade='admin' where id='lee'
 
 
 
-
-
-
-select substr(email,1,instr(email,'@')-1) as email_str from HomeUsers;
---  instr(칼럼A ,'찾는문자열B', 시작자릿수m, n번째 문자열B의 자릿수)
+select substr(email,1, instr(email,'@')-1) as email_str from HomeUsers;
+--  instr(칼럼A ,'찾는문자열B', 시작자릿수m, n번째 문자열B의 자릿수)   == 이메일에서  <'@' 앞자리만 추출 (kjdndrkd)
 --  substr(문자열,자르고싶은 시작수,자르고 싶은 끝 수)
 
 select email from HomeUsers;
-select substr(email,1,instr(email,'@')-1) as email_str from HomeUsers where email='kjdndrkd@naver.com';
-select substr(email,instr(email,'@')+1) as email_str_last from HomeUsers where email='kjdndrkd@naver.com';
+select substr(email,1,instr(email,'@')-1) as email_str from HomeUsers where email='kjdndrkd@naver.com';   --앞자리 추출
+select substr(email,instr(email,'@')+1) as email_str_last from HomeUsers where email='kjdndrkd@naver.com';    --뒷자리 추출
 
 
 insert into HomeUsers values('lee','lee123','이웅강','010-3312-8325','2021/11/23','kjdndrkd@naver.com','admin','admin');
@@ -94,9 +92,7 @@ primary key (replyseq, boardseq)         --제약조건을 2개를 묶어서 기
 );
 
 --제약조건 , 기본 테이블에 alter로 접근해서 제약조건을 추가하는 방법.
---부모테이블인 보드의 seq를 댓글테이블의 boardseq를 >외래키로 설정하고, 
-
-
+--부모테이블인 board의 seq를 댓글테이블의 boardseq를 >외래키로 설정하고, 
 -- 'cascade delete' 기능을 부여해서 삭제시 같이 삭제되게 함.
 alter table reply add constraint reply_fk 
 foreign key (boardseq) 
