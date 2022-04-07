@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html>
@@ -8,6 +9,13 @@
 							<title> 고객의 소리 </title>
 <link rel=stylesheet href="./css/inquiryCss.css">
 </head>
+
+	<c:if test="${empty name} ">
+		<c:redirect url="index.jsp?filePath=./login_check/Login_main.jsp" />
+	</c:if>
+
+
+
 <body>
 		<div class="fontBox">
 &nbsp;&nbsp;&nbsp; <h3><font size="6">고객의 소리 작성</font> </h3> <br />

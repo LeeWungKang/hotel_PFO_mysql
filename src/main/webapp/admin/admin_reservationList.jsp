@@ -36,6 +36,9 @@
 	ul{
 	margin-bottom: 0px;
 	}
+	th{
+	text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -56,7 +59,7 @@
 			</tr>
 		</thead>	
 		<tbody>
-		<tr style="margin: auto auto; ">
+		<tr align="center">
 			<th scope="col">예약번호</th>
 			<th scope="col">예약날짜</th>
 			<th scope="col">체크인</th>
@@ -405,6 +408,7 @@
 
 <script type="text/javascript">
 
+/* 목표매출 range  */
 var rangeSlider = function(){
 	  var slider = $('.range-slider'),
 	      range = $('.range-slider__range'),

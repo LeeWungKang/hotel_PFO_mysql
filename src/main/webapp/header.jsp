@@ -132,32 +132,9 @@
 	/* script.js   */
 	
 /* 시간 +날짜  js  */
-			
-function setClock(){
-    var dateInfo = new Date(); 
-    var hour = modifyNumber(dateInfo.getHours());
-    var min = modifyNumber(dateInfo.getMinutes());
-    var sec = modifyNumber(dateInfo.getSeconds());
-    var year = dateInfo.getFullYear();
-    var month = dateInfo.getMonth()+1; //monthIndex를 반환해주기 때문에 1을 더해준다.
-    var date = dateInfo.getDate();
-    document.getElementById("time").innerHTML = hour + ":" + min  + ":" + sec;
-    document.getElementById("date").innerHTML = year + "년 " + month + "월 " + date + "일";
-}
-function modifyNumber(time){
-    if(parseInt(time)<10){
-        return "0"+ time;
-    }
-    else
-        return time;
-}
-window.onload = function(){
-    setClock();
-    setInterval(setClock,1000); //1초마다 setClock 함수 실행
-}
 
-
-/* 날씨 아이콘넣고, api   */
+/*		실시간 현재 날씨 API	   
+  js링크로 넣으면 부트스트랩이랑 에러생김 (중복데이터)	*/
 $(document).ready(function() {
 let weatherIcon = {
 '01' : 'fas fa-sun',
@@ -170,6 +147,7 @@ let weatherIcon = {
 '13' : 'far fa-snowflake',
 '50' : 'fas fa-smog'
 };
+															/*q= ' 도시이름 '  */
 $.ajax({
 url:'http://api.openweathermap.org/data/2.5/weather?q=suwon&APPID=e815b8d0b829a695fa6f40cc01519c28&units=metric',
 dataType:'json',
@@ -184,6 +162,7 @@ $('.City').append($city);
 }
 })
 });
+
 
 
 </script>
