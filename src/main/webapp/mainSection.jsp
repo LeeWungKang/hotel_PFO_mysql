@@ -11,7 +11,7 @@
 <body>
 
 	<div class="section">
-	
+					
 		<input type="radio" name="slide" id="slide01" checked="checked">
 		<input type="radio" name="slide" id="slide02"> 
 		<input type="radio" name="slide" id="slide03">

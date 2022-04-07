@@ -1,26 +1,10 @@
 @charset "UTF-8";
-
-* {
-	padding: 0px;
-	margin: 0px;
-	list-style: none;
-}
 a {
 	text-decoration: none;
 }
 
 #container{
-	width: 85%;
-}
-
-table, tr, td, th, div, p, em, ol, ul, li, dl, dt, dd,a, address, img{
-	font-size: 11pt;
-	color: #666;
-	text-decoration: none;
-}
-
-.table-hover tr{
-	line-height: 40px;
+	width: 87%;
 }
 
 body H2{
@@ -111,7 +95,7 @@ margin-bottom: 50px;
 	box-shadow: 0 2px 4px rgba(0,79,255,0.6);
 }
 .table{
-	line-height: 25px;
+	line-height: 30px;
 }
 .table th{
 	text-align: center;
@@ -139,7 +123,7 @@ margin-bottom: 50px;
 /*  ------------------------------------------------------- */
 
 #container{
- margin: auto auto; padding-bottom: 50px;
+ margin: auto; padding-bottom: 50px;
 }
 .fa-comment-dots{
 	color: gray;

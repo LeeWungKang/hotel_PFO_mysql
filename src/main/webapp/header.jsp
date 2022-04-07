@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title> </title>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link href="./css/Design.css" rel="stylesheet">
 <link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="./css/Design.css" rel="stylesheet">
 <script type="text/javascript" src="./script/script.js"></script>
 </head>
 <header id="HD">
@@ -35,14 +35,27 @@
 		</c:when>
 
 		<c:otherwise>
-			<div align="right">
+			<div align="right" style="width: 300px; float: right; position: absolute; top: 70px; right: 17%;">
 				<p class="loginText">로그인이 필요 합니다.</p>
 			</div>
 		</c:otherwise>
 	</c:choose>
 
-
-	<div class="NAV">
+		<div class="apiWrap">
+						<!-- time/date  테이블  -->
+						<div class="timeDate">
+						<div id="time" class="time"> </div>
+        				<div id="date" class="date">  </div>
+        				</div>
+        				<!-- 날씨 -->
+        				<div class="weather" >
+							<div class="CurrIcon">	</div>
+							<div class="CurrTemp">	</div>
+							<div class="City">	</div>
+						</div>
+		</div>
+	<div class="NAV"> 
+	
 		<nav id="UL_left">
 			<nav>
 				<ul class="snip1284">
@@ -61,9 +74,8 @@
 		<form action="" method="get" name="out_check">
 			<nav id="UL_right">
 				<ul class="snip1284">
-					<li class="Rogoimg"><img src="./img/hotelRogo.png"
-						width="80px;"></li>
-
+				 		<!-- <li class="Rogoimg"><img src="./img/hotelRogo.png"	width="80px;"></li> -->
+						<!-- <li class="li_index" style="margin-right: 160px;">  </li> -->
 					<c:choose>
 						<c:when test="${empty name }">
 							<li class="li_index"><a href="#"
@@ -118,6 +130,62 @@
 
 <script type="text/javascript">
 	/* script.js   */
+	
+/* 시간 +날짜  js  */
+			
+function setClock(){
+    var dateInfo = new Date(); 
+    var hour = modifyNumber(dateInfo.getHours());
+    var min = modifyNumber(dateInfo.getMinutes());
+    var sec = modifyNumber(dateInfo.getSeconds());
+    var year = dateInfo.getFullYear();
+    var month = dateInfo.getMonth()+1; //monthIndex를 반환해주기 때문에 1을 더해준다.
+    var date = dateInfo.getDate();
+    document.getElementById("time").innerHTML = hour + ":" + min  + ":" + sec;
+    document.getElementById("date").innerHTML = year + "년 " + month + "월 " + date + "일";
+}
+function modifyNumber(time){
+    if(parseInt(time)<10){
+        return "0"+ time;
+    }
+    else
+        return time;
+}
+window.onload = function(){
+    setClock();
+    setInterval(setClock,1000); //1초마다 setClock 함수 실행
+}
+
+
+/* 날씨 아이콘넣고, api   */
+$(document).ready(function() {
+let weatherIcon = {
+'01' : 'fas fa-sun',
+'02' : 'fas fa-cloud-sun',
+'03' : 'fas fa-cloud',
+'04' : 'fas fa-cloud-meatball',
+'09' : 'fas fa-cloud-sun-rain',
+'10' : 'fas fa-cloud-showers-heavy',
+'11' : 'fas fa-poo-storm',
+'13' : 'far fa-snowflake',
+'50' : 'fas fa-smog'
+};
+$.ajax({
+url:'http://api.openweathermap.org/data/2.5/weather?q=suwon&APPID=e815b8d0b829a695fa6f40cc01519c28&units=metric',
+dataType:'json',
+type:'GET',
+success:function(data){
+var $Icon = (data.weather[0].icon).substr(0,2);
+var $Temp = Math.floor(data.main.temp) + 'º';
+var $city = data.name;
+$('.CurrIcon').append('<i class="' + weatherIcon[$Icon] +'"></i>');
+$('.CurrTemp').prepend($Temp);
+$('.City').append($city);
+}
+})
+});
+
+
 </script>
 
 </body>

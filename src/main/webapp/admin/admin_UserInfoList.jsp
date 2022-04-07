@@ -32,7 +32,12 @@
 .selected{
 background-color: rgba(255, 226, 41, 0.35);
 }
-
+*{ 
+	box-sizing: inherit;
+	}
+	ul{
+	margin-bottom: 0px;
+	}
 </style>
 </head>
 <body>

@@ -17,10 +17,8 @@
     }else{
     	totalCount= (Integer)request.getAttribute("totalRows");
     }
-    
+	/* 월별 매출값 받아온 배열  */
     String[] month = request.getParameterValues("month");
-    
-    
     %>
 <!DOCTYPE html>
 <html>
@@ -29,9 +27,16 @@
 				<title>  모든회원 예약 내역 </title>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
 <script type="text/javascript" src="./script/script.js"></script>
-<link href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css"rel="stylesheet" >
 <link href="./css/adminCss.css" rel="stylesheet">
-
+<link href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css"rel="stylesheet" >
+<style type="text/css">
+	*{ 
+	box-sizing: inherit;
+	}
+	ul{
+	margin-bottom: 0px;
+	}
+</style>
 </head>
 <body>
 

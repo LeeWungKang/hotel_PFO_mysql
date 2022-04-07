@@ -6,31 +6,18 @@
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-request.setCharacterEncoding("utf-8");
-response.setContentType("text/hrml;charset=utf-8");
-
-String role = (String) session.getAttribute("role");
-String name = (String) session.getAttribute("name");
-String id = (String) session.getAttribute("id");
 int pg; // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
 int totalCount;
-
-// 현재 페이지 변수 받음.
 if (request.getParameter("page") == null) {
 	pg = 1;
 } else {
 	pg = Integer.parseInt(request.getParameter("page"));
 }
-
-//전체 레코드의 수 구하기  차후 구하기...일단 기본 값으로 1로 해놓겠다.
 if (request.getAttribute("totalRows") == null) {
 	totalCount = 1;
 } else {
 	totalCount = (Integer) request.getAttribute("totalRows");
 }
-
-ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
-ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 %>
  <c:if test="${empty name } ">
  	<c:redirect url="index.jsp"/>
@@ -42,23 +29,22 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 <title>게시판 리스트</title>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
 <script type="text/javascript" src="script/script.js"></script>
-
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-
+<link	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 <link rel="stylesheet" href="./css/FormDesign.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js">
-	<style type="text/css">
+<style type="text/css">
 	.selected{
 	background-color: rgba(255, 226, 41, 0.35)
 	}
-	</style>
+	*{ 
+	box-sizing: inherit;
+	}
+	ul{
+	margin-bottom: 0px;
+	}
+</style>
 </head>
 <body>
 
@@ -97,59 +83,49 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 						<th scope="col">닉네임(아이디)</th>
 						<th scope="col">작성날짜</th>
 						<th scope="col">조회수</th>
-						<%
-						if (role.equals("admin")) {
-						%>
+						
+						<c:if test="${!empty role and role eq 'admin'}">
 						<th width="100" style="text-align: center;">전체 <input
 							type="checkbox" name="checkAll"  id="th_checkAll"
 							onclick="check_All()"></th>
-						<%
-						}
-						%>
+						</c:if>
 					</tr>
-					<c:forEach items="${list}" var="list" varStatus="status"></c:forEach>
-					<%
-					for (int i = 0; i < list.size(); i++) {
-						BoardVo vo = list.get(i);
-					%>
+				
+			<c:forEach items="${list}" var="list" varStatus="status">
 					<tr>
-						<td><%=vo.getSeq()%></td>
-						<td><a href="Get_Board_Pro?num=<%=vo.getSeq()%>"> <%=vo.getTitle()%>
+						<td>${list.seq}</td>
+						<td><a href="Get_Board_Pro?num=${list.seq }"> ${list.title }
 								&nbsp; &nbsp;
 						</a></td>
 						<!-- 댓글달릴떄만 아이콘 뜨게 수정해야댐  -->
-						<td><%=vo.getNickname()%>(<%=vo.getUserid()%>)</td>
-						<td><%=vo.getRegdate()%></td>
-						<td><%=vo.getCnt()%> &nbsp; <i
+						<td>${list.nickname}  (${list.userid})</td>
+						<td>${list.regdate }</td>
+						<td>${list.cnt } &nbsp; <i
 							class="fa-brands fa-creative-commons-by"
 							style="font-size: 1.2em;"></i></td>
-						<%
-						if (role.equals("admin")) {
-						%>
-						<td><input type="checkbox" value="<%=vo.getSeq()%>"
+					<c:if test="${!empty role and role eq 'admin'}">
+						<td><input type="checkbox" value="${list.seq }"
 								class="chcBox" name="chcBox"></td>
 						<!--체크박스 선택삭제시, seq키값 벨류에 넣어줘서 돌려야댐  -->
-						<%
-						}}
-						%>
+					</c:if>
 					</tr>
+			</c:forEach>
+						
 					<tr style="text-align: right;">
 						<td colspan="5" align="center"><input type="button"
 							value=" 글쓰기 "
 							onclick="location.href='index.jsp?filePath=./boardJSP/addBoard'"
 							style="background-color: rgba(255, 169, 50, 0.75); color: white; border: none; font-weight: 700; cursor: pointer; padding: 5px 20px 5px 20px;">
 						</td>
-						<%
-						if (role.equals("admin")) {
-						%>
+						
+						
+						<c:if test="${!empty role and role eq 'admin'}">
 						<!-- 체크박스 삭제 이벤트  -->
 						<td width="50" style="text-align: center;"><input
 							type="button" onclick="Delete_Check_Popup()" value="삭제"
 							style="background-color: rgba(0, 0, 10, 0.5); color: white; border: none; font-weight: 700; cursor: pointer;">
 						</td>
-						<%
-						}
-						%>
+						</c:if>
 					</tr>
 				</table>
 				
@@ -211,14 +187,11 @@ ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
 				}
 				if (pg < totalPage) {
 				%>
-
 				<a href="Get_Board_List_Pro?page=<%=pg + 1%>">다음</a>
-
 				<%
 				}
 				if (endPage < totalPage) {
 				%>
-
 				<a href="Get_Board_List_Pro?page=<%=totalPage%>">끝</a>
 
 				<%
