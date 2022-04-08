@@ -86,10 +86,10 @@
 								onclick="LogOut_Check_Popup();"> Logout </a></li>
 						</c:otherwise>
 					</c:choose>
-
+				<c:if test="${empty name }">
 					<li class="li_index"><a href="#"
 						onclick="location.href='index.jsp?filePath=signUp'"> Sign Up </a></li>
-
+				</c:if>
 					<c:choose>
 						<c:when test="${!empty role and role eq('admin') }">
 							<!--관리자만 보이는 메뉴얼 (회원목록, 예약한사람 목) -->

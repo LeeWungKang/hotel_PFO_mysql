@@ -16,11 +16,6 @@ if (name == null) {
 }
 BoardVo vo = (BoardVo) request.getAttribute("vo");
 ArrayList<replyVo> reply = (ArrayList<replyVo>) request.getAttribute("reply");
-
-
-
-Date nowTime = new Date();
-SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 %>
 <!DOCTYPE html>
 <html>
@@ -37,7 +32,7 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 </head>
 <body>
 
-	<h2 align="center">상세 페이지 글수정 페이지. </h2>
+	<h2 align="center" style="margin-top: 50px;">상세 페이지 글수정 페이지. </h2>
 	<br>
 	<br>
 
@@ -85,9 +80,9 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 						<input type="submit" value="글수정" class="btn btn-outline-dark"
 						id="TAbtn"> <input type="button"
 						onclick="location.href='Delete_Board_Pro?num=<%=vo.getSeq()%>'"
-						value="글삭제" class="btn btn-outline-danger"> <%}} %> <input
-						type="button" value="글목록"
-						onclick="location.href='Get_Board_List_Pro'"
+						value="글삭제" class="btn btn-outline-danger"> 
+						<%}} %> 
+						<input type="button" value="글목록"	onclick="location.href='Get_Board_List_Pro'"
 						class="btn btn-outline-primary">
 					</td>
 				</tr>
@@ -95,13 +90,12 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 		</form>
 		<br>
 		<!--댓글 작성창 -->
-		<div>
-			<form action="" name="replyForm">
+			<form action="" name="replyForm" class="replyform2">
 				<table>
 					<tr>
 						<th colspan="2" style="vertical-align: top;">
 							<!--댓글의 닉네임은 로그인한 회원의 이름으로 고정값.  --> <input type="text"
-							name="nickname" value="<%=name%>" readonly="readonly"
+							name="nickname" value="${name}" readonly="readonly"
 							style="border: none; text-align: center;"> <input
 							type="hidden" name="seq" value="<%=vo.getSeq()%>">
 						<td><textarea rows="3" cols="65" name="comments"
@@ -115,7 +109,6 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 					</tr>
 				</table>
 			</form>
-		</div>
 		<hr>
 		<i class="fa-solid fa-arrow-turn-down-right"></i>
 		<!-- 댓글 목록  -->
@@ -134,8 +127,6 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 						<%=replyvo.getRegdate()%>
 				</small> <br> <!--작성된 날짜+시간  --> <i class="fa-solid fa-angles-right"></i>
 					&nbsp;&nbsp;<%=replyvo.getComments()%> <!--작성된 내용 (댓글내용) --></td>
-
-
 
 
 				<!--대 댓글 입력  -->
@@ -168,8 +159,6 @@ SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 		<%}%>
 
 	</div>
-
-
 
 
 

@@ -200,7 +200,7 @@
 							<tr align="center">
 								<th class="td_width_1" >4</th>
 								<td class="td_width_2" ><img alt="" src="./img/size200/royal.jpg"></td>  
-								<td class="td_width_3"> 스탠다드</td>
+								<td class="td_width_3"> 로얄 룸</td>
 								<td class="td_width_4 ">${DCount } 회</td>
 								<td class="td_width_4 table_text_align_center">--	</td>
 								<td class="td_width_4 table_text_align_center"> 총매출: <fmt:formatNumber pattern=",##0" value="${DPrice}"/>	</td>

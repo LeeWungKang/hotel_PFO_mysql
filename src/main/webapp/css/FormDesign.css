@@ -4,9 +4,18 @@ a {
 }
 
 #container{
-	width: 87%;
+	width: 90%;
+	margin: auto;
 }
 
+#container form{
+	margin: auto;
+}
+#container .replyform2{
+	width: 100%;
+	margin: auto;
+	text-align: center;
+}
 body H2{
 	margin: 0px 0px 15px 30px;
 	text-align: center;
@@ -41,6 +50,7 @@ body H2{
 }
 
 #add_Form{
+	width : 700px;
 	margin-top: 50px;
 }
 #add_Form h4{
@@ -122,9 +132,6 @@ margin-bottom: 50px;
 
 /*  ------------------------------------------------------- */
 
-#container{
- margin: auto; padding-bottom: 50px;
-}
 .fa-comment-dots{
 	color: gray;
 	font-size: 1.0em;

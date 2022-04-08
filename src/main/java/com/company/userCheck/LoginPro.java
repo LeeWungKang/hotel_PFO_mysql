@@ -55,12 +55,16 @@ public class LoginPro extends HttpServlet {
 		
 		rs=pstmt.executeQuery();
 		HttpSession session=request.getSession();
+		PrintWriter out = response.getWriter();
 		if(rs.next()) {
 			System.out.println("로그인 성공");
 			session.setAttribute("id",rs.getString("id"));
 			session.setAttribute("name",rs.getString("name"));
 			session.setAttribute("role",rs.getString("role"));
-			response.sendRedirect("./index.jsp");
+			out.print("<script>alert('"+id+" 님 로그인되었습니다. 반갑습니다. '); location.href='./index.jsp';   </script> ");
+			out.flush();
+			out.close();
+			/* response.sendRedirect("./index.jsp"); */
 			return;
 		}else {
 			System.out.println("로그인 실패");

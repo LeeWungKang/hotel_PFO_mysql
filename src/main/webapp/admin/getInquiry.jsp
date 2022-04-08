@@ -11,7 +11,7 @@
 <body>
 	<c:set value="${vo}" target="${vo}" var="vo" />
 	<div id="reserveTitle">
-		<font size="8">"${vo.b_userid}" 님의 문의글 </font>
+		<font size="6">"${vo.b_userid}" 님의 문의글 </font>
 	</div>
 
 	<form action="inquiryDelete" method="get">
@@ -53,13 +53,13 @@
 							작성날짜 : ${iqList.ir_regdate }</font> <br />
 
 						<div id="showContent" style="white-space: pre-line;">
-							<c:out value="${iqList.ir_comments}"></c:out>
+						<b>	<c:out value="${iqList.ir_comments}"></c:out></b>
 							<br />
 						</div> <c:if test="${iqList.ir_role eq '관리자' }">
 							<div id="showContent" align="right">
-								<input type="button" value="수정" id="commentBtn"
-									onclick="showDesc(${iqList.ir_no})" /> <input type="button"
-									value="삭제" id="commentBtn"
+								<%-- <input type="button" value="수정" id="commentBtn"
+									onclick="showDesc(${iqList.ir_no})" /> --%>
+									 <input type="button" value="삭제" id="commentBtn"
 									onclick="location.href='AdminCommentDelete?ir_seq=${iqList.ir_seq}&ir_no=${iqList.ir_no}'" />
 							</div>
 						</c:if></td>

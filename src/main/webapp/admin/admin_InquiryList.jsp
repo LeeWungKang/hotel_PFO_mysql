@@ -26,7 +26,7 @@
 </head>
 <body>
 
-	<div id="reserveTitle"> <font size="12">:: 고객의 소리 </font></div>
+	<div id="reserveTitle"> <font size="8">:: 고객의 소리 </font></div>
 	
 	<div class="tableBox">
 	<table align="center" class="reserveInfo">

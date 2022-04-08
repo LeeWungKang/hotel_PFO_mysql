@@ -48,12 +48,18 @@ public class Insert_Signup extends HttpServlet {
 		pstmt.setString(4, phone_value+"-"+tel_1+"-"+tel_2);
 		pstmt.setString(5, email +"@"+ email02);
 		
-		
 		int cnt = pstmt.executeUpdate();
 		PrintWriter out = response.getWriter();
-		out.print("<script> alert('회원가입 완료 했습니다.먼저 로그인 해주세요.') </script>");    // 얼럿 안먹힘.
-		response.sendRedirect("index.jsp");
-		out.close();
+		if(cnt != 0) {
+			out.print("<script> alert('회원가입 완료. 먼저 로그인 해주세요.');    location.href='./index.jsp'; </script>");    // 얼럿 안먹힘.
+			out.flush();
+			out.close();
+			return;
+		}else {
+			out.print("<script> alert(' 잘못 입력했습니다. ');  history.back();  </script>");
+			out.close();
+			return;
+		}
 		
 		
 	} catch (ClassNotFoundException | SQLException e) {

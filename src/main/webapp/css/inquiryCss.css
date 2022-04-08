@@ -73,7 +73,7 @@ html,body{
 }
 
 .inquiryDetail{
-	width:70%;
+	width:40%;
 	margin-top:30px;
 	margin : auto;
 	margin-bottom:80px;
@@ -98,21 +98,21 @@ html,body{
 	height:40px;
 	color:#323232;
     font-weight:900;
-    background-color:#FF5A5A	;
+    background-color: #50B4F5;
 }
 
 #detailcontent{
 	text-align:center;
 	width:130px;
-	height:440px;
+	height:300px;
 	color:#323232;
     font-weight:900;
-    background-color:#FF5A5A	;
+    background-color: #50B4F5	;
 }
 
 #detailtextarea{
 	width:100%;
-	height:440px;
+	height:300px;
 	font-size:18px;
 	border:none;
 }
@@ -128,7 +128,7 @@ html,body{
 #commentWrite{
 	width:300px;
 	height:120px;
-	padding-left: 150px;
+	padding-left: 20px;
 }
 
  #commentBtn{
@@ -242,7 +242,8 @@ html,body{
 }
 
 .tableBox{
-	width: 100%;
+	width: 90%;
+	margin: auto;
 }
 .tableBox .reserveInfo{
 	margin: auto;	

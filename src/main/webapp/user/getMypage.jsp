@@ -70,7 +70,7 @@ background-color: rgba(255, 226, 41, 0.35);
 					</tr>
 					<tr>
 						<th>회원 이름</th>
-						<td>${name }</td>
+						<td>${uservo.name }</td>
 					</tr>
 					<tr>
 						<th>핸드폰 번호</th>
