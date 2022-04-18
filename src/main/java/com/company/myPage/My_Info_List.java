@@ -52,8 +52,7 @@ public class My_Info_List extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			conn = JDBCconn.getConnection();
-			String sql = "select * from (select rownum as rnum,A.* from "
-					+ "(select * from HomeBoard where userid=? order by seq desc) A) where rnum between ? and ?";
+			String sql = "select * from HomeBoard where userid=? order by seq desc limit ?, ?";
 			pstmt = conn.prepareStatement(sql);
 
 			// 페이지에 담기는 게시판이 로그인id와 일치하는 데이터만 페이징처리해서 뿌려준다.
@@ -111,8 +110,7 @@ public class My_Info_List extends HttpServlet {
 			rs.close();
 			// q&a 게시글은 최대 5개까지만 보여줌
 			
-			sql="select * from (select rownum as b_rnum, A.* from "
-					+ "	(select * from inquiry where b_userid=? order by b_no desc) A) where b_rnum between 6-5 and 5";
+			sql="select * from inquiry where b_userid=? order by b_no desc limit 0,5";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();

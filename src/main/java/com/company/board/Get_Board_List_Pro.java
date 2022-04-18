@@ -51,13 +51,12 @@ public class Get_Board_List_Pro extends HttpServlet {
 	ResultSet rs = null;
 	try {
 		conn = JDBCconn.getConnection();
-		String sql = "select * from (select rownum rnum,A.* from "
-				+ "(select * from HomeBoard order by seq desc) A) where rnum between ? and ?";
+		String sql = "select * from HomeBoard order by seq desc limit ?, ?";
 		pstmt = conn.prepareStatement(sql);
 		
 		//각 페이지에 담기는 rownum값을 정의해준다. 
-		pstmt.setInt(1, page*5-4);
-		pstmt.setInt(2, page*5);
+		pstmt.setInt(1, page*10-9);
+		pstmt.setInt(2, page*10);
 		
 		rs = pstmt.executeQuery();
 		ArrayList<BoardVo> list = new ArrayList<BoardVo>();

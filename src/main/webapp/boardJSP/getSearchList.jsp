@@ -5,32 +5,26 @@
     
     <%
 request.setCharacterEncoding("utf-8");
-
+ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
 String role = (String) session.getAttribute("role");
 String name = (String) session.getAttribute("name");
+
+
 int pg; // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
 int totalCount;
-
-// 현재 페이지 변수 받음.
-if (request.getParameter("page") == null) {
-	pg = 1;
-} else {
-	pg = Integer.parseInt(request.getParameter("page"));
-}
-
-//전체 레코드의 수 구하기  차후 구하기...일단 기본 값으로 1로 해놓겠다.
+if (request.getParameter("page") == null) {	pg = 1;
+} else {pg = Integer.parseInt(request.getParameter("page"));}
 if (request.getAttribute("totalRows") == null) {
 	totalCount = 1;
-} else {
-	totalCount = (Integer) request.getAttribute("totalRows");
-}
+} else {	totalCount = (Integer) request.getAttribute("totalRows");
 
+
+}
 if (name == null) {
 	response.sendRedirect("./login_check/LoginPopup.jsp");
 	return;
 }
 
-ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -38,16 +32,10 @@ ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
 <meta charset="UTF-8">
 <title> 검색 결과 </title>
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"	rel="stylesheet">
 <link rel="stylesheet" href="./css/FormDesign.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js">
+<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js">
 </head>
 <body>
 
@@ -148,60 +136,32 @@ ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
 				totalPage++;
 			}
 			if (totalPage < pg) {// 현재 페이지가 전체 페이지보다 크다면 이는 출력될 페이지 범위를 벗어난 현제 페이지를 의미
-				// 따라서 현재페이지를 가장 끝 페이지인 totalPage로 이동시킨다.
 				pg = totalPage;
 			}
-
 			int startPage = ((pg - 1) / 5) * 5 + 1;
-			// 현재 페이지를 기준으로 한 화면에서 시작 페이지 값을 보여준다.
-
 			int endPage = startPage + countPage - 1;
-
 			if (endPage > totalPage) {
 				endPage = totalPage;
 			}
-
 			if (startPage > 1) {
 			%>
 			<a href="Get_Board_List_Pro?page=1"> 처음 </a>
-			<%
-			}
-
-			if (pg > 1) {
-			%>
+			<%}if (pg > 1) {	%>
 			<a href="Get_Board_List_Pro?page=<%=pg - 1%>"> 이전 </a>
 			<%
 			}
-
 			for (int iCount = startPage; iCount <= endPage; iCount++) {
 			if (iCount == pg) {
 			%>
-
 			<b><%=iCount%></b>&nbsp;
-
-			<%
-			} else {
-			%>
+			<%} else {%>
 			<a href="Get_Board_List_Pro?page=<%=iCount%>"> <%=iCount%>
 			</a>&nbsp;
-			<%
-			}
-			}
-			if (pg < totalPage) {
-			%>
-
+			<%}}if (pg < totalPage) {	%>
 			<a href="Get_Board_List_Pro?page=<%=pg + 1%>">다음</a>
-
-			<%
-			}
-			if (endPage < totalPage) {
-			%>
-
+			<%	}if (endPage < totalPage) {	%>
 			<a href="Get_Board_List_Pro?page=<%=totalPage%>">끝</a>
-
-			<%
-			}
-			%>
+			<%	}	%>
 			<!--페이지 리스트 끝 부분  -->
 		</form>
 		<script type="text/javascript">

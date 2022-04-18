@@ -50,8 +50,7 @@ public class Admin_UserInfoPro extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			conn = JDBCconn.getConnection();
-			String sql = "select * from (select rownum rnum,A.* from "
-					+ "(select * from HomeUsers order by name desc) A) where rnum between ? and ?";
+			String sql = "select * from HomeUsers order by name desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			
 			//각 페이지에 담기는 rownum값을 정의해준다. 

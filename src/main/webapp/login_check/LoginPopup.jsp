@@ -1,4 +1,3 @@
-<%@page import="com.sun.jdi.Location"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -16,37 +15,29 @@ if (cookies != null && cookies.length > 0)
 		if (cookies[i].getName().equals("cookid")) { //내가 원하는 쿠키명 찾아서 값 저장
 	cookie = cookies[i].getValue();
 		}
-	}
+	} 
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>로그인 팝업 화면</title>
 <script type="text/javascript" src="script/loginScript.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
+<link 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 * {
 	padding: 5px;
 }
-
 .table #inputId:focus {
 	outline: none;
 	border: none;
 	box-shadow: 0px -1px 10px -2px rgba(0, 100, 300, 0.7);
 }
-
 .table #inputPw:focus {
 	outline: none;
 	border: none;
 	box-shadow: 0px -1px 10px -2px rgba(0, 100, 300, 0.7);
 }
-
 .table .logBtn {
 	width: 100px;
 	height: 40px;
@@ -63,11 +54,9 @@ if (cookies != null && cookies.length > 0)
 	top:50%;
 	transform: translate(-50%,-50%); */
 }
-
 .table .logBtn:focus {
 	outline: 0;
 }
-
 .table .logBtn:hover {
 	background: rgba(0, 150, 255, 0.8);
 	cursor: pointer;
@@ -88,7 +77,7 @@ if (cookies != null && cookies.length > 0)
 				<tr>
 					<th>아이디 :</th>
 					<td><input type="text" id="inputId" name="id"
-						placeholder="아이디를 입력하세요." maxlength="20" value="<%=cookie%>">
+						placeholder="아이디를 입력하세요." maxlength="20" value="<%-- <%=cookie%> --%>">
 						<br> <input type="checkbox" id="cookeyId" name="cookeyId"
 						value="1" style="font-size: 0.7em;"> 아이디 기억해두기</td>
 				</tr>

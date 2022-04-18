@@ -43,7 +43,7 @@ public class Mypage_Modify_Info extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			conn = JDBCconn.getConnection();
-			String sql="select * from Homeusers where id=?";
+			String sql="select * from HomeUsers where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();

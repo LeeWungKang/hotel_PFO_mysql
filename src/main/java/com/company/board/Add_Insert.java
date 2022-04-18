@@ -39,7 +39,7 @@ public class Add_Insert extends HttpServlet {
 		PreparedStatement pstmt = null;
 		try {
 			conn=JDBCconn.getConnection();   //새로운 글추가 "글쓰기"버튼
-			String sql="insert into HomeBoard(seq,title,nickname,content,userid) values((select nvl(max(seq),0)+1 from HomeBoard),?,?,?,?)";
+			String sql="insert into HomeBoard(seq,title,nickname,content,userid) values((select ifnull(max(seq),0)+1 from HomeBoard b),?,?,?,?)";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, title);
 			pstmt.setString(2, nickname);

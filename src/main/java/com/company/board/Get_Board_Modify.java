@@ -63,7 +63,7 @@ public class Get_Board_Modify extends HttpServlet {
 			}
 			pstmt.close();
 			rs.close();
-			sql = "select boardseq,replyseq,nickname,comments,to_char(regdate,'YYYY-MM-DD HH24:MI:SS') from reply where boardseq=? order by replyseq desc";
+			sql = "select boardseq,replyseq,nickname,comments,date_format(regdate,'%Y-%m-%d %H:%i:%s') from reply where boardseq=? order by replyseq desc";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num); 
 			// getboard에서 넘긴 num값(seq)에 댓글이 있으면 받아온다.

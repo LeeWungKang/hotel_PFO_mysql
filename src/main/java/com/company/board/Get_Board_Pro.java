@@ -44,7 +44,7 @@ public class Get_Board_Pro extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			conn = JDBCconn.getConnection(); // 조회수 증가 sql
-			String sql = "update HomeBoard set cnt=(select cnt+1 from HomeBoard where seq =?) where seq =? ";
+			String sql = "update HomeBoard set cnt=(select * from (select cnt+1 from HomeBoard where seq =?) f)  where seq =? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setInt(2, num);
@@ -73,7 +73,7 @@ public class Get_Board_Pro extends HttpServlet {
 			rs.close();
 			// 댓글목록을 화면에 넣기위해 위에서 사용한 자원은 잠시 닫아주고 재활용하면서 새로운 sql문 시작
 			// 날짜+ 시간까지 추가하는 sql
-			sql = "select boardseq,replyseq,nickname,comments,to_char(regdate,'YYYY-MM-DD HH24:MI:SS') from reply where boardseq=? order by replyseq desc";
+			sql = "select boardseq,replyseq,nickname,comments,date_format(regdate,'%Y-%m-%d %H:%i:%s') from reply where boardseq=? order by replyseq desc";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num); // replyPro에서 넘긴 num값을 (seq넘김) 받아오는 것.
 

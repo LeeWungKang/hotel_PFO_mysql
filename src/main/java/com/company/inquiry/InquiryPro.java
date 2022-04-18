@@ -39,7 +39,7 @@ public class InquiryPro extends HttpServlet {
 		PreparedStatement pstmt = null;
 		try {
 			conn = JDBCconn.getConnection();
-			String sql = "insert into inquiry (b_no, b_userid, b_title, b_content, b_writedate) values ( (select nvl(max(b_no),0)+1 from inquiry),? ,? ,?, sysdate)";
+			String sql = "insert into inquiry (b_no, b_userid, b_title, b_content, b_writedate) values ( (select ifnull(max(b_no),0)+1 from inquiry b),? ,? ,?, sysdate)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, b_userid);
 			pstmt.setString(2, b_title);

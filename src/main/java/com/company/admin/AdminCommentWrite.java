@@ -45,7 +45,7 @@ public class AdminCommentWrite extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			conn=JDBCconn.getConnection();
-			String sql="insert into inquiryReply (ir_seq, ir_no, ir_comments) values (?,  (select nvl(max(ir_no),0)+1 from inquiryReply) ,?)";
+			String sql="insert into inquiryReply (ir_seq, ir_no, ir_comments) values (?,  (select ifnull(max(ir_no),0)+1 from inquiryReply b) ,?)";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, ir_seq);
 			pstmt.setString(2, ir_comments);

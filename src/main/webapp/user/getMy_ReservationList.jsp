@@ -7,10 +7,9 @@
 	pageEncoding="UTF-8"%>
 	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<!-- compareTo 함수 사용으로/ 변경할사항이 있어서 아직 core태그 적용 안했음 -->
 <%
 ArrayList<reservationVo> rsList = (ArrayList<reservationVo>) request.getAttribute("rsList");
-
 int pg; // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
 int totalCount;
 if (request.getParameter("page") == null) {
@@ -46,7 +45,6 @@ String ndate = sf.format(cal.getTime());
 <style type="text/css">
 a {	text-decoration: none;}
 </style>
-
 </head>
 <body>
 		

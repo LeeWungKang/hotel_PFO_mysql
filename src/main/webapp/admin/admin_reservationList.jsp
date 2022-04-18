@@ -50,7 +50,7 @@
 	
 	<div style="width: 90%; margin: auto; margin-bottom: 100px;">
 	
-			 <h3>::<B> 회원 예약 리스트</B></h3>
+			 <h3>::<B> 회원 예약 리스트   (최근) </B></h3>
 			<form action="" name="userInfoList">
 		<table class="table table-light" style="height: auto; margin-top: 60px;">
 		<thead>
@@ -216,28 +216,30 @@
 			<!-- 가격 종합 -->
 			<div class="content_total_section">
 				<div class="total_wrap">
+			
 					<table>
 						<tr>
 							<td>
+								<h3><b> 룸 매출 </b> </h3>
 								<table>
 									<tr>
-										<td>스탠다드 총 매출</td>
+										<td>스탠다드 총 매출  =</td>
 										<td>
 											<span class="totalPrice_span"><fmt:formatNumber pattern=",##0" value="${APrice}"/> </span> 원
 										</td>
 									</tr>
 									<tr>
-										<td>디럭스 총 매출</td>
+										<td>디럭스 총 매출  =</td>
 										<td>
 											<span class="delivery_price"><fmt:formatNumber pattern=",##0" value="${BPrice}"/></span>원
 										</td>
 									</tr>									
 									<tr>
-										<td>스위트 총 매출</td>
+										<td>스위트 총 매출  =</td>
 										<td><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${CPrice}"/></span> 원 
 									</tr>
 									<tr>
-										<td>로얄 총 매출</td>
+										<td>로얄 총 매출  =</td>
 										<td><span class="totalKind_span"><fmt:formatNumber pattern=",##0" value="${DPrice}"/></span> 원
 									</tr>
 								</table>
@@ -260,7 +262,7 @@
 									<tbody>
 										<tr>
 											<td>
-												<strong>합산 매출</strong>
+												<strong>합산 총 매출</strong>
 											</td>
 											<td>
 											<c:set value="${APrice+BPrice+CPrice+DPrice}" var="nowtotal"/>
@@ -297,9 +299,11 @@
 	<!-- ////////////////////////////////    -->
 			<div class="content_total_section">
 				<div class="total_wrap">
+				
 					<table>
 						<tr>
 							<td>
+							<h3><b> 월 별 매출표</b> </h3>
 								<table>
 									<tr>
 										<th>1월 매출</th>

@@ -78,8 +78,10 @@
 						<!-- <li class="li_index" style="margin-right: 160px;">  </li> -->
 					<c:choose>
 						<c:when test="${empty name }">
-							<li class="li_index"><a href="#"
-								onclick="window.open('./login_check/LoginPopup.jsp','LoginPopup','top=200, left=450, width=550, height=400, toolbar=no, status=yes, menubar=no')">Login</a></li>
+							<li class="li_index">
+							<a href="#"	onclick="window.open('./login_check/LoginPopup.jsp','LoginPopup','top=200, left=450, width=550, height=400, toolbar=no, status=yes, menubar=no')">Login</a></li>
+						<!-- <a href="#"	onclick="window.open('./login_check/logPOP2.jsp','LogPOP','top=200, left=450, width=550, height=400')">Login</a> </li> -->
+						
 						</c:when>
 						<c:otherwise>
 							<li class="li_index"><a href="#"

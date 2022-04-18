@@ -82,8 +82,7 @@ public class Get_UserProfile extends HttpServlet {
 				
 				pstmt.close();
 				rs.close();
-				sql="select * from (select rownum as b_rnum, A.* from "
-						+ "	(select * from reservation where rs_userid=? order by rs_no desc) A) where b_rnum between 6-5 and 5";
+				sql="select * from reservation where rs_userid=? order by rs_no desc limit 0,5";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, num);
 				rs = pstmt.executeQuery();

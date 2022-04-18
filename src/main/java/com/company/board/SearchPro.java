@@ -62,7 +62,9 @@ public class SearchPro extends HttpServlet {
 //재활용하기 위해 데이타받아놓고 잠시 닫아준다.
 //추가 sql 문 ( 검색한 결과만 내려주기 위해 )		
 		
-		String sql = "select count(*) from HomeBoard where "+select_type+" like '%'|| ? ||'%'";
+		
+	
+		String sql ="select count(*) from HomeBoard where "+select_type+" like concat('%', ?, '%') ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, search_keyword);
 		
@@ -93,12 +95,12 @@ public class SearchPro extends HttpServlet {
 	private PreparedStatement search(Connection conn, String select_type, String search_keyword, int page) throws SQLException {
 		PreparedStatement pstmt = null;
 
-		final String SEARCHING_SQL = "select * from (select rownum as rnum,B.* from(select * from HomeBoard where " + select_type + " like '%'|| ? ||'%' order by seq desc) B) where rnum between ? and ?";
+		final String SEARCHING_SQL = "select * from HomeBoard where " +select_type+ " like concat('%', ?, '%') order by seq desc limit ?,?";
 
 		pstmt = conn.prepareStatement(SEARCHING_SQL);
 		pstmt.setString(1, search_keyword);
-		pstmt.setInt(2, page * 5 - 4);
-		pstmt.setInt(3, page * 5);
+		pstmt.setInt(2, page * 0);
+		pstmt.setInt(3, page * 10);
 
 		return pstmt;
 	}

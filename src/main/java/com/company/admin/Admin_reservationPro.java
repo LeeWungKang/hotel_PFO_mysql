@@ -51,8 +51,7 @@ public class Admin_reservationPro extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			conn = JDBCconn.getConnection();
-			String sql = "select * from (select rownum rnum,A.* from "
-					+ "(select * from reservation order by rs_no desc) A) where rnum between ? and ?";
+			String sql = "select * from reservation order by rs_no desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			
 			//각 페이지에 담기는 rownum값을 정의해준다. 
@@ -140,9 +139,10 @@ public class Admin_reservationPro extends HttpServlet {
 			
 			
 			//가장 잘 나가는방 sql 
-			sql="select max(count(rs_roomname)) as maxCount, "
-					+ " max(rs_roomname) as maxRoom "
-					+ " from reservation group by rs_roomname";
+			sql="select max(mc) as maxCount,"
+					+ " rs_roomname as maxRoom "
+					+ " from (select rs_roomname, count(*) as mc from "
+					+ " reservation group by rs_roomname) as maxRoom";
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			
@@ -160,11 +160,11 @@ public class Admin_reservationPro extends HttpServlet {
 			// 월별 매출 sql 반복문으로~
 			int[] month = new int[13];
 			for( int j=0;    j<=12;    j++ ) {
-				sql="SELECT TO_CHAR(rs_date, 'MM'), "
-						+ " sum(rs_price) as APrice "
-						+ " FROM reservation "
-						+ " where TO_CHAR(rs_date, 'mm') ="+ j
-						+ " GROUP BY  TO_CHAR(rs_date, 'MM') order by 1";
+				sql="SELECT date_format(rs_date, '%m'),"
+						+ " sum(rs_price) as APrice"
+						+ " FROM reservation"
+						+ " where  date_format(rs_date, '%m') ="+j
+						+ " GROUP BY  date_format(rs_date, '%m') order by 1";
 				pstmt=conn.prepareStatement(sql);
 				rs=pstmt.executeQuery();
 				 if(rs.next()) { 

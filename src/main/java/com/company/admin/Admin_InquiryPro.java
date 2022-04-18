@@ -50,8 +50,7 @@ public class Admin_InquiryPro extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			conn = JDBCconn.getConnection();
-			String sql = "select * from (select rownum rnum,A.* from "
-					+ "(select * from inquiry order by b_writedate desc) A) where rnum between ? and ?";
+			String sql = "select * from inquiry order by b_writedate desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, page*10-9);
 			pstmt.setInt(2, page*10);

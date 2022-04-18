@@ -8,16 +8,11 @@
 <%
 int pg; // page변수로 현재 페이지 값을 받아서 페이징 처리에 이용..
 int totalCount;
-if (request.getParameter("page") == null) {
-	pg = 1;
-} else {
-	pg = Integer.parseInt(request.getParameter("page"));
-}
+if (request.getParameter("page") == null) {	pg = 1; 
+} else {	pg = Integer.parseInt(request.getParameter("page"));}
 if (request.getAttribute("totalRows") == null) {
 	totalCount = 1;
-} else {
-	totalCount = (Integer) request.getAttribute("totalRows");
-}
+} else {	totalCount = (Integer) request.getAttribute("totalRows");}
 %>
  <c:if test="${empty name } ">
  	<c:redirect url="index.jsp"/>
@@ -133,7 +128,7 @@ if (request.getAttribute("totalRows") == null) {
 				
 				<!--페이지 리스트 시작부분  -->
 				<%
-				int countList = 5; // 한 페이지에 출력될 게시물 수(10개를 기준으로 잡음)
+				int countList = 10; // 한 페이지에 출력될 게시물 수(10개를 기준으로 잡음)
 				int countPage = 5; // 한 화면에 출력될 페이지 수(통상적으로 10개 페이지를 나오게 함)
 
 				/* 	int pg=3; // 현재 페이지 번호, 'page'는 도스에서 이미 사용하고있는 변수이기떄문에 pg로 변경, 차후에 requast 겟방식으로 받아서 처리해야함.   (!수정)
@@ -150,7 +145,7 @@ if (request.getAttribute("totalRows") == null) {
 					pg = totalPage;
 				}
 
-				int startPage = ((pg - 1) / 5) * 5 + 1;
+				int startPage = ((pg - 1) / 10) * 10 + 1;
 				// 현재 페이지를 기준으로 한 화면에서 시작 페이지 값을 보여준다.
 
 				int endPage = startPage + countPage - 1;

@@ -21,7 +21,7 @@ if (name == null)
 
 	<div id="container">
 
-		<h1 class="H1">Locataion - 오시는 길</h1>
+		<h2 class="headerText">Locataion - 오시는 길</h2>
 
 		<div class="Wrap_location">
 			<div id="map"></div>
@@ -34,15 +34,21 @@ if (name == null)
 						<li>주소 : 경기도 수원시 팔달구 인계동 1234-123</li>
 						<li>수원시청역 6번출구에서 도보 5분</li>
 						<li>주차장 시설 완비 (최대 50대 차량)</li>
+					</ul>
 						<hr>
 						<h3>전화번호</h3>
+						<ul>
 						<li>000-0000-0000</li>
-						<li>011-0111-0111</li>
+						<li>011-1234-5678</li>
+						</ul>
 						<hr>
 						<h3>이메일</h3>
+						<ul>
 						<li>kjdndrkd@naver.com</li>
+						</ul>
 						<hr>
 						<h3>편의 시설</h3>
+						<ul>
 						<li>수영장 , 아동풀장</li>
 						<li>사우나 규모 150평</li>
 						<li>조식 석식 중식 가능</li>

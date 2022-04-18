@@ -170,7 +170,6 @@
 
 
 
-
 	<script type="text/javascript"
 		src="./smarteditor2/demo/js/service/HuskyEZCreator.js" charset="utf-8">  </script>
 	<script type="text/javascript"

@@ -57,7 +57,7 @@ public class getUserInquiry extends HttpServlet {
 			  // 댓글목록을 화면에 넣기위해 위에서 사용한 자원은 잠시 닫아주고 재활용하면서 새로운 sql문 시작
 			  // 날짜+ 시간까지 추가하는 sql
 			  sql =
-			  "select ir_seq, ir_no, ir_role, ir_comments ,to_char(ir_regdate,'YYYY-MM-DD HH24:MI:SS') as ir_regdate"
+			  "select ir_seq, ir_no, ir_role, ir_comments ,date_format(ir_regdate,'%Y-%m-%d %H:%i:%s') as ir_regdate"
 					  + " from inquiryReply where ir_seq=? " 
 					  + " order by ir_no desc"; 
 			  pstmt =  conn.prepareStatement(sql); 

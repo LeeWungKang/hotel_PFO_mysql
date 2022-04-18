@@ -4,63 +4,63 @@
 <%@page import="com.company.Vo.roomVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 		request.setCharacterEncoding("utf-8");
 String name = (String) session.getAttribute("name");
-String id = (String) session.getAttribute("id");
-String role = (String) session.getAttribute("role");
-
-
 String date = (String) request.getAttribute("date"); 			//(중복날짜확인)켈린더 서블릿 갓다가 다시내려오는 객체
 if(date == null) date = "";
 
-roomVo roomvo = (roomVo) request.getAttribute("roomvo");
 String se_roomname =(String) request.getAttribute("se_roomname");  //룸페이지에서 고객이 선택한 룸의 정보
 String roomname =(String) session.getAttribute("roomname"); 	 //세션에다 안넣으면 달력에서 매개로 줄때 코드가 꼬임.
-
 	if (name == null) {	 out.print(
 		"<script> alert('죄송합니다. 예약은 로그인이 필요합니다.'); location.href='index.jsp?filePath=./login_check/Login_main'  </script>");
 		out.close(); return;
 }
-
 String overlap = request.getParameter("overlap");
 	if (overlap == null) 
 		overlap="";
-	
-	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>예약하기 페이지</title>
+				<title>예약하기 페이지</title>
 <link href="./css/reservationCss.css" rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js">
-
+<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js">
 <style>
 </style>
 </head>
 <body>
 	<!-- 오늘날짜 이전 날짜를 클릭하면 , 서블릿에서  window.history.back(); 시키는 기능 넣어야됨.  -->
 
+	<c:set value="${roomvo }" var="RV" />
+
 	<div class="subText">
-		<%	if (roomvo != null) {	%>
-		<h2>
-			선택하신 "<font style="color: red;"> <%=roomvo.getRoomname()%>
-			</font>" 방 ,<br> 객실이 만석인지 조회 하기위해, 예약 할 날짜를 선택해 주세요.
-		</h2>
-		<h4><font color="#A8A8A8" size="3"> 예약 목록과 중복되는 방은 선택하실 수 없습니다. </font></h4>
-		<br>
-		<%}else{%>
-		<h2 align="center">(선택하신 방이 없습니다. 예약 현황표에서 방을 선택해 주세요)</h2>
-		<br> <a href="RoomInfo?roomseq=1"> 방 선택하러 가기 </a>
-		<%} %>
+		<c:choose>
+			<c:when test="${!empty RV }">
+				<h2>
+					선택하신 "<font style="color: red;"> ${RV.roomname } </font>" 방 ,<br>
+					객실이 만석인지 조회 하기위해, 예약 할 날짜를 선택해 주세요.
+				</h2>
+				<h4>
+					<font color="#A8A8A8" size="3"> 예약 목록과 중복되는 방은 선택하실 수 없습니다.
+					</font>
+				</h4>
+				<br>
+			</c:when>
+			<c:otherwise>
+				<h2 align="center">(선택하신 방이 없습니다. 예약 현황표에서 방을 선택해 주세요)</h2>
+				<br>
+				<a href="RoomInfo?roomseq=1"> 방 선택하러 가기 </a>
+			</c:otherwise>
+
+		</c:choose>
 	</div>
 
-<script type="text/javascript">
+
+	<script type="text/javascript">
     var monthName=new Array("1월","2월","3월","4월","5월","6월","7월",
     "8월","9월","10월","11월","12월")
     var monthDays=new Array(31,28,31,30,31,30,31,31,30,31,30,31)
@@ -132,20 +132,23 @@ calStr += "</table></form>";
 	<div class="containerBox">
 
 		<div class="calendarWrap">
-			<br><font color="#8A8B8B" size="3"> (클릭시 해당 날짜의 예약 현황 페이지로 이동합니다.) </font><br>
+			<br>
+			<font color="#8A8B8B" size="3"> (클릭시 해당 날짜의 예약 현황 페이지로 이동합니다.)
+			</font><br>
 
-				<div id="calendar">
-					<!--달력 스크립트 // 객체소환  -->
-					<script type="text/javascript"> showCalendar(nowd,nowm,nowy);</script>
-					<br />
-				</div>
-		
+			<div id="calendar">
+				<!--달력 스크립트 // 객체소환  -->
+				<script type="text/javascript"> showCalendar(nowd,nowm,nowy);</script>
+				<br />
+			</div>
+
 		</div>
 
 
 		<div class="outside_A">
-				<p>중복된 날 :  ${overlap }</p> <br><br>
-			<a href="index.jsp"> 홈으로 이동</a>
+			<p>중복된 날 : ${overlap }</p>
+			<br>
+			<br> <a href="index.jsp"> 홈으로 이동</a>
 		</div>
 
 	</div>

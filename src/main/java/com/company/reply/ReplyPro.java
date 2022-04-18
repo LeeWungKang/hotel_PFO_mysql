@@ -45,7 +45,7 @@ public class ReplyPro extends HttpServlet {
 	ResultSet rs = null;
 	try {
 		conn=JDBCconn.getConnection();
-		String sql="insert into reply (boardseq,replyseq,nickname,comments) values (?,(select nvl(max(replyseq),0)+1 from reply),?,?)";
+		String sql="insert into reply (boardseq,replyseq,nickname,comments) values (?,(select ifnull(max(replyseq),0)+1 from reply b),?,?)";
 		pstmt=conn.prepareStatement(sql);
 		
 		pstmt.setInt(1, seq);

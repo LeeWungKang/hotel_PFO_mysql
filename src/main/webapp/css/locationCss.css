@@ -10,15 +10,16 @@ body{
 	width: 100%;
 	margin: auto auto;
 }
-body H1{
-	margin: 0px 0px 15px 30px;
+body .headerText{
+	margin: 0px 0px 70px 30px;
 	text-align: center;
-	color:#b1b1b1;
+	color:rgb(128, 128, 128);
 	height:10%;
 	font-size:xx-large;
 	border-bottom: 4px solid #1abc9c;
 	font-weight:bolder;
 	padding-bottom: 10px;
+	font-size: 4;
 }
 
 .Wrap_location{
@@ -33,29 +34,28 @@ body H1{
 }
 
 #map{
-width:40%;	height:500px; 	z-index: 0;
+width:40%;	height:450px; 	z-index: 0;
 box-shadow: 2px 2px 5px 3px silver;
 border-radius: 30px;
-margin-top: 100px;
+margin-top: 20px;
 }
 #side_text hr{
 	border-top: 3px dashed #bbb;
-	margin: 20px;
+	margin: 5px;
 	}
 #side_text{
-	width: 40%; height:830px;
+	width: 45%; height:500px;
 	display: inline-block;
-	background-color: #212121;
+	background-color: rgba(0, 0, 12, 0.7);
 	z-index:1;
-	text-align: left;
+	text-align: center;
 	box-sizing:border-box;
-	padding: 30px;
+	padding: 10px;
 	position: relative;
-	font-size: 1.4em;
+	font-size: 1.0em;
 	font-style: normal;
-	font-weight: 700;
 	border-radius: 25px;
-	overflow: hidden;
+	overflow: scroll;
 }
 #side_text li{
 	list-style: circle;
@@ -69,13 +69,9 @@ margin-top: 100px;
 	text-align:center;
 	height:400px;
 	position: absolute;
-	width: 90%;
+	width: 80%;
 	line-height: 50px;
 	margin-left: 25px;
-}
-
-#side_text .article ul li{
-	font-size: 0.65em;
 }
 
 

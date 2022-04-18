@@ -49,11 +49,10 @@ public class MyRs_List extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			conn = JDBCconn.getConnection();
-			String sql = "select * from (select rownum as rnum,A.* from "
-					+ "(select rs_no,to_char(rs_date,'YYYY-MM-DD HH24:MI:SS') as rs_date,"
+			String sql = "select rs_no,date_format(rs_date,'%Y-%m-%d %H:%i:%s') as rs_date, "
 					+ "rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price,rs_state "
 					+ "from reservation where rs_userid=? "
-					+ "order by rs_no desc) A) where rnum between ? and ?";
+					+ "order by rs_no desc limit ?, ?";
 			pstmt = conn.prepareStatement(sql);
 
 			// 페이지에 담기는 예약정보가 세션 id와 일치하는 데이터만 페이징처리해서 뿌려준다.

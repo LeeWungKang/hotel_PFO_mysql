@@ -9,9 +9,6 @@
 <%
 request.setCharacterEncoding("utf-8");
 String name = (String) session.getAttribute("name");
-
-String date = (String) request.getAttribute("date");   //켈린더에서 > 중복날짜 조회 서블릿 갓다가 확인후 다시내려오는 객체(String)
-roomVo roomvo = (roomVo) request.getAttribute("roomvo");
 if (name == null) {
 	out.print(
 	"<script> alert('죄송합니다. 예약은 로그인이 필요합니다.'); location.href='index.jsp?filePath=./login_check/Login_main'  </script>");
@@ -30,16 +27,14 @@ if (name == null) {
 </style>
 </head>
 <body>
-
+<c:set value="${roomvo }" var="RV"/>
 <c:set value="${date}"  var="Adate"/>   <!-- 달력 클릭으로 넘어온 String타입 날짜 -->
 <fmt:parseDate value="${Adate }"  var="Bdate"  pattern="yyyyMMdd"  />
 <fmt:formatDate value="${Bdate }" var="clickDate" pattern="YYYY년 MM월 dd일"/>  <!--상단에뿌릴 데이터  -->
 <fmt:formatDate value="${Bdate }" var="Fdate" pattern="YYYY-MM-dd"/>  <!--체크인 인풋박스  -->
 
 	<div id="container">
-
 		<div class="TEST_box1">
-
 			<div class="TEST_box2">
 				<c:choose>
 					<c:when test="${!empty se_roomname }">
@@ -89,7 +84,7 @@ if (name == null) {
 								value="${se_roomname }"></td>
 							<!--최초로 클릭한 사용자가 선택한 룸 -->
 							<td><input type="hidden" name="rs_roomseq"
-								value="<%=roomvo.getRoomseq()%>"></td>
+								value="${RV.roomseq }"></td>
 						</tr>
 
 						<tr align="center" style="color: #a0a0a0; font-weight: bold;">
@@ -107,7 +102,7 @@ if (name == null) {
 							<!--체크아웃 이벤트 -->
 							<td class="totalPrice_BOX"><input type="text" id="rs_Getprice" name="rs_Getprice"
 								value="" placeholder=" = " > <input type="hidden"
-								id="rs_setPrice_X" value="<%=roomvo.getPrice()%>"> <input
+								id="rs_setPrice_X" value="${RV.price }"> <input
 								type="hidden" id="rs_price" name="rs_price" value=""></td>
 							<td><input type="text" maxlength="1" name="rs_people"
 								placeholder="기본 2명" value="2"></td>

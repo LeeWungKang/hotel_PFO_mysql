@@ -53,7 +53,7 @@ public class Reservation_Ok extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			conn = JDBCconn.getConnection();
-			String sql = "insert into reservation (rs_no,rs_date,rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price) values (seq_reservation.nextval,sysdate,?,?,?,?,?,?,?)";   //객실이름이랑 날자가 동일한 데이타가 있는지 검사해야댐.
+			String sql = "insert into reservation (rs_no,rs_date,rs_checkin,rs_checkout,rs_people,rs_roomname,rs_roomseq,rs_userid,rs_price) values (default, now(), ?,?,?,?,?,?,?)";   //객실이름이랑 날자가 동일한 데이타가 있는지 검사해야댐.
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, rs_checkin);
 			pstmt.setString(2, rs_checkout);

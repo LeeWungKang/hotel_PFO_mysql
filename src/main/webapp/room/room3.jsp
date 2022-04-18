@@ -1,11 +1,7 @@
 <%@page import="com.company.Vo.roomVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
-	
-	roomVo roomvo =(roomVo) request.getAttribute("roomvo");	
-	
-	%>
+    <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
 <!DOCTYPE html>
 <html>
@@ -15,7 +11,7 @@
 <link rel="stylesheet" href="./css/roomCss.css">
 </head>
 <body>
-
+<c:set var="RV" value="${roomvo }"/>
 <div id="container_room">
 
 
@@ -39,7 +35,7 @@
 				</tr>
 			</table>
 		<div class="wrap">
-  <button class="button" onclick="location.href='RsRoomInput?roomseq=<%=roomvo.getRoomseq()%>'"> <%=roomvo.getRoomname()%> 예약</button>
+  <button class="button" onclick="location.href='RsRoomInput?roomseq=${RV.roomseq}'"> ${RV.roomname } 예약</button>
 </div>
 		</div>
 
@@ -87,9 +83,9 @@
 					<h2>객실정보</h2>
 					<br />
 					<ul>
-						<li>룸 이름 : &nbsp;&nbsp;<b> <%=roomvo.getRoomname() %></b> 룸</li>
-						<li>가격 : &nbsp;&nbsp;<b> <%=roomvo.getPrice() %></b> 원</li>
-						<li>수용인원 :&nbsp; <b><%=roomvo.getRoomsize() %></b> 명</li>
+						<li>룸 이름 : &nbsp;&nbsp;<b>${RV.roomname }</b> 룸</li>
+						<li>가격 : &nbsp;&nbsp;<b>${RV.price }</b> 원</li>
+						<li>수용인원 :&nbsp; <b>${RV.roomsize }</b> 명</li>
 						<li>구성&nbsp;&nbsp;침실1, 욕실1, 거실1, 화장실1, 개인바베큐</li>
 						<li>전망 &nbsp;시티뷰 또는 빌리지뷰</li>
 						<li>침대&nbsp;&nbsp;더블(킹 사이즈), 트윈</li>
