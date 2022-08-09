@@ -10,39 +10,44 @@ public class JDBCconn {
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 
 		/*
-		 * 오라클 Class.forName("oracle.jdbc.driver.OracleDriver"); String url =
-		 * "jdbc:oracle:thin:@localhost:1521:xe"; Connection conn =
+		 * Class.forName("oracle.jdbc.driver.OracleDriver"); String url
+		 * ="jdbc:oracle:thin:@localhost:1521:xe"; Connection conn =
 		 * DriverManager.getConnection(url, "system", "1234"); return conn;
 		 */
-
-		/* 카페24디비로 연동. */
-
 		
+		/* mysql localhost:3307 */
+		  
 		
-		  Class.forName("com.mysql.jdbc.Driver"); String url
-		  ="jdbc:mysql://umj7-029.cafe24.com/thuman"; Connection conn =
-		  DriverManager.getConnection(url,"thuman","human123!");
-		  System.out.println(" 카페24 디비로 연동 "); return conn;
+		  Class.forName("com.mysql.jdbc.Driver"); 
+		  String url="jdbc:mysql://localhost/kjdndrkd"; 
+		  Connection conn = DriverManager.getConnection(url,"kjdndrkd","cjdtks3232!!");
+		  System.out.println("카페24 외부서버 연동 완료"); 
+		  return conn; 
+		  }
+
 		 
-
-			
-			/*
-			 * Class.forName("com.mysql.jdbc.Driver"); String url =
-			 * "jdbc:mysql://localhost/thuman"; Connection conn =
-			 * DriverManager.getConnection(url, "thuman", "human123!"); return conn;
-			 */
-			 
-
-	}
-
-	/*
-	 * mysql localhost:3307, 카페에 올릴떄는 url에 로컬호스트 입력.
-	 * 
-	 * Class.forName("com.mysql.jdbc.Driver"); String
-	 * url="jdbc:mysql://localhost/thuman"; conn =
-	 * DriverManager.getConnection(url,"thuman","human123!");
-	 * System.out.println("카페24 DB 연동 완료");
-	 */
+		/*
+		 * Class.forName("com.mysql.jdbc.Driver"); String
+		 * url="jdbc:mysql://kjdndrkd.cafe24.com/kjdndrkd"; Connection conn =
+		 * DriverManager.getConnection(url,"kjdndrkd","cjdtks3232!!");
+		 * System.out.println("카페24 DB 연동 완료"); return conn; }
+		 */
+		
+		
+	
+	
+		// mysql  DB로 접속, 
+		
+		/*
+		 * Class.forName("com.mysql.jdbc.Driver"); String url
+		 * ="jdbc:mysql://localhost:3306/test1"; Connection conn =
+		 * DriverManager.getConnection(url,"root","0000"); 
+		 * return conn; 
+		 *   System.out.println("MYSQL DB 연동 완료");
+		 * 
+		 * }
+		 */
+	
 
 	public static void close(ResultSet rs, PreparedStatement pstmt, Connection conn) {
 

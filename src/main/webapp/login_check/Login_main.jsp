@@ -56,6 +56,18 @@ if (cookies != null && cookies.length > 0)
 						<input type="button" value="회원가입" onclick="Sign_Up()"
 						class="logBtn"></td>
 				</tr>
+				
+				<tr>
+			<th> 테스트 접속 아이디<th>
+			</tr>
+			<tr>
+				<td>관리자 : lee   </td>
+				<td>암호 : lee123 </td>
+			</tr>
+			<tr>
+			<td>손님 : aaaa </td>
+			<td>암호 : aaaa </td>
+			</tr>
 
 			</table>
 		</form>
